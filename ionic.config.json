@@ -1,0 +1,7 @@
+{
+  "name": "Battle",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
