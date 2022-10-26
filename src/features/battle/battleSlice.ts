@@ -34,6 +34,7 @@ export const battleSlice = createSlice({
   reducers: {
     start: (state, action: PayloadAction<Character[]>) => {
       state.status = "running";
+      state.loot = [];
       state.combatants = action.payload.map((c) => {
         return {
           ...c,
