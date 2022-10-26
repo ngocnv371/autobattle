@@ -53,7 +53,7 @@ const Battle: React.FC<
       const delta = now.getTime() - lastUpdate.getTime();
       dispatch(update(delta));
       lastUpdate = now;
-    }, 123);
+    }, 250);
     return () => clearInterval(handle);
   }, [dispatch, status]);
 

@@ -36,6 +36,7 @@ import './theme/variables.css';
 import Atlas from './features/atlas/Atlas';
 import Barrack from './features/barrack/Barrack';
 import Battle from './features/battle/Battle';
+import Inventory from './features/inventory/Inventory';
 
 setupIonicReact();
 
@@ -49,6 +50,9 @@ const App: React.FC = () => (
           </Route>
           <Route exact path="/tab2">
             <Tab2 />
+          </Route>
+          <Route exact path="/inventory">
+            <Inventory />
           </Route>
           <Route exact path="/atlas">
             <Atlas />
@@ -64,9 +68,9 @@ const App: React.FC = () => (
             <IonIcon icon={triangle} />
             <IonLabel>Dungeons</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
+          <IonTabButton tab="inventory" href="/inventory">
             <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
+            <IonLabel>Inventory</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab1" href="/tab1">
             <IonIcon icon={square} />
