@@ -65,20 +65,20 @@ const Battle: React.FC<
       <IonHeader>
         <IonToolbar>
           <IonTitle>Battle</IonTitle>
+          <IonButtons slot="end">
+            <IonButton
+              disabled={status !== "ended"}
+              onClick={() => handleDone()}
+            >
+              Done
+            </IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Battle</IonTitle>
-            <IonButtons slot="end">
-              <IonButton
-                disabled={status !== "ended"}
-                onClick={() => handleDone()}
-              >
-                Done
-              </IonButton>
-            </IonButtons>
           </IonToolbar>
         </IonHeader>
         <IonGrid>
