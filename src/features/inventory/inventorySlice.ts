@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import { mergeItems } from "./utils";
 
-interface Item {
+export interface Item {
   name: string;
   quantity: number;
 }
@@ -23,13 +24,8 @@ export const inventorySlice = createSlice({
   name: "inventory",
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<Item>) => {
-      const item = state.items.find((i) => i.name === action.payload.name);
-      if (item) {
-        item.quantity += action.payload.quantity;
-      } else {
-        state.items.push(action.payload);
-      }
+    add: (state, action: PayloadAction<Item[]>) => {
+      state.items = mergeItems(state.items, action.payload);
     },
   },
 });

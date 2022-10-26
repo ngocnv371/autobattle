@@ -15,6 +15,7 @@ const heroes: Character[] = [
     maxLife: 100,
 
     skill: "Punch",
+    loot: "monster",
   },
   {
     id: "skeleton2",
@@ -28,6 +29,7 @@ const heroes: Character[] = [
     maxLife: 100,
 
     skill: "Punch",
+    loot: "monster",
   },
   {
     id: "player",
@@ -41,6 +43,7 @@ const heroes: Character[] = [
     maxLife: 100,
 
     skill: "Slap",
+    loot: "human",
   },
   {
     id: "dis",
@@ -54,6 +57,7 @@ const heroes: Character[] = [
     maxLife: 100,
 
     skill: "Bite",
+    loot: "monster",
   },
 ];
 

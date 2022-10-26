@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import { Item } from "../inventory/inventorySlice";
+import { mergeItems } from "../inventory/utils";
+import { generateLoot } from "./loot";
 import { Character, Combatant, Faction } from "./models";
 import skillFactory from "./skills";
 
@@ -15,12 +18,14 @@ export interface BattleState {
   status: BattleStatus;
   combatants: Combatant[];
   timer: TimerHandler;
+  loot: Item[];
 }
 
 const initialState: BattleState = {
   status: "none",
   combatants: [],
   timer: "",
+  loot: [],
 };
 
 export const battleSlice = createSlice({
@@ -76,6 +81,10 @@ export const battleSlice = createSlice({
           if (target) {
             const skill = skillFactory(c.skill, 1);
             skill.use(c, target);
+            if (target.life <= 0) {
+              const loot = generateLoot(target.loot);
+              state.loot = mergeItems(state.loot, loot);
+            }
           } else {
             console.log(`${c.name} found no target`);
             state.status = "ended";
@@ -117,6 +126,8 @@ export const selectIsOver = (state: RootState) =>
   state.battle.status === "ended";
 
 export const selectStatus = (state: RootState) => state.battle.status;
+
+export const selectLoot = (state: RootState) => state.battle.loot;
 
 export const selectPlayers = (state: RootState) =>
   state.battle.combatants.filter((c) => c.faction === "player");

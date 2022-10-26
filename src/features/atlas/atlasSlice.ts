@@ -14,7 +14,7 @@ export interface AtlasState {
 
 const defaultDungeons: Dungeon[] = [
   {
-    id: 'w1',
+    id: "w1",
     name: "Wolf's Den",
     monsters: [
       {
@@ -29,6 +29,7 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 100,
 
         skill: "Bite",
+        loot: "monster",
       },
       {
         id: "wolf2",
@@ -42,6 +43,7 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 100,
 
         skill: "Bite",
+        loot: "monster",
       },
       {
         id: "wolf3",
@@ -55,11 +57,12 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 100,
 
         skill: "Bite",
+        loot: "monster",
       },
     ],
   },
   {
-    id: 'w2',
+    id: "w2",
     name: "Dim Hollow",
     monsters: [
       {
@@ -74,6 +77,7 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 100,
 
         skill: "Slap",
+        loot: "monster",
       },
       {
         id: "sp2",
@@ -87,6 +91,7 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 100,
 
         skill: "Slap",
+        loot: "monster",
       },
       {
         id: "sp3",
@@ -100,11 +105,12 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 100,
 
         skill: "Punch",
+        loot: "monster",
       },
     ],
   },
   {
-    id: 'w3',
+    id: "w3",
     name: "Dark Stream",
     monsters: [
       {
@@ -119,6 +125,7 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 100,
 
         skill: "Bite",
+        loot: "monster",
       },
       {
         id: "sd2",
@@ -132,6 +139,7 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 100,
 
         skill: "Bite",
+        loot: "monster",
       },
       {
         id: "sd3",
@@ -145,6 +153,7 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 100,
 
         skill: "Bite",
+        loot: "monster",
       },
     ],
   },

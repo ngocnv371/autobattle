@@ -12,6 +12,7 @@ export interface Character {
   faction: Faction;
 
   skill: string;
+  loot: string;
 }
 
 export interface Combatant extends Character {

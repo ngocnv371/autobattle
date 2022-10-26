@@ -5,6 +5,10 @@ import {
   IonContent,
   IonGrid,
   IonHeader,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonListHeader,
   IonPage,
   IonRow,
   IonTitle,
@@ -16,7 +20,9 @@ import { RouteComponentProps } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { selectDungeons } from "../atlas/atlasSlice";
 import { selectParties } from "../barrack/barrackSlice";
+import { add } from "../inventory/inventorySlice";
 import {
+  selectLoot,
   selectMonsters,
   selectPlayers,
   selectStatus,
@@ -35,6 +41,7 @@ const Battle: React.FC<
   const parties = useAppSelector(selectParties);
   const players = useAppSelector(selectPlayers);
   const monsters = useAppSelector(selectMonsters);
+  const loot = useAppSelector(selectLoot);
 
   useEffect(() => {
     const dungeon = dungeons.find((d) => d.id === match.params.dungeon);
@@ -58,6 +65,7 @@ const Battle: React.FC<
   }, [dispatch, status]);
 
   function handleDone() {
+    dispatch(add(loot));
     router.goBack();
   }
   return (
@@ -97,6 +105,15 @@ const Battle: React.FC<
             ))}
           </IonRow>
         </IonGrid>
+        <IonList>
+          <IonListHeader>Loot</IonListHeader>
+          {loot.map((l) => (
+            <IonItem key={l.name}>
+              <IonLabel>{l.name}</IonLabel>
+              <IonLabel slot="end">{l.quantity}</IonLabel>
+            </IonItem>
+          ))}
+        </IonList>
       </IonContent>
     </IonPage>
   );
