@@ -41,4 +41,11 @@ export const { add, sell } = inventorySlice.actions;
 
 export const selectItems = (state: RootState) => state.inventory.items;
 
+export const selectInStock = (items: Item[]) => (state: RootState) =>
+  items.filter((i) =>
+    state.inventory.items.find(
+      (k) => k.name === i.name && k.quantity >= i.quantity
+    )
+  ).length === items.length;
+
 export default inventorySlice.reducer;

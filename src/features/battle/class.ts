@@ -1,4 +1,5 @@
 import { Logger } from "../../logger";
+import { Item } from "../inventory/inventorySlice";
 import { Character, Combatant } from "./models";
 import skillFactory from "./skills";
 
@@ -7,6 +8,7 @@ export interface Action {
 }
 
 export interface Class {
+  getLevelUpRequirements(self: Character): Item[];
   levelUp(self: Character): void;
   processTurn(self: Combatant, combatants: Combatant[], logger: Logger): Action;
 }
@@ -35,6 +37,11 @@ function executeSkill(
 
 function Simpleton(): Class {
   return {
+    getLevelUpRequirements(self) {
+      return [
+        { name: 'Meat', quantity: 10 * self.level },
+      ]
+    },
     levelUp(self) {
       self.str += 5;
       self.dex += 3;
@@ -52,6 +59,11 @@ function Simpleton(): Class {
  */
 function Healer(): Class {
   return {
+    getLevelUpRequirements(self) {
+      return [
+        { name: 'Magic Stone', quantity: 10 * self.level },
+      ]
+    },
     levelUp(self) {
       self.str += 1;
       self.dex += 3;
@@ -85,6 +97,11 @@ function Healer(): Class {
  */
 function Brute(): Class {
   return {
+    getLevelUpRequirements(self) {
+      return [
+        { name: 'Bone', quantity: 10 * self.level },
+      ]
+    },
     levelUp(self) {
       self.str += 5;
       self.dex += 3;

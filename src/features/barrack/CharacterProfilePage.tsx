@@ -13,8 +13,10 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { useMemo } from "react";
 import { RouteComponentProps } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import classFactory from "../battle/class";
 import { Character } from "../battle/models";
 import { levelUp, selectMember } from "./barrackSlice";
 
@@ -29,6 +31,13 @@ const Stat: React.FC<{ name: string; value: any }> = (props) => {
 
 const LevelUp: React.FC<{ character: Character }> = ({ character }) => {
   const dispatch = useAppDispatch();
+  const requirements = useMemo(() => {
+    const mc = classFactory(character.class);
+    const req = mc.getLevelUpRequirements(character);
+    return req;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [character.class, character.level]);
+
   function handleLevelUp() {
     dispatch(levelUp(character.id));
   }
@@ -36,14 +45,12 @@ const LevelUp: React.FC<{ character: Character }> = ({ character }) => {
     <IonCard>
       <IonCardHeader>Class Progression</IonCardHeader>
       <IonList>
-        <IonItem>
-          <IonLabel>Branch</IonLabel>
-          <IonLabel slot="end">1</IonLabel>
-        </IonItem>
-        <IonItem>
-          <IonLabel>Dog's Ear</IonLabel>
-          <IonLabel slot="end">3</IonLabel>
-        </IonItem>
+        {requirements.map((r) => (
+          <IonItem key={r.name}>
+            <IonLabel>{r.name}</IonLabel>
+            <IonLabel slot="end">{r.quantity}</IonLabel>
+          </IonItem>
+        ))}
       </IonList>
       <IonButton fill="clear" onClick={() => handleLevelUp()}>
         Level Up
