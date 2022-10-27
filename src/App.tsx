@@ -11,9 +11,6 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { ellipse, square, triangle } from "ionicons/icons";
-import Tab1 from "./pages/Tab1";
-import Tab2 from "./pages/Tab2";
-import Tab3 from "./pages/Tab3";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -38,6 +35,7 @@ import PartyAssignmentPage from "./features/barrack/PartyAssignmentPage";
 import Battle from "./features/battle/Battle";
 import InventoryPage from "./features/inventory/InventoryPage";
 import BarrackPage from "./features/barrack/BarrackPage";
+import CharacterProfilePage from "./features/barrack/CharacterProfilePage";
 
 setupIonicReact();
 
@@ -46,18 +44,13 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
-          </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
-          </Route>
           <Route exact path="/inventory">
             <InventoryPage />
           </Route>
           <Route exact path="/barrack">
             <BarrackPage />
           </Route>
+          <Route exact path="/barrack/:party/:member" component={CharacterProfilePage} />
           <Route exact path="/atlas">
             <Atlas />
           </Route>
