@@ -83,7 +83,7 @@ export const battleSlice = createSlice({
         state.combatants
           .filter((c) => c.faction === "monster")
           .forEach((m) => {
-            bag = mergeItems(bag, lootFactory(m.loot));
+            bag = mergeItems(bag, lootFactory(m.class));
           });
         state.loot = bag;
       }

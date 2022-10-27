@@ -17,7 +17,8 @@ const defaultDungeons: Dungeon[] = [
   {
     id: "w1",
     name: "Wolf's Den",
-    description: "The drought brought hunger. The wolves are getting bolder everyday. Somebody got to do something.",
+    description:
+      "The drought brought hunger. The wolves are getting bolder everyday. Somebody got to do something.",
     monsters: [
       {
         id: "wolf1",
@@ -31,8 +32,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 300,
 
-        class: "Animal",
-        loot: "monster",
+        class: "Wolf",
       },
       {
         id: "wolf2",
@@ -46,8 +46,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 300,
 
-        class: "Animal",
-        loot: "monster",
+        class: "Wolf",
       },
       {
         id: "wolf3",
@@ -61,8 +60,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 300,
 
-        class: "Animal",
-        loot: "monster",
+        class: "Wolf",
       },
       {
         id: "wolf4",
@@ -77,14 +75,14 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 300,
 
         class: "Brute",
-        loot: "human",
       },
     ],
   },
   {
     id: "w2",
     name: "Dim Hollow",
-    description: "Wanderers near the valley sometimes didn't come back. Some tried to find out but they too disappeared.",
+    description:
+      "Wanderers near the valley sometimes didn't come back. Some tried to find out but they too disappeared.",
     monsters: [
       {
         id: "sp1",
@@ -99,7 +97,6 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 300,
 
         class: "Brute",
-        loot: "monster",
       },
       {
         id: "sp2",
@@ -114,7 +111,6 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 300,
 
         class: "Brute",
-        loot: "monster",
       },
       {
         id: "sp3",
@@ -129,7 +125,6 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 300,
 
         class: "Brute",
-        loot: "monster",
       },
       {
         id: "sp4",
@@ -144,14 +139,14 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 300,
 
         class: "Healer",
-        loot: "human",
       },
     ],
   },
   {
     id: "w3",
     name: "Dark Stream",
-    description: "Fishing boats no longer come by that corner. Nobody talks about it.",
+    description:
+      "Fishing boats no longer come by that corner. Nobody talks about it.",
     monsters: [
       {
         id: "sd1",
@@ -166,7 +161,6 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 300,
 
         class: "Brute",
-        loot: "human",
       },
       {
         id: "sd2",
@@ -180,8 +174,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 300,
 
-        class: "Brute",
-        loot: "monster",
+        class: "Snake",
       },
       {
         id: "sd3",
@@ -195,8 +188,56 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 300,
 
-        class: "Brute",
-        loot: "monster",
+        class: "Animal",
+      },
+    ],
+  },
+  {
+    id: "w4",
+    name: "Green Hills",
+    description: "The tranquil landscape is quite convincing.",
+    monsters: [
+      {
+        id: "sd1",
+        level: 1,
+        name: "Rattlesnake",
+        int: 10,
+        str: 15,
+        dex: 17,
+        faction: "monster",
+
+        life: 0,
+        maxLife: 300,
+
+        class: "Snake",
+      },
+      {
+        id: "sd2",
+        level: 1,
+        name: "White Snake",
+        int: 10,
+        str: 15,
+        dex: 19,
+        faction: "monster",
+
+        life: 0,
+        maxLife: 300,
+
+        class: "Snake",
+      },
+      {
+        id: "sd3",
+        level: 1,
+        name: "Python",
+        int: 10,
+        str: 15,
+        dex: 20,
+        faction: "monster",
+
+        life: 0,
+        maxLife: 300,
+
+        class: "Snake",
       },
     ],
   },
