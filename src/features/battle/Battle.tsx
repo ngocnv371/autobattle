@@ -120,6 +120,13 @@ const Battle: React.FC<
             ))}
           </IonRow>
         </IonGrid>
+        {status === "playerWin" && (
+          <IonCard>
+            <IonCardContent>
+              <IonLabel color="success">You Win</IonLabel>
+            </IonCardContent>
+          </IonCard>
+        )}
         {status === "playerWin" && <Loot items={loot} />}
         {status === "playerLoose" && (
           <IonCard>
