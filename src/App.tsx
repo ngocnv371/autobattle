@@ -36,7 +36,7 @@ import "./theme/variables.css";
 import Atlas from "./features/atlas/Atlas";
 import PartyAssignmentPage from "./features/barrack/PartyAssignmentPage";
 import Battle from "./features/battle/Battle";
-import Inventory from "./features/inventory/Inventory";
+import InventoryPage from "./features/inventory/InventoryPage";
 import BarrackPage from "./features/barrack/BarrackPage";
 
 setupIonicReact();
@@ -53,7 +53,7 @@ const App: React.FC = () => (
             <Tab2 />
           </Route>
           <Route exact path="/inventory">
-            <Inventory />
+            <InventoryPage />
           </Route>
           <Route exact path="/barrack">
             <BarrackPage />
