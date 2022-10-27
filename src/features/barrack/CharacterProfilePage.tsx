@@ -18,6 +18,7 @@ import { RouteComponentProps } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import classFactory from "../battle/class";
 import { Character } from "../battle/models";
+import { remove, selectInStock } from "../inventory/inventorySlice";
 import { levelUp, selectMember } from "./barrackSlice";
 
 const Stat: React.FC<{ name: string; value: any }> = (props) => {
@@ -37,9 +38,11 @@ const LevelUp: React.FC<{ character: Character }> = ({ character }) => {
     return req;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [character.class, character.level]);
+  const inStock = useAppSelector(selectInStock(requirements));
 
   function handleLevelUp() {
     dispatch(levelUp(character.id));
+    dispatch(remove(requirements));
   }
   return (
     <IonCard>
@@ -52,7 +55,11 @@ const LevelUp: React.FC<{ character: Character }> = ({ character }) => {
           </IonItem>
         ))}
       </IonList>
-      <IonButton fill="clear" onClick={() => handleLevelUp()}>
+      <IonButton
+        disabled={!inStock}
+        fill="clear"
+        onClick={() => handleLevelUp()}
+      >
         Level Up
       </IonButton>
     </IonCard>

@@ -10,6 +10,7 @@ export interface Item {
 const defaultItems: Item[] = [
   { name: "Branch", quantity: 3 },
   { name: "Torn Coat", quantity: 1 },
+  { name: "Magic Stone", quantity: 132 },
 ];
 
 export interface inventoryState {
@@ -34,10 +35,23 @@ export const inventorySlice = createSlice({
         { name: "Gold", quantity: 10 * action.payload.quantity },
       ]);
     },
+    remove: (state, action: PayloadAction<Item[]>) => {
+      state.items = state.items
+        .map((i) => {
+          const d = action.payload.find((p) => p.name === i.name);
+          if (!d) {
+            return i;
+          }
+          const item = { ...i, quantity: i.quantity - d?.quantity };
+
+          return item;
+        })
+        .filter((p) => p.quantity > 0);
+    },
   },
 });
 
-export const { add, sell } = inventorySlice.actions;
+export const { add, sell, remove } = inventorySlice.actions;
 
 export const selectItems = (state: RootState) => state.inventory.items;
 
