@@ -84,6 +84,7 @@ const defaultDungeons: Dungeon[] = [
   {
     id: "w2",
     name: "Dim Hollow",
+    description: "Wanderers near the valley sometimes didn't come back. Some tried to find out but they too disappeared.",
     monsters: [
       {
         id: "sp1",
@@ -142,7 +143,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 300,
 
-        class: "Brute",
+        class: "Healer",
         loot: "human",
       },
     ],
@@ -150,6 +151,7 @@ const defaultDungeons: Dungeon[] = [
   {
     id: "w3",
     name: "Dark Stream",
+    description: "Fishing boats no longer come by that corner. Nobody talks about it.",
     monsters: [
       {
         id: "sd1",

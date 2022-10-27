@@ -1,5 +1,6 @@
 import {
   IonCard,
+  IonCardContent,
   IonCardHeader,
   IonCardTitle,
   IonItem,
@@ -14,6 +15,9 @@ const DungeonCard: React.FC<React.PropsWithChildren<Dungeon>> = (props) => {
       <IonCardHeader>
         <IonCardTitle>{props.name}</IonCardTitle>
       </IonCardHeader>
+      {props.description && (
+        <IonCardContent>{props.description}</IonCardContent>
+      )}
       <IonList>
         {props.monsters.map((m) => (
           <IonItem key={m.id}>
