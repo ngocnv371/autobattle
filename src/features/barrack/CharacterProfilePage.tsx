@@ -1,6 +1,9 @@
 import {
   IonBackButton,
+  IonButton,
   IonButtons,
+  IonCard,
+  IonCardHeader,
   IonContent,
   IonHeader,
   IonItem,
@@ -10,11 +13,10 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router";
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Character } from "../battle/models";
-import { selectParties } from "./barrackSlice";
+import { levelUp, selectMember } from "./barrackSlice";
 
 const Stat: React.FC<{ name: string; value: any }> = (props) => {
   return (
@@ -25,24 +27,35 @@ const Stat: React.FC<{ name: string; value: any }> = (props) => {
   );
 };
 
+const LevelUp: React.FC<{ character: Character }> = ({ character }) => {
+  const dispatch = useAppDispatch();
+  function handleLevelUp() {
+    dispatch(levelUp(character.id));
+  }
+  return (
+    <IonCard>
+      <IonCardHeader>Class Progression</IonCardHeader>
+      <IonList>
+        <IonItem>
+          <IonLabel>Branch</IonLabel>
+          <IonLabel slot="end">1</IonLabel>
+        </IonItem>
+        <IonItem>
+          <IonLabel>Dog's Ear</IonLabel>
+          <IonLabel slot="end">3</IonLabel>
+        </IonItem>
+      </IonList>
+      <IonButton fill="clear" onClick={() => handleLevelUp()}>
+        Level Up
+      </IonButton>
+    </IonCard>
+  );
+};
+
 const CharacterProfilePage: React.FC<
   RouteComponentProps<{ party: string; member: string }>
 > = ({ match }) => {
-  const parties = useAppSelector(selectParties);
-  const [char, setChar] = useState<Character | null>(null);
-
-  useEffect(() => {
-    const p = parties.find((p) => p.id === match.params.party);
-    if (!p) {
-      return;
-    }
-    const me = p.members.find((m) => m.id === match.params.member);
-    if (!me) {
-      return;
-    }
-    setChar(me);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [match.params.member, match.params.party]);
+  const char = useAppSelector(selectMember(match.params.member));
 
   if (!char) {
     return null;
@@ -66,12 +79,14 @@ const CharacterProfilePage: React.FC<
         </IonHeader>
         <IonList>
           <Stat name="Class" value={char.class} />
+          <Stat name="Level" value={char.level} />
           <Stat name="Faction" value={char.faction} />
           <Stat name="Life" value={char.maxLife} />
           <Stat name="STR" value={char.str} />
           <Stat name="DEX" value={char.dex} />
           <Stat name="INT" value={char.int} />
         </IonList>
+        <LevelUp character={char} />
       </IonContent>
     </IonPage>
   );

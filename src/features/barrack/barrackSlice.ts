@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import classFactory from "../battle/class";
 import { Character } from "../battle/models";
 
 const heroes: Character[] = [
@@ -92,11 +93,25 @@ export const barrackSlice = createSlice({
     add: (state, action: PayloadAction<Character[]>) => {
       //
     },
+    levelUp: (state, action: PayloadAction<string>) => {
+      const member = state.parties
+        .flatMap((p) => p.members)
+        .find((m) => m.id === action.payload);
+      if (!member) {
+        console.error(`member not found ${action.payload}`);
+        return;
+      }
+      const mc = classFactory(member.class);
+      mc.levelUp(member);
+      member.level++
+    },
   },
 });
 
-export const { add } = barrackSlice.actions;
+export const { add, levelUp } = barrackSlice.actions;
 
 export const selectParties = (state: RootState) => state.barrack.parties;
+export const selectMember = (id: string) => (state: RootState) =>
+  state.barrack.parties.flatMap((p) => p.members).find((m) => m.id === id);
 
 export default barrackSlice.reducer;

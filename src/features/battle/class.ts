@@ -1,5 +1,5 @@
 import { Logger } from "../../logger";
-import { Combatant } from "./models";
+import { Character, Combatant } from "./models";
 import skillFactory from "./skills";
 
 export interface Action {
@@ -7,6 +7,7 @@ export interface Action {
 }
 
 export interface Class {
+  levelUp(self: Character): void;
   processTurn(self: Combatant, combatants: Combatant[], logger: Logger): Action;
 }
 
@@ -15,8 +16,8 @@ function doNothing(self: Combatant): Action {
     execute(logger) {
       logger.log(`${self.name} does nothing`);
     },
-  }
-};
+  };
+}
 
 function executeSkill(
   self: Combatant,
@@ -34,6 +35,12 @@ function executeSkill(
 
 function Simpleton(): Class {
   return {
+    levelUp(self) {
+      self.str += 5;
+      self.dex += 3;
+      self.int += 1;
+      self.maxLife += 30;
+    },
     processTurn(self, combatants, logger) {
       return doNothing(self);
     },
@@ -45,10 +52,21 @@ function Simpleton(): Class {
  */
 function Healer(): Class {
   return {
+    levelUp(self) {
+      self.str += 1;
+      self.dex += 3;
+      self.int += 5;
+      self.maxLife += 25;
+    },
     processTurn(self, combatants, logger) {
-      const dangered = combatants.filter(c => c.life > 0 && c.faction === self.faction && c.life < c.maxLife / 2).at(0)
+      const dangered = combatants
+        .filter(
+          (c) =>
+            c.life > 0 && c.faction === self.faction && c.life < c.maxLife / 2
+        )
+        .at(0);
       if (dangered) {
-        return executeSkill(self, "Heal", self.level, dangered)
+        return executeSkill(self, "Heal", self.level, dangered);
       }
       const weakest = combatants
         .filter((c) => c.faction !== self.faction && c.life > 0)
@@ -67,6 +85,12 @@ function Healer(): Class {
  */
 function Brute(): Class {
   return {
+    levelUp(self) {
+      self.str += 5;
+      self.dex += 3;
+      self.int += 1;
+      self.maxLife += 30;
+    },
     processTurn(self, combatants, logger) {
       const weakest = combatants
         .filter((c) => c.faction !== self.faction && c.life > 0)
