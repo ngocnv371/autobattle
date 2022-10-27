@@ -12,7 +12,7 @@ export interface Character {
   dex: number;
   faction: Faction;
 
-  skill: string;
+  class: string;
   loot: string;
 }
 

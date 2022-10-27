@@ -15,7 +15,7 @@ const heroes: Character[] = [
     life: 0,
     maxLife: 100,
 
-    skill: "Punch",
+    class: "Brute",
     loot: "monster",
   },
   {
@@ -30,7 +30,7 @@ const heroes: Character[] = [
     life: 0,
     maxLife: 100,
 
-    skill: "Punch",
+    class: "Brute",
     loot: "monster",
   },
   {
@@ -39,13 +39,13 @@ const heroes: Character[] = [
     name: "Summoner",
     int: 20,
     str: 10,
-    dex: 12,
+    dex: 22,
     faction: "player",
 
     life: 0,
     maxLife: 100,
 
-    skill: "Slap",
+    class: "Brute",
     loot: "human",
   },
   {
@@ -60,7 +60,7 @@ const heroes: Character[] = [
     life: 0,
     maxLife: 100,
 
-    skill: "Bite",
+    class: "Brute",
     loot: "monster",
   },
 ];

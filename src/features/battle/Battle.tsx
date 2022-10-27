@@ -1,6 +1,8 @@
 import {
   IonButton,
   IonButtons,
+  IonCard,
+  IonCardContent,
   IonCol,
   IonContent,
   IonGrid,
@@ -20,8 +22,9 @@ import { RouteComponentProps } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { selectDungeons } from "../atlas/atlasSlice";
 import { selectParties } from "../barrack/barrackSlice";
-import { add } from "../inventory/inventorySlice";
+import { add, Item } from "../inventory/inventorySlice";
 import {
+  selectIsOver,
   selectLoot,
   selectMonsters,
   selectPlayers,
@@ -30,6 +33,20 @@ import {
   update,
 } from "./battleSlice";
 import Combatant from "./Combatant";
+
+const Loot: React.FC<{ items: Item[] }> = (props) => {
+  return (
+    <IonList>
+      <IonListHeader>Loot</IonListHeader>
+      {props.items.map((l) => (
+        <IonItem key={l.name}>
+          <IonLabel>{l.name}</IonLabel>
+          <IonLabel slot="end">{l.quantity}</IonLabel>
+        </IonItem>
+      ))}
+    </IonList>
+  );
+};
 
 const Battle: React.FC<
   RouteComponentProps<{ dungeon: string; party: string }>
@@ -41,6 +58,7 @@ const Battle: React.FC<
   const parties = useAppSelector(selectParties);
   const players = useAppSelector(selectPlayers);
   const monsters = useAppSelector(selectMonsters);
+  const isOver = useAppSelector(selectIsOver);
   const loot = useAppSelector(selectLoot);
 
   useEffect(() => {
@@ -74,10 +92,7 @@ const Battle: React.FC<
         <IonToolbar>
           <IonTitle>Battle</IonTitle>
           <IonButtons slot="end">
-            <IonButton
-              disabled={status !== "ended"}
-              onClick={() => handleDone()}
-            >
+            <IonButton disabled={!isOver} onClick={() => handleDone()}>
               Done
             </IonButton>
           </IonButtons>
@@ -105,15 +120,14 @@ const Battle: React.FC<
             ))}
           </IonRow>
         </IonGrid>
-        <IonList>
-          <IonListHeader>Loot</IonListHeader>
-          {loot.map((l) => (
-            <IonItem key={l.name}>
-              <IonLabel>{l.name}</IonLabel>
-              <IonLabel slot="end">{l.quantity}</IonLabel>
-            </IonItem>
-          ))}
-        </IonList>
+        {status === "playerWin" && <Loot items={loot} />}
+        {status === "playerLoose" && (
+          <IonCard>
+            <IonCardContent>
+              <IonLabel color="danger">You loose</IonLabel>
+            </IonCardContent>
+          </IonCard>
+        )}
       </IonContent>
     </IonPage>
   );

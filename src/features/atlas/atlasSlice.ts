@@ -29,7 +29,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 100,
 
-        skill: "Bite",
+        class: "Brute",
         loot: "monster",
       },
       {
@@ -44,7 +44,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 100,
 
-        skill: "Bite",
+        class: "Brute",
         loot: "monster",
       },
       {
@@ -59,7 +59,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 100,
 
-        skill: "Bite",
+        class: "Brute",
         loot: "monster",
       },
       {
@@ -74,7 +74,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 100,
 
-        skill: "Bite",
+        class: "Brute",
         loot: "human",
       },
     ],
@@ -95,7 +95,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 100,
 
-        skill: "Slap",
+        class: "Brute",
         loot: "monster",
       },
       {
@@ -110,7 +110,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 100,
 
-        skill: "Slap",
+        class: "Brute",
         loot: "monster",
       },
       {
@@ -125,7 +125,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 100,
 
-        skill: "Punch",
+        class: "Brute",
         loot: "monster",
       },
       {
@@ -140,7 +140,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 100,
 
-        skill: "Punch",
+        class: "Brute",
         loot: "human",
       },
     ],
@@ -161,7 +161,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 100,
 
-        skill: "Bite",
+        class: "Brute",
         loot: "human",
       },
       {
@@ -176,7 +176,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 100,
 
-        skill: "Bite",
+        class: "Brute",
         loot: "monster",
       },
       {
@@ -191,7 +191,7 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 100,
 
-        skill: "Bite",
+        class: "Brute",
         loot: "monster",
       },
     ],

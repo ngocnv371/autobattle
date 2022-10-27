@@ -65,12 +65,12 @@ const CharacterProfilePage: React.FC<
           </IonToolbar>
         </IonHeader>
         <IonList>
+          <Stat name="Class" value={char.class} />
           <Stat name="Faction" value={char.faction} />
           <Stat name="Life" value={char.maxLife} />
           <Stat name="STR" value={char.str} />
           <Stat name="DEX" value={char.dex} />
           <Stat name="INT" value={char.int} />
-          <Stat name="Skill" value={char.skill} />
         </IonList>
       </IonContent>
     </IonPage>

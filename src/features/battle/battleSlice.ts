@@ -3,9 +3,9 @@ import { RootState } from "../../app/store";
 import createLogger from "../../logger";
 import { Item } from "../inventory/inventorySlice";
 import { mergeItems } from "../inventory/utils";
+import classFactory from "./class";
 import { lootFactory } from "./loot";
 import { Character, Combatant, Faction } from "./models";
-import skillFactory from "./skills";
 
 /**
  * A combatant with `dex` of `10` will attack once every second.
@@ -14,7 +14,12 @@ import skillFactory from "./skills";
  */
 const BASE_ATTACK_RECOVER = 1000;
 
-export type BattleStatus = "none" | "running" | "paused" | "ended";
+export type BattleStatus =
+  | "none"
+  | "running"
+  | "paused"
+  | "playerWin"
+  | "playerLoose";
 export interface BattleState {
   status: BattleStatus;
   combatants: Combatant[];
@@ -47,27 +52,14 @@ export const battleSlice = createSlice({
       });
     },
     update: (state, action: PayloadAction<number>) => {
-      const now = new Date().getTime()
-      const logger = createLogger(`update-${now}`)
-      function getWeakestCombatant(faction: Faction) {
-        return state.combatants
-          .filter((c) => c.life > 0 && c.faction === faction)
-          .sort((a, b) => a.life - b.life)
-          .at(0);
-      }
-      function getEnemyFaction(faction: Faction): Faction {
-        return faction === "monster" ? "player" : "monster";
-      }
+      const now = new Date().getTime();
+      const logger = createLogger(`update-${now}`);
       function isFactionDead(faction: Faction) {
         return (
           state.combatants.filter((c) => c.faction === faction && c.life > 0)
             .length === 0
         );
       }
-      function isOver() {
-        return isFactionDead("player") || isFactionDead("monster");
-      }
-
       function getLivingCombatants() {
         return state.combatants.filter((c) => c.life > 0);
       }
@@ -81,38 +73,40 @@ export const battleSlice = createSlice({
         if (c.rested > c.recovery) {
           logger.log(`${c.name} has recovered and decided to do something`);
           c.rested = 0;
-          const target = getWeakestCombatant(getEnemyFaction(c.faction));
-          if (target) {
-            const skill = skillFactory(c.skill, 1, logger);
-            skill.use(c, target, logger);
-            if (target.life <= 0 && target.faction === 'monster') {
-              const loot = lootFactory(target.loot);
-              state.loot = mergeItems(state.loot, loot);
-            }
-          } else {
-            logger.log(`${c.name} found no target`);
-            state.status = "ended";
-            return;
-          }
-        } else {
-          logger.log(`${c.name} is resting`);
+          const mc = classFactory(c.class);
+          const action = mc.processTurn(c, state.combatants, logger);
+          action.execute(logger);
         }
+      }
+      function generateLoot() {
+        let bag: Item[] = [];
+        state.combatants
+          .filter((c) => c.faction === "monster")
+          .forEach((m) => {
+            bag = mergeItems(bag, lootFactory(m.loot));
+          });
+        state.loot = bag;
       }
 
       const delta = action.payload;
       if (state.status !== "running") {
         return;
       }
-      if (isOver()) {
-        logger.log("game over");
-        state.status = "ended";
+      if (isFactionDead("monster")) {
+        logger.log("player wins");
+        state.status = "playerWin";
+        generateLoot();
+        return;
+      } else if (isFactionDead("player")) {
+        logger.log("player loose");
+        state.status = "playerLoose";
         return;
       }
       const livings = getLivingCombatants();
       livings.forEach(processTurn);
     },
     stop: (state) => {
-      state.status = "ended";
+      state.status = "playerLoose";
     },
     togglePause: (state) => {
       if (state.status === "paused") {
@@ -127,7 +121,7 @@ export const battleSlice = createSlice({
 export const { start, update, stop, togglePause } = battleSlice.actions;
 
 export const selectIsOver = (state: RootState) =>
-  state.battle.status === "ended";
+  state.battle.status === "playerLoose" || state.battle.status === "playerWin";
 
 export const selectStatus = (state: RootState) => state.battle.status;
 
