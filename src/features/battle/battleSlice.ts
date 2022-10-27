@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { Item } from "../inventory/inventorySlice";
 import { mergeItems } from "../inventory/utils";
-import { generateLoot } from "./loot";
+import { lootFactory } from "./loot";
 import { Character, Combatant, Faction } from "./models";
 import skillFactory from "./skills";
 
@@ -82,8 +82,8 @@ export const battleSlice = createSlice({
           if (target) {
             const skill = skillFactory(c.skill, 1);
             skill.use(c, target);
-            if (target.life <= 0) {
-              const loot = generateLoot(target.loot);
+            if (target.life <= 0 && target.faction === 'monster') {
+              const loot = lootFactory(target.loot);
               state.loot = mergeItems(state.loot, loot);
             }
           } else {

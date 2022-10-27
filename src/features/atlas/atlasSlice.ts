@@ -59,6 +59,20 @@ const defaultDungeons: Dungeon[] = [
         skill: "Bite",
         loot: "monster",
       },
+      {
+        id: "wolf4",
+        name: "Tamer",
+        int: 10,
+        str: 15,
+        dex: 15,
+        faction: "monster",
+
+        life: 0,
+        maxLife: 100,
+
+        skill: "Bite",
+        loot: "human",
+      },
     ],
   },
   {
@@ -107,6 +121,20 @@ const defaultDungeons: Dungeon[] = [
         skill: "Punch",
         loot: "monster",
       },
+      {
+        id: "sp4",
+        name: "Gardener",
+        int: 10,
+        str: 15,
+        dex: 15,
+        faction: "monster",
+
+        life: 0,
+        maxLife: 100,
+
+        skill: "Punch",
+        loot: "human",
+      },
     ],
   },
   {
@@ -115,7 +143,7 @@ const defaultDungeons: Dungeon[] = [
     monsters: [
       {
         id: "sd1",
-        name: "Carp",
+        name: "Fisherman",
         int: 10,
         str: 15,
         dex: 10,
@@ -125,7 +153,7 @@ const defaultDungeons: Dungeon[] = [
         maxLife: 100,
 
         skill: "Bite",
-        loot: "monster",
+        loot: "human",
       },
       {
         id: "sd2",
