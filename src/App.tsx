@@ -34,7 +34,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import Atlas from './features/atlas/Atlas';
-import Barrack from './features/barrack/Barrack';
+import PartyAssignmentPage from './features/barrack/PartyAssignmentPage';
 import Battle from './features/battle/Battle';
 import Inventory from './features/inventory/Inventory';
 
@@ -57,7 +57,7 @@ const App: React.FC = () => (
           <Route exact path="/atlas">
             <Atlas />
           </Route>
-          <Route exact path="/atlas/:dungeon" component={Barrack} />
+          <Route exact path="/atlas/:dungeon" component={PartyAssignmentPage} />
           <Route exact path="/atlas/:dungeon/:party" component={Battle} />
           <Route exact path="/">
             <Redirect to="/atlas" />

@@ -1,25 +1,18 @@
 import {
-  IonButton,
   IonContent,
   IonHeader,
   IonPage,
   IonTitle,
   IonToolbar,
-  useIonRouter,
 } from "@ionic/react";
-import { RouteComponentProps } from "react-router";
+import { ReactElement } from "react";
 import { useAppSelector } from "../../app/hooks";
 import { Party, selectParties } from "./barrackSlice";
-import PartyCard from "./PartyCard";
 
-const Barrack: React.FC<RouteComponentProps<{ dungeon: string }>> = ({
-  match
-}) => {
+const PartyListPage: React.FC<{
+  renderParties: (parties: Party[]) => ReactElement[];
+}> = (props) => {
   const parties = useAppSelector(selectParties);
-  const router = useIonRouter();
-  function onSelectParty(p: Party) {
-    router.push(`/atlas/${match.params.dungeon}/${p.id}`);
-  }
   return (
     <IonPage>
       <IonHeader>
@@ -33,16 +26,10 @@ const Barrack: React.FC<RouteComponentProps<{ dungeon: string }>> = ({
             <IonTitle size="large">Parties</IonTitle>
           </IonToolbar>
         </IonHeader>
-        {parties.map((d) => (
-          <PartyCard key={d.id} {...d}>
-            <IonButton fill="clear" onClick={() => onSelectParty(d)}>
-              Select
-            </IonButton>
-          </PartyCard>
-        ))}
+        {props.renderParties(parties)}
       </IonContent>
     </IonPage>
   );
 };
 
-export default Barrack;
+export default PartyListPage;
