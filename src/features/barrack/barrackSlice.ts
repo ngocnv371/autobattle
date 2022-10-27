@@ -8,16 +8,16 @@ const heroes: Character[] = [
     id: "skeleton1",
     level: 1,
     name: "Bob",
-    int: 10,
-    str: 15,
+    int: 15,
+    str: 10,
     dex: 16,
     faction: "player",
 
     life: 0,
     maxLife: 300,
 
-    class: "Brute",
-    loot: "monster",
+    class: "Healer",
+    loot: "human",
   },
   {
     id: "skeleton2",
@@ -61,7 +61,7 @@ const heroes: Character[] = [
     life: 0,
     maxLife: 300,
 
-    class: "Healer",
+    class: "Animal",
     loot: "monster",
   },
 ];

@@ -5,6 +5,7 @@ import { Character } from "../battle/models";
 export interface Dungeon {
   id: string;
   name: string;
+  description?: string;
   monsters: Character[];
 }
 
@@ -16,6 +17,7 @@ const defaultDungeons: Dungeon[] = [
   {
     id: "w1",
     name: "Wolf's Den",
+    description: "The drought brought hunger. The wolves are getting bolder everyday. Somebody got to do something.",
     monsters: [
       {
         id: "wolf1",
@@ -29,22 +31,22 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 300,
 
-        class: "Brute",
+        class: "Animal",
         loot: "monster",
       },
       {
         id: "wolf2",
         level: 1,
-        name: "Wolf Bitch",
+        name: "Scarred Wolf",
         int: 10,
         str: 15,
-        dex: 12,
+        dex: 15,
         faction: "monster",
 
         life: 0,
         maxLife: 300,
 
-        class: "Brute",
+        class: "Animal",
         loot: "monster",
       },
       {
@@ -59,13 +61,13 @@ const defaultDungeons: Dungeon[] = [
         life: 0,
         maxLife: 300,
 
-        class: "Brute",
+        class: "Animal",
         loot: "monster",
       },
       {
         id: "wolf4",
         level: 1,
-        name: "Tamer",
+        name: "Wolfborn",
         int: 10,
         str: 15,
         dex: 15,

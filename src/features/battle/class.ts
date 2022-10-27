@@ -38,9 +38,7 @@ function executeSkill(
 function Simpleton(): Class {
   return {
     getLevelUpRequirements(self) {
-      return [
-        { name: 'Meat', quantity: 10 * self.level },
-      ]
+      return [{ name: "Meat", quantity: 10 * self.level }];
     },
     levelUp(self) {
       self.str += 5;
@@ -60,9 +58,7 @@ function Simpleton(): Class {
 function Healer(): Class {
   return {
     getLevelUpRequirements(self) {
-      return [
-        { name: 'Magic Stone', quantity: 10 * self.level },
-      ]
+      return [{ name: "Magic Stone", quantity: 10 * self.level }];
     },
     levelUp(self) {
       self.str += 1;
@@ -93,14 +89,12 @@ function Healer(): Class {
 }
 
 /**
- * simply punch anything
+ * simply punch everything
  */
 function Brute(): Class {
   return {
     getLevelUpRequirements(self) {
-      return [
-        { name: 'Bone', quantity: 10 * self.level },
-      ]
+      return [{ name: "Meat", quantity: 10 * self.level }];
     },
     levelUp(self) {
       self.str += 5;
@@ -121,7 +115,37 @@ function Brute(): Class {
   };
 }
 
-const table = [Brute, Healer];
+/**
+ * simply bite everything
+ */
+function Animal(): Class {
+  return {
+    getLevelUpRequirements(self) {
+      return [
+        { name: "Meat", quantity: 5 * self.level },
+        { name: "Bone", quantity: 1 * self.level },
+      ];
+    },
+    levelUp(self) {
+      self.str += 2;
+      self.dex += 5;
+      self.int += 1;
+      self.maxLife += 30;
+    },
+    processTurn(self, combatants, logger) {
+      const weakest = combatants
+        .filter((c) => c.faction !== self.faction && c.life > 0)
+        .sort((a, b) => a.life - b.life)
+        .at(0);
+      if (!weakest) {
+        return doNothing(self);
+      }
+      return executeSkill(self, "Bite", self.level, weakest);
+    },
+  };
+}
+
+const table = [Brute, Healer, Animal];
 
 export default function classFactory(name: string): Class {
   const c = table.find((t) => t.name === name);
