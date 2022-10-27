@@ -27,7 +27,7 @@ const defaultDungeons: Dungeon[] = [
         faction: "monster",
 
         life: 0,
-        maxLife: 100,
+        maxLife: 300,
 
         class: "Brute",
         loot: "monster",
@@ -42,7 +42,7 @@ const defaultDungeons: Dungeon[] = [
         faction: "monster",
 
         life: 0,
-        maxLife: 100,
+        maxLife: 300,
 
         class: "Brute",
         loot: "monster",
@@ -57,7 +57,7 @@ const defaultDungeons: Dungeon[] = [
         faction: "monster",
 
         life: 0,
-        maxLife: 100,
+        maxLife: 300,
 
         class: "Brute",
         loot: "monster",
@@ -72,7 +72,7 @@ const defaultDungeons: Dungeon[] = [
         faction: "monster",
 
         life: 0,
-        maxLife: 100,
+        maxLife: 300,
 
         class: "Brute",
         loot: "human",
@@ -93,7 +93,7 @@ const defaultDungeons: Dungeon[] = [
         faction: "monster",
 
         life: 0,
-        maxLife: 100,
+        maxLife: 300,
 
         class: "Brute",
         loot: "monster",
@@ -108,7 +108,7 @@ const defaultDungeons: Dungeon[] = [
         faction: "monster",
 
         life: 0,
-        maxLife: 100,
+        maxLife: 300,
 
         class: "Brute",
         loot: "monster",
@@ -123,7 +123,7 @@ const defaultDungeons: Dungeon[] = [
         faction: "monster",
 
         life: 0,
-        maxLife: 100,
+        maxLife: 300,
 
         class: "Brute",
         loot: "monster",
@@ -138,7 +138,7 @@ const defaultDungeons: Dungeon[] = [
         faction: "monster",
 
         life: 0,
-        maxLife: 100,
+        maxLife: 300,
 
         class: "Brute",
         loot: "human",
@@ -159,7 +159,7 @@ const defaultDungeons: Dungeon[] = [
         faction: "monster",
 
         life: 0,
-        maxLife: 100,
+        maxLife: 300,
 
         class: "Brute",
         loot: "human",
@@ -174,7 +174,7 @@ const defaultDungeons: Dungeon[] = [
         faction: "monster",
 
         life: 0,
-        maxLife: 100,
+        maxLife: 300,
 
         class: "Brute",
         loot: "monster",
@@ -189,7 +189,7 @@ const defaultDungeons: Dungeon[] = [
         faction: "monster",
 
         life: 0,
-        maxLife: 100,
+        maxLife: 300,
 
         class: "Brute",
         loot: "monster",

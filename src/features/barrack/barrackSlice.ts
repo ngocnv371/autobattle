@@ -13,7 +13,7 @@ const heroes: Character[] = [
     faction: "player",
 
     life: 0,
-    maxLife: 100,
+    maxLife: 300,
 
     class: "Brute",
     loot: "monster",
@@ -28,7 +28,7 @@ const heroes: Character[] = [
     faction: "player",
 
     life: 0,
-    maxLife: 100,
+    maxLife: 300,
 
     class: "Brute",
     loot: "monster",
@@ -43,7 +43,7 @@ const heroes: Character[] = [
     faction: "player",
 
     life: 0,
-    maxLife: 100,
+    maxLife: 300,
 
     class: "Brute",
     loot: "human",
@@ -58,9 +58,9 @@ const heroes: Character[] = [
     faction: "player",
 
     life: 0,
-    maxLife: 100,
+    maxLife: 300,
 
-    class: "Brute",
+    class: "Healer",
     loot: "monster",
   },
 ];

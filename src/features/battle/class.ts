@@ -40,6 +40,31 @@ function Simpleton(): Class {
   };
 }
 
+/**
+ * prioritize healing allies before attacking
+ */
+function Healer(): Class {
+  return {
+    processTurn(self, combatants, logger) {
+      const dangered = combatants.filter(c => c.life > 0 && c.faction === self.faction && c.life < c.maxLife / 2).at(0)
+      if (dangered) {
+        return executeSkill(self, "Heal", self.level, dangered)
+      }
+      const weakest = combatants
+        .filter((c) => c.faction !== self.faction && c.life > 0)
+        .sort((a, b) => a.life - b.life)
+        .at(0);
+      if (!weakest) {
+        return doNothing(self);
+      }
+      return executeSkill(self, "Punch", self.level, weakest);
+    },
+  };
+}
+
+/**
+ * simply punch anything
+ */
 function Brute(): Class {
   return {
     processTurn(self, combatants, logger) {
@@ -55,7 +80,7 @@ function Brute(): Class {
   };
 }
 
-const table = [Brute];
+const table = [Brute, Healer];
 
 export default function classFactory(name: string): Class {
   const c = table.find((t) => t.name === name);
