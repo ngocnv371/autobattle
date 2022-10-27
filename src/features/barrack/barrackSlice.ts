@@ -5,6 +5,7 @@ import { Character } from "../battle/models";
 const heroes: Character[] = [
   {
     id: "skeleton1",
+    level: 1,
     name: "Bob",
     int: 10,
     str: 15,
@@ -19,6 +20,7 @@ const heroes: Character[] = [
   },
   {
     id: "skeleton2",
+    level: 1,
     name: "Weist",
     int: 10,
     str: 15,
@@ -33,6 +35,7 @@ const heroes: Character[] = [
   },
   {
     id: "player",
+    level: 1,
     name: "Summoner",
     int: 20,
     str: 10,
@@ -47,6 +50,7 @@ const heroes: Character[] = [
   },
   {
     id: "dis",
+    level: 1,
     name: "Monkey",
     int: 20,
     str: 10,

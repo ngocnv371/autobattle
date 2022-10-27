@@ -19,6 +19,7 @@ const defaultDungeons: Dungeon[] = [
     monsters: [
       {
         id: "wolf1",
+        level: 1,
         name: "Wolf Alpha",
         int: 10,
         str: 15,
@@ -33,6 +34,7 @@ const defaultDungeons: Dungeon[] = [
       },
       {
         id: "wolf2",
+        level: 1,
         name: "Wolf Bitch",
         int: 10,
         str: 15,
@@ -47,6 +49,7 @@ const defaultDungeons: Dungeon[] = [
       },
       {
         id: "wolf3",
+        level: 1,
         name: "Wolf Pub",
         int: 10,
         str: 15,
@@ -61,6 +64,7 @@ const defaultDungeons: Dungeon[] = [
       },
       {
         id: "wolf4",
+        level: 1,
         name: "Tamer",
         int: 10,
         str: 15,
@@ -81,6 +85,7 @@ const defaultDungeons: Dungeon[] = [
     monsters: [
       {
         id: "sp1",
+        level: 1,
         name: "Sprout",
         int: 10,
         str: 15,
@@ -95,6 +100,7 @@ const defaultDungeons: Dungeon[] = [
       },
       {
         id: "sp2",
+        level: 1,
         name: "Green Thorn",
         int: 10,
         str: 15,
@@ -109,6 +115,7 @@ const defaultDungeons: Dungeon[] = [
       },
       {
         id: "sp3",
+        level: 1,
         name: "Big Tree",
         int: 10,
         str: 15,
@@ -123,6 +130,7 @@ const defaultDungeons: Dungeon[] = [
       },
       {
         id: "sp4",
+        level: 1,
         name: "Gardener",
         int: 10,
         str: 15,
@@ -143,6 +151,7 @@ const defaultDungeons: Dungeon[] = [
     monsters: [
       {
         id: "sd1",
+        level: 1,
         name: "Fisherman",
         int: 10,
         str: 15,
@@ -157,6 +166,7 @@ const defaultDungeons: Dungeon[] = [
       },
       {
         id: "sd2",
+        level: 1,
         name: "Snake",
         int: 10,
         str: 15,
@@ -171,6 +181,7 @@ const defaultDungeons: Dungeon[] = [
       },
       {
         id: "sd3",
+        level: 1,
         name: "Crocodile",
         int: 10,
         str: 15,

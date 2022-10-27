@@ -2,6 +2,7 @@ export type Faction = "player" | "monster";
 
 export interface Character {
   id: string;
+  level: number;
   name: string;
   life: number;
   maxLife: number;
