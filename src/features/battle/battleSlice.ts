@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import createLogger from "../../logger";
 import { Item } from "../inventory/inventorySlice";
 import { mergeItems } from "../inventory/utils";
 import { lootFactory } from "./loot";
@@ -46,6 +47,8 @@ export const battleSlice = createSlice({
       });
     },
     update: (state, action: PayloadAction<number>) => {
+      const now = new Date().getTime()
+      const logger = createLogger(`update-${now}`)
       function getWeakestCombatant(faction: Faction) {
         return state.combatants
           .filter((c) => c.life > 0 && c.faction === faction)
@@ -76,23 +79,23 @@ export const battleSlice = createSlice({
         }
 
         if (c.rested > c.recovery) {
-          console.log(`${c.name} has recovered and decided to do something`);
+          logger.log(`${c.name} has recovered and decided to do something`);
           c.rested = 0;
           const target = getWeakestCombatant(getEnemyFaction(c.faction));
           if (target) {
-            const skill = skillFactory(c.skill, 1);
-            skill.use(c, target);
+            const skill = skillFactory(c.skill, 1, logger);
+            skill.use(c, target, logger);
             if (target.life <= 0 && target.faction === 'monster') {
               const loot = lootFactory(target.loot);
               state.loot = mergeItems(state.loot, loot);
             }
           } else {
-            console.log(`${c.name} found no target`);
+            logger.log(`${c.name} found no target`);
             state.status = "ended";
             return;
           }
         } else {
-          console.log(`${c.name} is resting`);
+          logger.log(`${c.name} is resting`);
         }
       }
 
@@ -101,7 +104,7 @@ export const battleSlice = createSlice({
         return;
       }
       if (isOver()) {
-        console.log("game over");
+        logger.log("game over");
         state.status = "ended";
         return;
       }
