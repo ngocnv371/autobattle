@@ -32,6 +32,15 @@ export function Slap(level: number, logger: Logger): Skill {
   };
 }
 
+export function SpitPoison(level: number, logger: Logger): Skill {
+  return {
+    use(user, target) {
+      logger.log(`${user.name} spits poison at ${target.name}`);
+      applyDamageTo(target, user.baseDamage * level * user.str, logger);
+    },
+  };
+}
+
 export function Bite(level: number, logger: Logger): Skill {
   return {
     use(user, target) {
@@ -50,7 +59,7 @@ export function Heal(level: number, logger: Logger): Skill {
   };
 }
 
-const factories = [Punch, Slap, Bite, Heal];
+const factories = [Punch, Slap, Bite, Heal, SpitPoison];
 
 export default function skillFactory(name: string, level: number, logger: Logger): Skill {
   const f = factories.find((i) => i.name === name);

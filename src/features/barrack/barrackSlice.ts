@@ -19,7 +19,7 @@ const heroes: Character[] = [
     class: "Healer",
   },
   {
-    id: "skeleton2",
+    id: "p23",
     level: 1,
     name: "Weist",
     int: 10,
@@ -30,7 +30,7 @@ const heroes: Character[] = [
     life: 0,
     maxLife: 300,
 
-    class: "Brute",
+    class: "Poisonborn",
   },
   {
     id: "player",

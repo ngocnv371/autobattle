@@ -1,7 +1,7 @@
 import { Logger } from "../../logger";
 import { Item } from "../inventory/inventorySlice";
 import { Character, Combatant } from "./models";
-import skillFactory, { Bite, Heal, Punch } from "./skills";
+import skillFactory, { Bite, Heal, Punch, SpitPoison } from "./skills";
 
 export interface Action {
   execute(logger: Logger): void;
@@ -202,7 +202,36 @@ function Wolf(): Class {
   };
 }
 
-const table = [Brute, Healer, Animal, Wolf, Snake];
+/**
+ * simply bite everything
+ */
+ function Poisonborn(): Class {
+  return {
+    getLevelUpRequirements(self) {
+      return [
+        { name: "Poison", quantity: 9 * self.level },
+      ];
+    },
+    levelUp(self) {
+      self.str += 1;
+      self.dex += 2;
+      self.int += 5;
+      self.maxLife += 30;
+    },
+    processTurn(self, combatants, logger) {
+      const weakest = combatants
+        .filter((c) => c.faction !== self.faction && c.life > 0)
+        .sort((a, b) => a.life - b.life)
+        .at(0);
+      if (!weakest) {
+        return doNothing(self);
+      }
+      return executeSkill(self, SpitPoison.name, self.level, weakest);
+    },
+  };
+}
+
+const table = [Brute, Healer, Animal, Wolf, Snake, Poisonborn];
 
 export default function classFactory(name: string): Class {
   const c = table.find((t) => t.name === name);

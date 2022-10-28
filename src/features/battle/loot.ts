@@ -30,7 +30,7 @@ function Snake(): Item[] {
   return [
     { name: "Snake Skin", quantity: random(0, 1) },
     { name: "Snake Spine", quantity: random(0, 1) },
-    { name: "Snake Poison", quantity: 1 },
+    { name: "Poison", quantity: 1 },
     ...Monster(),
   ];
 }
