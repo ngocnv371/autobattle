@@ -14,7 +14,7 @@ function applyDamageTo(combatant: Combatant, damage: number, logger: Logger) {
   }
 }
 
-function Punch(level: number, logger: Logger): Skill {
+export function Punch(level: number, logger: Logger): Skill {
   return {
     use(user, target) {
       logger.log(`${user.name} punches ${target.name}`);
@@ -23,7 +23,7 @@ function Punch(level: number, logger: Logger): Skill {
   };
 }
 
-function Slap(level: number, logger: Logger): Skill {
+export function Slap(level: number, logger: Logger): Skill {
   return {
     use(user, target) {
       logger.log(`${user.name} slaps ${target.name}`);
@@ -32,7 +32,7 @@ function Slap(level: number, logger: Logger): Skill {
   };
 }
 
-function Bite(level: number, logger: Logger): Skill {
+export function Bite(level: number, logger: Logger): Skill {
   return {
     use(user, target) {
       logger.log(`${user.name} slaps ${target.name}`);
@@ -41,7 +41,7 @@ function Bite(level: number, logger: Logger): Skill {
   };
 }
 
-function Heal(level: number, logger: Logger): Skill {
+export function Heal(level: number, logger: Logger): Skill {
   return {
     use(user, target) {
       logger.log(`${user.name} heals ${target.name}`);

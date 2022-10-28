@@ -1,7 +1,7 @@
 import { Logger } from "../../logger";
 import { Item } from "../inventory/inventorySlice";
 import { Character, Combatant } from "./models";
-import skillFactory from "./skills";
+import skillFactory, { Bite, Heal, Punch } from "./skills";
 
 export interface Action {
   execute(logger: Logger): void;
@@ -74,7 +74,7 @@ function Healer(): Class {
         )
         .at(0);
       if (dangered) {
-        return executeSkill(self, "Heal", self.level, dangered);
+        return executeSkill(self, Heal.name, self.level, dangered);
       }
       const weakest = combatants
         .filter((c) => c.faction !== self.faction && c.life > 0)
@@ -83,7 +83,7 @@ function Healer(): Class {
       if (!weakest) {
         return doNothing(self);
       }
-      return executeSkill(self, "Punch", self.level, weakest);
+      return executeSkill(self, Punch.name, self.level, weakest);
     },
   };
 }
@@ -110,7 +110,7 @@ function Brute(): Class {
       if (!weakest) {
         return doNothing(self);
       }
-      return executeSkill(self, "Punch", self.level, weakest);
+      return executeSkill(self, Punch.name, self.level, weakest);
     },
   };
 }
@@ -140,7 +140,7 @@ function Animal(): Class {
       if (!weakest) {
         return doNothing(self);
       }
-      return executeSkill(self, "Bite", self.level, weakest);
+      return executeSkill(self, Bite.name, self.level, weakest);
     },
   };
 }
@@ -167,7 +167,7 @@ function Snake(): Class {
       if (!weakest) {
         return doNothing(self);
       }
-      return executeSkill(self, "Bite", self.level, weakest);
+      return executeSkill(self, Bite.name, self.level, weakest);
     },
   };
 }
@@ -197,7 +197,7 @@ function Wolf(): Class {
       if (!weakest) {
         return doNothing(self);
       }
-      return executeSkill(self, "Bite", self.level, weakest);
+      return executeSkill(self, Bite.name, self.level, weakest);
     },
   };
 }
