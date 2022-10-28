@@ -4,7 +4,6 @@ export interface Character {
   id: string;
   level: number;
   name: string;
-  life: number;
   maxLife: number;
 
   int: number;
@@ -19,4 +18,5 @@ export interface Combatant extends Character {
   rested: number;
   recovery: number;
   baseDamage: number;
+  life: number;
 }

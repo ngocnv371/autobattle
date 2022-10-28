@@ -28,10 +28,7 @@ const defaultDungeons: Dungeon[] = [
         str: 15,
         dex: 10,
         faction: "monster",
-
-        life: 0,
         maxLife: 300,
-
         class: "Wolf",
       },
       {
@@ -42,10 +39,7 @@ const defaultDungeons: Dungeon[] = [
         str: 15,
         dex: 15,
         faction: "monster",
-
-        life: 0,
         maxLife: 300,
-
         class: "Wolf",
       },
       {
@@ -56,10 +50,7 @@ const defaultDungeons: Dungeon[] = [
         str: 15,
         dex: 15,
         faction: "monster",
-
-        life: 0,
         maxLife: 300,
-
         class: "Wolf",
       },
       {
@@ -70,10 +61,7 @@ const defaultDungeons: Dungeon[] = [
         str: 15,
         dex: 15,
         faction: "monster",
-
-        life: 0,
         maxLife: 300,
-
         class: "Brute",
       },
     ],
@@ -92,10 +80,7 @@ const defaultDungeons: Dungeon[] = [
         str: 15,
         dex: 10,
         faction: "monster",
-
-        life: 0,
         maxLife: 300,
-
         class: "Brute",
       },
       {
@@ -106,10 +91,7 @@ const defaultDungeons: Dungeon[] = [
         str: 15,
         dex: 12,
         faction: "monster",
-
-        life: 0,
         maxLife: 300,
-
         class: "Brute",
       },
       {
@@ -120,10 +102,7 @@ const defaultDungeons: Dungeon[] = [
         str: 15,
         dex: 15,
         faction: "monster",
-
-        life: 0,
         maxLife: 300,
-
         class: "Brute",
       },
       {
@@ -134,10 +113,7 @@ const defaultDungeons: Dungeon[] = [
         str: 15,
         dex: 15,
         faction: "monster",
-
-        life: 0,
         maxLife: 300,
-
         class: "Healer",
       },
     ],
@@ -156,10 +132,7 @@ const defaultDungeons: Dungeon[] = [
         str: 15,
         dex: 10,
         faction: "monster",
-
-        life: 0,
         maxLife: 300,
-
         class: "Brute",
       },
       {
@@ -170,10 +143,7 @@ const defaultDungeons: Dungeon[] = [
         str: 15,
         dex: 12,
         faction: "monster",
-
-        life: 0,
         maxLife: 300,
-
         class: "Snake",
       },
       {
@@ -184,10 +154,7 @@ const defaultDungeons: Dungeon[] = [
         str: 15,
         dex: 15,
         faction: "monster",
-
-        life: 0,
         maxLife: 300,
-
         class: "Animal",
       },
     ],
@@ -205,10 +172,7 @@ const defaultDungeons: Dungeon[] = [
         str: 15,
         dex: 17,
         faction: "monster",
-
-        life: 0,
         maxLife: 300,
-
         class: "Snake",
       },
       {
@@ -219,10 +183,7 @@ const defaultDungeons: Dungeon[] = [
         str: 15,
         dex: 19,
         faction: "monster",
-
-        life: 0,
         maxLife: 300,
-
         class: "Snake",
       },
       {
@@ -233,10 +194,7 @@ const defaultDungeons: Dungeon[] = [
         str: 15,
         dex: 20,
         faction: "monster",
-
-        life: 0,
         maxLife: 300,
-
         class: "Snake",
       },
     ],

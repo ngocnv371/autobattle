@@ -12,10 +12,7 @@ const heroes: Character[] = [
     str: 10,
     dex: 16,
     faction: "player",
-
-    life: 0,
     maxLife: 300,
-
     class: "Healer",
   },
   {
@@ -26,10 +23,7 @@ const heroes: Character[] = [
     str: 15,
     dex: 16,
     faction: "player",
-
-    life: 0,
     maxLife: 300,
-
     class: "Poisonborn",
   },
   {
@@ -40,10 +34,7 @@ const heroes: Character[] = [
     str: 10,
     dex: 22,
     faction: "player",
-
-    life: 0,
     maxLife: 300,
-
     class: "Brute",
   },
   {
@@ -54,10 +45,7 @@ const heroes: Character[] = [
     str: 10,
     dex: 12,
     faction: "player",
-
-    life: 0,
     maxLife: 300,
-
     class: "Animal",
   },
 ];
