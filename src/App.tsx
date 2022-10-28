@@ -10,7 +10,7 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { ellipse, square, triangle } from "ionicons/icons";
+import { fileTrayStacked, map, home } from "ionicons/icons";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -62,15 +62,15 @@ const App: React.FC = () => (
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="atlas" href="/atlas">
-            <IonIcon icon={triangle} />
+            <IonIcon icon={map} />
             <IonLabel>Dungeons</IonLabel>
           </IonTabButton>
           <IonTabButton tab="barrack" href="/barrack">
-            <IonIcon icon={square} />
+            <IonIcon icon={home} />
             <IonLabel>Barrack</IonLabel>
           </IonTabButton>
           <IonTabButton tab="inventory" href="/inventory">
-            <IonIcon icon={ellipse} />
+            <IonIcon icon={fileTrayStacked} />
             <IonLabel>Inventory</IonLabel>
           </IonTabButton>
         </IonTabBar>
