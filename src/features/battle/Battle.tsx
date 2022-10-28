@@ -25,6 +25,7 @@ import { selectParties } from "../barrack/barrackSlice";
 import { add, Item } from "../inventory/inventorySlice";
 import {
   selectIsOver,
+  selectLogs,
   selectLoot,
   selectMonsters,
   selectPlayers,
@@ -42,6 +43,20 @@ const Loot: React.FC<{ items: Item[] }> = (props) => {
         <IonItem key={l.name}>
           <IonLabel>{l.name}</IonLabel>
           <IonLabel slot="end">{l.quantity}</IonLabel>
+        </IonItem>
+      ))}
+    </IonList>
+  );
+};
+
+const Logs: React.FC = () => {
+  const logs = useAppSelector(selectLogs);
+  return (
+    <IonList>
+      <IonListHeader>Battle Logs</IonListHeader>
+      {logs.map((m, idx) => (
+        <IonItem key={idx}>
+          {m}
         </IonItem>
       ))}
     </IonList>
@@ -135,6 +150,7 @@ const Battle: React.FC<
             </IonCardContent>
           </IonCard>
         )}
+        {isOver && <Logs />}
       </IonContent>
     </IonPage>
   );

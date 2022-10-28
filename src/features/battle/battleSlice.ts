@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import createLogger from "../../logger";
+import createLogger, { Logger } from "../../logger";
 import { Item } from "../inventory/inventorySlice";
 import { mergeItems } from "../inventory/utils";
 import classFactory from "./class";
@@ -25,6 +25,7 @@ export interface BattleState {
   combatants: Combatant[];
   timer: TimerHandler;
   loot: Item[];
+  logs: string[];
 }
 
 const initialState: BattleState = {
@@ -32,6 +33,7 @@ const initialState: BattleState = {
   combatants: [],
   timer: "",
   loot: [],
+  logs: []
 };
 
 export const battleSlice = createSlice({
@@ -41,6 +43,7 @@ export const battleSlice = createSlice({
     start: (state, action: PayloadAction<Character[]>) => {
       state.status = "running";
       state.loot = [];
+      state.logs = [];
       state.combatants = action.payload.map((c) => {
         return {
           ...c,
@@ -54,6 +57,13 @@ export const battleSlice = createSlice({
     update: (state, action: PayloadAction<number>) => {
       const now = new Date().getTime();
       const logger = createLogger(`update-${now}`);
+      const battleLogger: Logger = {
+        log(message?, ...optionalParams) {
+          state.logs.push(message)
+          return logger.log(message, ...optionalParams)
+        },
+        error: logger.error,
+      }
       function isFactionDead(faction: Faction) {
         return (
           state.combatants.filter((c) => c.faction === faction && c.life > 0)
@@ -71,11 +81,11 @@ export const battleSlice = createSlice({
         }
 
         if (c.rested > c.recovery) {
-          logger.log(`${c.name} has recovered and decided to do something`);
+          battleLogger.log(`${c.name} has recovered and decided to do something`);
           c.rested = 0;
           const mc = classFactory(c.class);
-          const action = mc.processTurn(c, state.combatants, logger);
-          action.execute(logger);
+          const action = mc.processTurn(c, state.combatants, battleLogger);
+          action.execute(battleLogger);
         }
       }
       function generateLoot() {
@@ -93,12 +103,12 @@ export const battleSlice = createSlice({
         return;
       }
       if (isFactionDead("monster")) {
-        logger.log("player wins");
+        battleLogger.log("player wins");
         state.status = "playerWin";
         generateLoot();
         return;
       } else if (isFactionDead("player")) {
-        logger.log("player loose");
+        battleLogger.log("player loose");
         state.status = "playerLoose";
         return;
       }
@@ -126,6 +136,7 @@ export const selectIsOver = (state: RootState) =>
 export const selectStatus = (state: RootState) => state.battle.status;
 
 export const selectLoot = (state: RootState) => state.battle.loot;
+export const selectLogs = (state: RootState) => state.battle.logs;
 
 export const selectPlayers = (state: RootState) =>
   state.battle.combatants.filter((c) => c.faction === "player");
