@@ -17,7 +17,7 @@ import {
   IonToolbar,
   useIonRouter,
 } from "@ionic/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { selectDungeons } from "../atlas/atlasSlice";
@@ -36,29 +36,38 @@ import {
 import Combatant from "./Combatant";
 
 const Loot: React.FC<{ items: Item[] }> = (props) => {
+  const [show, setShow] = useState(true);
   return (
     <IonList>
-      <IonListHeader>Loot</IonListHeader>
-      {props.items.map((l) => (
-        <IonItem key={l.name}>
-          <IonLabel>{l.name}</IonLabel>
-          <IonLabel slot="end">{l.quantity}</IonLabel>
-        </IonItem>
-      ))}
+      <IonListHeader>
+        <IonLabel>Loot</IonLabel>
+        <IonButton onClick={() => setShow(!show)}>
+          {show ? "Hide" : "Show"}
+        </IonButton>
+      </IonListHeader>
+      {show &&
+        props.items.map((l) => (
+          <IonItem key={l.name}>
+            <IonLabel>{l.name}</IonLabel>
+            <IonLabel slot="end">{l.quantity}</IonLabel>
+          </IonItem>
+        ))}
     </IonList>
   );
 };
 
 const Logs: React.FC = () => {
   const logs = useAppSelector(selectLogs);
+  const [show, setShow] = useState(false);
   return (
     <IonList>
-      <IonListHeader>Battle Logs</IonListHeader>
-      {logs.map((m, idx) => (
-        <IonItem key={idx}>
-          {m}
-        </IonItem>
-      ))}
+      <IonListHeader>
+        <IonLabel>Battle Logs</IonLabel>
+        <IonButton onClick={() => setShow(!show)}>
+          {show ? "Hide" : "Show"}
+        </IonButton>
+      </IonListHeader>
+      {show && logs.map((m, idx) => <IonItem key={idx}>{m}</IonItem>)}
     </IonList>
   );
 };
