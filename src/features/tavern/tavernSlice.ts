@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { names, Config, uniqueNamesGenerator } from "unique-names-generator"
 import { RootState } from "../../app/store";
+
+const config: Config = {
+  dictionaries: [names]
+}
 
 export interface Wanderer {
   id: string;
@@ -14,7 +19,7 @@ function generateWanderers(num: number): Wanderer[] {
     const id = 'w' + ++lastWandererId
     return {
       id,
-      name: "Nobody",
+      name: uniqueNamesGenerator(config),
       class: "Wolf",
       level: 3,
     };
