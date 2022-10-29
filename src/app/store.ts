@@ -3,6 +3,7 @@ import battleReducer from '../features/battle/battleSlice';
 import atlasReducer from '../features/atlas/atlasSlice';
 import barrackReducer from '../features/barrack/barrackSlice';
 import inventoryReducer from '../features/inventory/inventorySlice';
+import tavernReducer from '../features/tavern/tavernSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     atlas: atlasReducer,
     barrack: barrackReducer,
     inventory: inventoryReducer,
+    tavern: tavernReducer,
   },
 });
 

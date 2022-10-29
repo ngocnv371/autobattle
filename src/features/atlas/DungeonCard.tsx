@@ -22,7 +22,7 @@ const DungeonCard: React.FC<React.PropsWithChildren<Dungeon>> = (props) => {
         {props.monsters.map((m) => (
           <IonItem key={m.id}>
             <IonLabel>{m.name}</IonLabel>
-            <IonLabel slot="end">LV{m.level}</IonLabel>
+            <IonLabel slot="end">{m.class} LV{m.level}</IonLabel>
           </IonItem>
         ))}
       </IonList>

@@ -36,6 +36,7 @@ import Battle from "./features/battle/Battle";
 import InventoryPage from "./features/inventory/InventoryPage";
 import BarrackPage from "./features/barrack/BarrackPage";
 import CharacterProfilePage from "./features/barrack/CharacterProfilePage";
+import TavernPage from "./features/tavern/TavernPage";
 
 setupIonicReact();
 
@@ -49,6 +50,9 @@ const App: React.FC = () => (
           </Route>
           <Route exact path="/barrack">
             <BarrackPage />
+          </Route>
+          <Route exact path="/barrack/tavern">
+            <TavernPage />
           </Route>
           <Route exact path="/barrack/:party/:member" component={CharacterProfilePage} />
           <Route exact path="/atlas">

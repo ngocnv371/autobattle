@@ -24,7 +24,7 @@ const PartyCard: React.FC<
             onClick={() => props.onSelectMember && props.onSelectMember(m)}
           >
             <IonLabel>{m.name}</IonLabel>
-            <IonLabel slot="end">LV{m.level}</IonLabel>
+            <IonLabel slot="end">{m.class} LV{m.level}</IonLabel>
           </IonItem>
         ))}
       </IonList>

@@ -12,41 +12,42 @@ import {
 } from "@ionic/react";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { Item, selectItems, sell } from "./inventorySlice";
+import { refresh, remove, selectWanderers, Wanderer } from "./tavernSlice";
 
-const InventoryPage: React.FC = () => {
+const TavernPage: React.FC = () => {
   const dispatch = useAppDispatch();
-  const items = useAppSelector(selectItems);
-  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
-  function handleSell() {
+  const wanderers = useAppSelector(selectWanderers);
+  const [selectedItem, setSelectedItem] = useState<Wanderer | null>(null);
+  function handleHire() {
     if (!selectedItem) {
       return;
     }
-    dispatch(sell(selectedItem));
+    dispatch(remove(selectedItem.id));
     setSelectedItem(null);
   }
-  function handleSelect(w: Item) {
+  function handleSelect(w: Wanderer) {
     if (!selectedItem) {
       setSelectedItem(w);
-    } else if (selectedItem.name !== w.name) {
+    } else if (selectedItem.id !== w.id) {
       setSelectedItem(w);
     } else {
       setSelectedItem(null);
     }
   }
+  function handleRefresh() {
+    dispatch(refresh());
+  }
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Inventory</IonTitle>
+          <IonTitle>Tavern</IonTitle>
           <IonButtons slot="end">
             {selectedItem && (
-              <IonButton
-                disabled={selectedItem.name === "Gold"}
-                onClick={() => handleSell()}
-              >
-                Sell
-              </IonButton>
+              <IonButton onClick={() => handleHire()}>Hire</IonButton>
+            )}
+            {!selectedItem && (
+              <IonButton onClick={() => handleRefresh()}>Refresh</IonButton>
             )}
           </IonButtons>
         </IonToolbar>
@@ -54,18 +55,20 @@ const InventoryPage: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Inventory</IonTitle>
+            <IonTitle size="large">Tavern</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonList>
-          {items.map((d) => (
+          {wanderers.map((d) => (
             <IonItem
-              key={d.name}
+              key={d.id}
               onClick={() => handleSelect(d)}
-              color={selectedItem?.name === d.name ? "primary" : ""}
+              color={selectedItem?.id === d.id ? "primary" : ""}
             >
               <IonLabel>{d.name}</IonLabel>
-              <IonLabel slot="end">{d.quantity}</IonLabel>
+              <IonLabel slot="end">
+                {d.class} LV{d.level}
+              </IonLabel>
             </IonItem>
           ))}
         </IonList>
@@ -74,4 +77,4 @@ const InventoryPage: React.FC = () => {
   );
 };
 
-export default InventoryPage;
+export default TavernPage;

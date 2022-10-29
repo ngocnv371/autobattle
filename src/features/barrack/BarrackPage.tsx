@@ -26,7 +26,7 @@ const BarrackPage: React.FC = () => {
         <IonToolbar>
           <IonTitle>Parties</IonTitle>
           <IonButtons slot="end">
-            <IonButton>Add</IonButton>
+            <IonButton routerLink="/barrack/tavern">Tavern</IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>
