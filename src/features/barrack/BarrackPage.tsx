@@ -8,13 +8,14 @@ import {
   IonToolbar,
   useIonRouter,
 } from "@ionic/react";
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Character } from "../battle/models";
-import { Party, selectParties } from "./barrackSlice";
+import { addParty, Party, removeParty, selectParties } from "./barrackSlice";
 import PartyCard from "./PartyCard";
 
 const BarrackPage: React.FC = () => {
   const router = useIonRouter();
+  const dispatch = useAppDispatch();
   const parties = useAppSelector(selectParties);
 
   function handleSelectMember(p: Party, m: Character) {
@@ -26,6 +27,7 @@ const BarrackPage: React.FC = () => {
         <IonToolbar>
           <IonTitle>Parties</IonTitle>
           <IonButtons slot="end">
+            <IonButton onClick={() => dispatch(addParty())}>+ Party</IonButton>
             <IonButton routerLink="/barrack/tavern">Tavern</IonButton>
           </IonButtons>
         </IonToolbar>
@@ -41,7 +43,11 @@ const BarrackPage: React.FC = () => {
             key={p.id}
             {...p}
             onSelectMember={(m) => handleSelectMember(p, m)}
-          ></PartyCard>
+          >
+            <IonButton fill="clear" onClick={() => dispatch(removeParty(p.id))}>
+              Delete
+            </IonButton>
+          </PartyCard>
         ))}
       </IonContent>
     </IonPage>
