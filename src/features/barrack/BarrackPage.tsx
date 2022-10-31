@@ -6,6 +6,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonAlert,
   useIonRouter,
 } from "@ionic/react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -16,10 +17,30 @@ import PartyCard from "./PartyCard";
 const BarrackPage: React.FC = () => {
   const router = useIonRouter();
   const dispatch = useAppDispatch();
+  const [presentAlert] = useIonAlert();
   const parties = useAppSelector(selectParties);
 
   function handleSelectMember(p: Party, m: Character) {
     router.push(`/barrack/${p.id}/${m.id}`);
+  }
+  function handleDeleteParty(p: Party) {
+    presentAlert({
+      header: "Alert",
+      message: `Do you really want to delete ${p.name}?`,
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+        },
+        {
+          text: "OK",
+          role: "confirm",
+          handler: () => {
+            dispatch(removeParty(p.id));
+          },
+        },
+      ],
+    });
   }
   return (
     <IonPage>
@@ -44,7 +65,7 @@ const BarrackPage: React.FC = () => {
             {...p}
             onSelectMember={(m) => handleSelectMember(p, m)}
           >
-            <IonButton fill="clear" onClick={() => dispatch(removeParty(p.id))}>
+            <IonButton fill="clear" onClick={() => handleDeleteParty(p)}>
               Delete
             </IonButton>
           </PartyCard>
