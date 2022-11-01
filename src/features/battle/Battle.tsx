@@ -73,7 +73,7 @@ const Logs: React.FC = () => {
 };
 
 const Battle: React.FC<
-  RouteComponentProps<{ dungeon: string; party: string }>
+  RouteComponentProps<{ dungeonId: string; partyId: string }>
 > = ({ match }) => {
   const router = useIonRouter();
   const dispatch = useAppDispatch();
@@ -86,8 +86,8 @@ const Battle: React.FC<
   const loot = useAppSelector(selectLoot);
 
   useEffect(() => {
-    const dungeon = dungeons.find((d) => d.id === match.params.dungeon);
-    const party = parties.find((d) => d.id === match.params.party);
+    const dungeon = dungeons.find((d) => d.id === match.params.dungeonId);
+    const party = parties.find((d) => d.id === match.params.partyId);
     dispatch(start([...(dungeon?.monsters || []), ...(party?.members || [])]));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);

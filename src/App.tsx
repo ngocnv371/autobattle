@@ -51,15 +51,13 @@ const App: React.FC = () => (
           <Route exact path="/barrack">
             <BarrackPage />
           </Route>
-          <Route exact path="/barrack/tavern">
-            <TavernPage />
-          </Route>
-          <Route exact path="/barrack/:party/:member" component={CharacterProfilePage} />
+          <Route exact path="/barrack/tavern" component={TavernPage} />
+          <Route exact path="/barrack/:partyId/:memberId" component={CharacterProfilePage} />
           <Route exact path="/atlas">
             <Atlas />
           </Route>
-          <Route exact path="/atlas/:dungeon" component={PartyAssignmentPage} />
-          <Route exact path="/atlas/:dungeon/:party" component={Battle} />
+          <Route exact path="/atlas/:dungeonId" component={PartyAssignmentPage} />
+          <Route exact path="/atlas/:dungeonId/:partyId" component={Battle} />
           <Route exact path="/">
             <Redirect to="/atlas" />
           </Route>

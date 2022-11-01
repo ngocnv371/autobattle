@@ -67,9 +67,9 @@ const LevelUp: React.FC<{ character: Character }> = ({ character }) => {
 };
 
 const CharacterProfilePage: React.FC<
-  RouteComponentProps<{ party: string; member: string }>
+  RouteComponentProps<{ partyId: string; memberId: string }>
 > = ({ match }) => {
-  const char = useAppSelector(selectMember(match.params.member));
+  const char = useAppSelector(selectMember(match.params.memberId));
 
   if (!char) {
     return null;
