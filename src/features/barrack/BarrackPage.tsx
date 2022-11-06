@@ -11,6 +11,7 @@ import {
 } from "@ionic/react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Character } from "../battle/models";
+import HireModal from "../tavern/HireModal";
 import { addParty, Party, removeParty, selectParties } from "./barrackSlice";
 import PartyCard from "./PartyCard";
 
@@ -68,6 +69,7 @@ const BarrackPage: React.FC = () => {
             <IonButton fill="clear" onClick={() => handleDeleteParty(p)}>
               Delete
             </IonButton>
+            <HireModal party={p} />
           </PartyCard>
         ))}
       </IonContent>
