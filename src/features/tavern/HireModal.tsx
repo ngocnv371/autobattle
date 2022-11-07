@@ -12,16 +12,17 @@ import {
 } from "@ionic/react";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { Character } from "../../app/models";
 import { addMember, Party } from "../barrack/barrackSlice";
-import { refresh, remove, selectWanderers, Wanderer } from "./tavernSlice";
+import { refresh, remove, selectWanderers } from "./tavernSlice";
 
 const HireModal: React.FC<{ party: Party }> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAppDispatch();
   const wanderers = useAppSelector(selectWanderers);
-  const [selectedItem, setSelectedItem] = useState<Wanderer | null>(null);
+  const [selectedItem, setSelectedItem] = useState<Character | null>(null);
 
-  function handleSelect(w: Wanderer) {
+  function handleSelect(w: Character) {
     if (!selectedItem) {
       setSelectedItem(w);
     } else if (selectedItem.id !== w.id) {

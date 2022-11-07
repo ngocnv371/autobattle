@@ -12,12 +12,13 @@ import {
 } from "@ionic/react";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { refresh, remove, selectWanderers, Wanderer } from "./tavernSlice";
+import { Character } from "../../app/models";
+import { refresh, remove, selectWanderers } from "./tavernSlice";
 
 const TavernPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const wanderers = useAppSelector(selectWanderers);
-  const [selectedItem, setSelectedItem] = useState<Wanderer | null>(null);
+  const [selectedItem, setSelectedItem] = useState<Character | null>(null);
   function handleHire() {
     if (!selectedItem) {
       return;
@@ -25,7 +26,7 @@ const TavernPage: React.FC = () => {
     dispatch(remove(selectedItem.id));
     setSelectedItem(null);
   }
-  function handleSelect(w: Wanderer) {
+  function handleSelect(w: Character) {
     if (!selectedItem) {
       setSelectedItem(w);
     } else if (selectedItem.id !== w.id) {

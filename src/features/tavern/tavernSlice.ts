@@ -1,20 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { names, Config, uniqueNamesGenerator } from "unique-names-generator"
+import { Character } from "../../app/models";
 import { RootState } from "../../app/store";
 
 const config: Config = {
   dictionaries: [names]
 }
 
-export interface Wanderer {
-  id: string;
-  name: string;
-  level: number;
-  class: string;
-}
-
 let lastWandererId = 1;
-function generateWanderers(num: number): Wanderer[] {
+function generateWanderers(num: number): Character[] {
   return Array(num).fill(0).map(() => {
     const id = 'w' + ++lastWandererId
     return {
@@ -27,7 +21,7 @@ function generateWanderers(num: number): Wanderer[] {
 }
 
 export interface tavernState {
-  wanderers: Wanderer[];
+  wanderers: Character[];
 }
 
 const initialState: tavernState = {
