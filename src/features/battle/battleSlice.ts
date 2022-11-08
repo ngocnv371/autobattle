@@ -1,10 +1,10 @@
-import { Character, Combatant, Faction } from "../../app/models";
+import { Character, Combatant, Faction, Item } from "../../app/models";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import createLogger, { Logger } from "../../logger";
 
-import { Item } from "../inventory/inventorySlice";
+import { Logger } from "../../app/models";
 import { RootState } from "../../app/store";
 import classFactory from "./class";
+import createLogger from "../../logger";
 import { lootFactory } from "./loot";
 import { mergeItems } from "../inventory/utils";
 

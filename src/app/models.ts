@@ -33,3 +33,23 @@ export interface Combatant extends Character, CombatStats {
   faction: Faction;
   rested: number;
 }
+
+export interface Item {
+  name: string;
+  quantity: number;
+}
+
+export interface Logger {
+  log(message?: any, ...optionalParams: any[]): void;
+  error(message?: any, ...optionalParams: any[]): void;
+}
+
+export interface Action {
+  execute(logger: Logger): void;
+}
+
+export interface Class {
+  getLevelUpRequirements(self: Character): Item[];
+  levelUp(self: Character): void;
+  processTurn(self: Combatant, combatants: Combatant[], logger: Logger): Action;
+}

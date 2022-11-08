@@ -17,12 +17,6 @@ import {
   IonToolbar,
   useIonRouter,
 } from "@ionic/react";
-import { useEffect, useState } from "react";
-import { RouteComponentProps } from "react-router";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { selectDungeons } from "../atlas/atlasSlice";
-import { selectParties } from "../barrack/barrackSlice";
-import { add, Item } from "../inventory/inventorySlice";
 import {
   selectIsOver,
   selectLogs,
@@ -33,7 +27,15 @@ import {
   start,
   update,
 } from "./battleSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useEffect, useState } from "react";
+
 import Combatant from "./Combatant";
+import { Item } from "../../app/models";
+import { RouteComponentProps } from "react-router";
+import { add } from "../inventory/inventorySlice";
+import { selectDungeons } from "../atlas/atlasSlice";
+import { selectParties } from "../barrack/barrackSlice";
 
 const Loot: React.FC<{ items: Item[] }> = (props) => {
   const [show, setShow] = useState(true);

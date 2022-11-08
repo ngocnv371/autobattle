@@ -1,11 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
+import { Item } from "../../app/models";
 import { RootState } from "../../app/store";
 import { mergeItems } from "./utils";
-
-export interface Item {
-  name: string;
-  quantity: number;
-}
 
 const defaultItems: Item[] = [
   { name: "Branch", quantity: 3 },

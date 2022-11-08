@@ -10,9 +10,11 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useState } from "react";
+import { selectItems, sell } from "./inventorySlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { Item, selectItems, sell } from "./inventorySlice";
+
+import { Item } from "../../app/models";
+import { useState } from "react";
 
 const InventoryPage: React.FC = () => {
   const dispatch = useAppDispatch();

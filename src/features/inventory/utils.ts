@@ -1,4 +1,4 @@
-import { Item } from "./inventorySlice";
+import { Item } from "../../app/models";
 
 export function mergeItems(a: Item[], b: Item[]): Item[] {
   const result = a;

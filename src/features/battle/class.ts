@@ -1,18 +1,5 @@
-import { Character, Combatant } from "../../app/models";
+import { Action, Character, Class, Combatant } from "../../app/models";
 import skillFactory, { Bite, Heal, Punch, SpitPoison } from "./skills";
-
-import { Item } from "../inventory/inventorySlice";
-import { Logger } from "../../logger";
-
-export interface Action {
-  execute(logger: Logger): void;
-}
-
-export interface Class {
-  getLevelUpRequirements(self: Character): Item[];
-  levelUp(self: Character): void;
-  processTurn(self: Combatant, combatants: Combatant[], logger: Logger): Action;
-}
 
 function doNothing(self: Combatant): Action {
   return {

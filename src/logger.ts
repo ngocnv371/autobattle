@@ -1,7 +1,4 @@
-export interface Logger {
-  log(message?: any, ...optionalParams: any[]): void;
-  error(message?: any, ...optionalParams: any[]): void;
-}
+import { Logger } from "./app/models";
 
 export default function createLogger(tag: string): Logger {
   function log(message?: any, ...optionalParams: any[]): void {
