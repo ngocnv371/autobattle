@@ -25,6 +25,8 @@ export interface CombatStats {
   dex: number;
   maxLife: number;
   life: number;
+  mana: number;
+  maxMana: number;
   recovery: number;
   baseDamage: number;
 }
@@ -55,4 +57,5 @@ export interface Skill {
 export interface Class {
   getLevelUpRequirements(self: Character): Item[];
   processTurn(self: Combatant, combatants: Combatant[], logger: Logger): Action;
+  createCombatant(self: Character): Combatant;
 }

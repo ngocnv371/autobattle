@@ -21,5 +21,24 @@ export function Poisonborn(): Class {
       }
       return UseSkill(self, SpitPoison.name, self.level, weakest);
     },
+    createCombatant(self) {
+      return {
+        ...self,
+
+        int: 10 + self.level * 1,
+        str: 10 + self.level * 2,
+        dex: 10 + self.level * 2,
+
+        life: 100 + self.level * 20,
+        maxLife: 100 + self.level * 20,
+        mana: 50 + self.level * 10,
+        maxMana: 50 + self.level * 10,
+
+        baseDamage: 10 + self.level * 2,
+        recovery: 1000 + self.level * 10,
+        faction: "monster",
+        rested: 0,
+      };
+    },
   };
 }

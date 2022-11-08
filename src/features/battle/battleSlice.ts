@@ -49,16 +49,9 @@ export const battleSlice = createSlice({
         char: Character,
         faction: Faction
       ): Combatant {
+        const mc = classFactory(char.class);
         return {
-          ...char,
-          rested: 0,
-          recovery: Math.floor((10 / 20) * BASE_ATTACK_RECOVER),
-          baseDamage: 15,
-          life: 200,
-          int: 10,
-          dex: 20,
-          str: 10,
-          maxLife: 200,
+          ...mc.createCombatant(char),
           faction,
         };
       }
