@@ -1,8 +1,8 @@
-import { Heal, Punch } from "../skills";
-
 import { Class } from "../../../app/models";
 import { DoNothing } from "../actions/DoNothing";
 import { UseSkill } from "../actions/UseSkill";
+import { Heal } from "../skills/Heal";
+import { Punch } from "../skills/Punch";
 
 /**
  * prioritize healing allies before attacking

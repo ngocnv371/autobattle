@@ -1,7 +1,7 @@
-import { Bite } from "../skills";
 import { Class } from "../../../app/models";
 import { DoNothing } from "../actions/DoNothing";
 import { UseSkill } from "../actions/UseSkill";
+import { Bite } from "../skills/Bite";
 
 /**
  * simply bite everything

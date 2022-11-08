@@ -1,7 +1,7 @@
 import { Class } from "../../../app/models";
 import { DoNothing } from "../actions/DoNothing";
-import { Punch } from "../skills";
 import { UseSkill } from "../actions/UseSkill";
+import { Punch } from "../skills/Punch";
 
 /**
  * simply punch everything
