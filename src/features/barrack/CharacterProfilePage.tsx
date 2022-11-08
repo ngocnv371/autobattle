@@ -13,13 +13,14 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { useMemo } from "react";
-import { RouteComponentProps } from "react-router";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { Character } from "../../app/models";
-import classFactory from "../battle/class";
-import { remove, selectInStock } from "../inventory/inventorySlice";
 import { levelUp, selectMember } from "./barrackSlice";
+import { remove, selectInStock } from "../inventory/inventorySlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+
+import { Character } from "../../app/models";
+import { RouteComponentProps } from "react-router";
+import classFactory from "../battle/classes";
+import { useMemo } from "react";
 
 const Stat: React.FC<{ name: string; value: any }> = (props) => {
   return (

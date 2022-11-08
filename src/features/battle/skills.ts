@@ -1,8 +1,4 @@
-import { Combatant, Logger } from "../../app/models";
-
-export interface Skill {
-  use: (user: Combatant, target: Combatant, logger: Logger) => void;
-}
+import { Combatant, Logger, Skill } from "../../app/models";
 
 function applyDamageTo(combatant: Combatant, damage: number, logger: Logger) {
   logger.log(`${combatant.name} takes ${damage} damage`);

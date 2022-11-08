@@ -48,8 +48,11 @@ export interface Action {
   execute(logger: Logger): void;
 }
 
+export interface Skill {
+  use: (user: Combatant, target: Combatant, logger: Logger) => void;
+}
+
 export interface Class {
   getLevelUpRequirements(self: Character): Item[];
-  levelUp(self: Character): void;
   processTurn(self: Combatant, combatants: Combatant[], logger: Logger): Action;
 }

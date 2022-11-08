@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { Logger } from "../../app/models";
 import { RootState } from "../../app/store";
-import classFactory from "./class";
+import classFactory from "./classes";
 import createLogger from "../../logger";
 import { lootFactory } from "./loot";
 import { mergeItems } from "../inventory/utils";
