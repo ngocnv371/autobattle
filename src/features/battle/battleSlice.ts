@@ -8,13 +8,6 @@ import createLogger from "../../logger";
 import { lootFactory } from "./loot";
 import { mergeItems } from "../inventory/utils";
 
-/**
- * A combatant with `dex` of `10` will attack once every second.
- * With `dex` of `20`, it will attack twice every second.
- * This meaning attack timer (attack on elapsed) = 10/dex * 1000
- */
-const BASE_ATTACK_RECOVER = 1000;
-
 export type BattleStatus =
   | "none"
   | "running"
