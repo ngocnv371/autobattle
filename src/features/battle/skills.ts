@@ -1,5 +1,5 @@
+import { Combatant } from "../../app/models";
 import { Logger } from "../../logger";
-import { Combatant } from "./models";
 
 export interface Skill {
   use: (user: Combatant, target: Combatant, logger: Logger) => void;

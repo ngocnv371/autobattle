@@ -1,4 +1,5 @@
-import React from "react";
+import * as models from "../../app/models";
+
 import {
   IonCard,
   IonCardHeader,
@@ -7,7 +8,7 @@ import {
   IonProgressBar,
 } from "@ionic/react";
 
-import * as models from "./models";
+import React from "react";
 
 interface Props {
   combatant: models.Combatant;

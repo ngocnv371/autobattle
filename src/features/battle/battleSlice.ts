@@ -1,12 +1,12 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Character } from "../../app/models";
-import { RootState } from "../../app/store";
+import { Character, Combatant, Faction } from "../../app/models";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import createLogger, { Logger } from "../../logger";
+
 import { Item } from "../inventory/inventorySlice";
-import { mergeItems } from "../inventory/utils";
+import { RootState } from "../../app/store";
 import classFactory from "./class";
 import { lootFactory } from "./loot";
-import { Combatant, Faction } from "./models";
+import { mergeItems } from "../inventory/utils";
 
 /**
  * A combatant with `dex` of `10` will attack once every second.

@@ -16,3 +16,20 @@ export interface Party {
   name: string;
   members: Character[];
 }
+
+export type Faction = "player" | "monster";
+
+export interface CombatStats {
+  int: number;
+  str: number;
+  dex: number;
+  maxLife: number;
+  life: number;
+  recovery: number;
+  baseDamage: number;
+}
+
+export interface Combatant extends Character, CombatStats {
+  faction: Faction;
+  rested: number;
+}

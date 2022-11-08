@@ -1,8 +1,8 @@
-import { Character } from "../../app/models";
-import { Logger } from "../../logger";
-import { Item } from "../inventory/inventorySlice";
-import { Combatant } from "./models";
+import { Character, Combatant } from "../../app/models";
 import skillFactory, { Bite, Heal, Punch, SpitPoison } from "./skills";
+
+import { Item } from "../inventory/inventorySlice";
+import { Logger } from "../../logger";
 
 export interface Action {
   execute(logger: Logger): void;
