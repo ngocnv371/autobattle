@@ -10,9 +10,9 @@ import {
   useIonRouter,
 } from "@ionic/react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { Character } from "../battle/models";
+import { Character, Party } from "../../app/models";
 import HireModal from "../tavern/HireModal";
-import { addParty, Party, removeParty, selectParties } from "./barrackSlice";
+import { addParty, removeParty, selectParties } from "./barrackSlice";
 import PartyCard from "./PartyCard";
 
 const BarrackPage: React.FC = () => {

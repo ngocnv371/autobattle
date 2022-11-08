@@ -1,20 +1,14 @@
+import { Character } from "../../app/models";
+
 export type Faction = "player" | "monster";
 
-export interface Character {
-  id: string;
-  level: number;
-  name: string;
+export interface Combatant extends Character {
   maxLife: number;
 
   int: number;
   str: number;
   dex: number;
   faction: Faction;
-
-  class: string;
-}
-
-export interface Combatant extends Character {
   rested: number;
   recovery: number;
   baseDamage: number;

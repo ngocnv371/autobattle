@@ -6,8 +6,7 @@ import {
   IonLabel,
   IonList,
 } from "@ionic/react";
-import { Character } from "../battle/models";
-import { Party } from "./barrackSlice";
+import { Character, Party } from "../../app/models";
 
 const PartyCard: React.FC<
   React.PropsWithChildren<Party & { onSelectMember?: (m: Character) => void }>

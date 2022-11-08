@@ -11,7 +11,8 @@ import {
 } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 import { useAppSelector } from "../../app/hooks";
-import { Party, selectParties } from "./barrackSlice";
+import { Party } from "../../app/models";
+import { selectParties } from "./barrackSlice";
 import PartyCard from "./PartyCard";
 
 const PartyAssignmentPage: React.FC<

@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Character } from "../../app/models";
 import { RootState } from "../../app/store";
 import createLogger, { Logger } from "../../logger";
 import { Item } from "../inventory/inventorySlice";
 import { mergeItems } from "../inventory/utils";
 import classFactory from "./class";
 import { lootFactory } from "./loot";
-import { Character, Combatant, Faction } from "./models";
+import { Combatant, Faction } from "./models";
 
 /**
  * A combatant with `dex` of `10` will attack once every second.
@@ -33,37 +34,54 @@ const initialState: BattleState = {
   combatants: [],
   timer: "",
   loot: [],
-  logs: []
+  logs: [],
 };
 
 export const battleSlice = createSlice({
   name: "battle",
   initialState,
   reducers: {
-    start: (state, action: PayloadAction<Character[]>) => {
+    start: (
+      state,
+      action: PayloadAction<{ players: Character[]; monsters: Character[] }>
+    ) => {
+      function instantiateCharacter(
+        char: Character,
+        faction: Faction
+      ): Combatant {
+        return {
+          ...char,
+          rested: 0,
+          recovery: Math.floor((10 / 20) * BASE_ATTACK_RECOVER),
+          baseDamage: 15,
+          life: 200,
+          int: 10,
+          dex: 20,
+          str: 10,
+          maxLife: 200,
+          faction,
+        };
+      }
       state.status = "running";
       state.loot = [];
       state.logs = [];
-      state.combatants = action.payload.map((c) => {
-        return {
-          ...c,
-          rested: 0,
-          recovery: Math.floor((10 / c.dex) * BASE_ATTACK_RECOVER),
-          baseDamage: 15,
-          life: c.maxLife,
-        };
-      });
+      state.combatants = [
+        ...action.payload.players.map((p) => instantiateCharacter(p, "player")),
+        ...action.payload.monsters.map((p) =>
+          instantiateCharacter(p, "monster")
+        ),
+      ];
     },
     update: (state, action: PayloadAction<number>) => {
       const now = new Date().getTime();
       const logger = createLogger(`update-${now}`);
       const battleLogger: Logger = {
         log(message?, ...optionalParams) {
-          state.logs.push(message)
-          return logger.log(message, ...optionalParams)
+          state.logs.push(message);
+          return logger.log(message, ...optionalParams);
         },
         error: logger.error,
-      }
+      };
       function isFactionDead(faction: Faction) {
         return (
           state.combatants.filter((c) => c.faction === faction && c.life > 0)
@@ -81,7 +99,9 @@ export const battleSlice = createSlice({
         }
 
         if (c.rested > c.recovery) {
-          battleLogger.log(`${c.name} has recovered and decided to do something`);
+          battleLogger.log(
+            `${c.name} has recovered and decided to do something`
+          );
           c.rested = 0;
           const mc = classFactory(c.class);
           const action = mc.processTurn(c, state.combatants, battleLogger);

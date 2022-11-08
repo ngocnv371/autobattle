@@ -1,6 +1,7 @@
+import { Character } from "../../app/models";
 import { Logger } from "../../logger";
 import { Item } from "../inventory/inventorySlice";
-import { Character, Combatant } from "./models";
+import { Combatant } from "./models";
 import skillFactory, { Bite, Heal, Punch, SpitPoison } from "./skills";
 
 export interface Action {
@@ -41,10 +42,6 @@ function Simpleton(): Class {
       return [{ name: "Meat", quantity: 10 * self.level }];
     },
     levelUp(self) {
-      self.str += 5;
-      self.dex += 3;
-      self.int += 1;
-      self.maxLife += 30;
     },
     processTurn(self, combatants, logger) {
       return doNothing(self);
@@ -61,10 +58,6 @@ function Healer(): Class {
       return [{ name: "Magic Stone", quantity: 10 * self.level }];
     },
     levelUp(self) {
-      self.str += 1;
-      self.dex += 3;
-      self.int += 5;
-      self.maxLife += 25;
     },
     processTurn(self, combatants, logger) {
       const dangered = combatants
@@ -97,10 +90,6 @@ function Brute(): Class {
       return [{ name: "Meat", quantity: 10 * self.level }];
     },
     levelUp(self) {
-      self.str += 5;
-      self.dex += 3;
-      self.int += 1;
-      self.maxLife += 30;
     },
     processTurn(self, combatants, logger) {
       const weakest = combatants
@@ -127,10 +116,6 @@ function Animal(): Class {
       ];
     },
     levelUp(self) {
-      self.str += 2;
-      self.dex += 5;
-      self.int += 1;
-      self.maxLife += 30;
     },
     processTurn(self, combatants, logger) {
       const weakest = combatants
@@ -154,10 +139,6 @@ function Snake(): Class {
       return [{ name: "Meat", quantity: 5 * self.level }];
     },
     levelUp(self) {
-      self.str += 2;
-      self.dex += 5;
-      self.int += 1;
-      self.maxLife += 30;
     },
     processTurn(self, combatants, logger) {
       const weakest = combatants
@@ -184,10 +165,6 @@ function Wolf(): Class {
       ];
     },
     levelUp(self) {
-      self.str += 2;
-      self.dex += 5;
-      self.int += 1;
-      self.maxLife += 30;
     },
     processTurn(self, combatants, logger) {
       const weakest = combatants
@@ -213,10 +190,6 @@ function Wolf(): Class {
       ];
     },
     levelUp(self) {
-      self.str += 1;
-      self.dex += 2;
-      self.int += 5;
-      self.maxLife += 30;
     },
     processTurn(self, combatants, logger) {
       const weakest = combatants

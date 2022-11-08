@@ -16,8 +16,8 @@ import {
 import { useMemo } from "react";
 import { RouteComponentProps } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { Character } from "../../app/models";
 import classFactory from "../battle/class";
-import { Character } from "../battle/models";
 import { remove, selectInStock } from "../inventory/inventorySlice";
 import { levelUp, selectMember } from "./barrackSlice";
 
@@ -94,11 +94,6 @@ const CharacterProfilePage: React.FC<
         <IonList>
           <Stat name="Class" value={char.class} />
           <Stat name="Level" value={char.level} />
-          <Stat name="Faction" value={char.faction} />
-          <Stat name="Life" value={char.maxLife} />
-          <Stat name="STR" value={char.str} />
-          <Stat name="DEX" value={char.dex} />
-          <Stat name="INT" value={char.int} />
         </IonList>
         <LevelUp character={char} />
       </IonContent>

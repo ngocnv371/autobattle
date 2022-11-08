@@ -88,7 +88,12 @@ const Battle: React.FC<
   useEffect(() => {
     const dungeon = dungeons.find((d) => d.id === match.params.dungeonId);
     const party = parties.find((d) => d.id === match.params.partyId);
-    dispatch(start([...(dungeon?.monsters || []), ...(party?.members || [])]));
+    dispatch(
+      start({
+        monsters: dungeon?.monsters || [],
+        players: party?.members || [],
+      })
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 

@@ -12,8 +12,8 @@ import {
 } from "@ionic/react";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { Character } from "../../app/models";
-import { addMember, Party } from "../barrack/barrackSlice";
+import { Character, Party } from "../../app/models";
+import { addMember } from "../barrack/barrackSlice";
 import { refresh, remove, selectWanderers } from "./tavernSlice";
 
 const HireModal: React.FC<{ party: Party }> = (props) => {
@@ -42,14 +42,7 @@ const HireModal: React.FC<{ party: Party }> = (props) => {
     dispatch(
       addMember({
         partyId: props.party.id,
-        member: {
-          ...selectedItem,
-          maxLife: 0,
-          str: 0,
-          int: 0,
-          dex: 0,
-          faction: "monster",
-        },
+        member: selectedItem,
       })
     );
     dispatch(remove(selectedItem.id));

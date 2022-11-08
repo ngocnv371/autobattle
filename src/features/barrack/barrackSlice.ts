@@ -1,51 +1,31 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Character, Party } from "../../app/models";
 import { RootState } from "../../app/store";
 import classFactory from "../battle/class";
-import { Character } from "../battle/models";
 
 const heroes: Character[] = [
   {
     id: "skeleton1",
     level: 1,
     name: "Bob",
-    int: 15,
-    str: 10,
-    dex: 16,
-    faction: "player",
-    maxLife: 300,
     class: "Healer",
   },
   {
     id: "p23",
     level: 1,
     name: "Weist",
-    int: 10,
-    str: 15,
-    dex: 16,
-    faction: "player",
-    maxLife: 300,
     class: "Poisonborn",
   },
   {
     id: "player",
     level: 1,
     name: "Summoner",
-    int: 20,
-    str: 10,
-    dex: 22,
-    faction: "player",
-    maxLife: 300,
     class: "Brute",
   },
   {
     id: "dis",
     level: 1,
     name: "Monkey",
-    int: 20,
-    str: 10,
-    dex: 12,
-    faction: "player",
-    maxLife: 300,
     class: "Animal",
   },
 ];
@@ -55,12 +35,6 @@ const mainParty: Party = {
   name: "Forward Force",
   members: heroes,
 };
-
-export interface Party {
-  id: string;
-  name: string;
-  members: Character[];
-}
 
 export interface barrackState {
   parties: Party[];
