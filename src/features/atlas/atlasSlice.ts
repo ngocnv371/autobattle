@@ -147,4 +147,7 @@ export const { add } = atlasSlice.actions;
 
 export const selectDungeons = (state: RootState) => state.atlas.dungeons;
 
+export const selectMonsters = (dungeonId: string) => (state: RootState) =>
+  state.atlas.dungeons.find((d) => d.id === dungeonId)?.monsters || [];
+
 export default atlasSlice.reducer;

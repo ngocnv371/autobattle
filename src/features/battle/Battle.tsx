@@ -18,11 +18,10 @@ import {
   useIonRouter,
 } from "@ionic/react";
 import {
+  selectCombatants,
   selectIsOver,
   selectLogs,
   selectLoot,
-  selectMonsters,
-  selectPlayers,
   selectStatus,
   start,
   update,
@@ -34,8 +33,8 @@ import Combatant from "./Combatant";
 import { Item } from "../../app/models";
 import { RouteComponentProps } from "react-router";
 import { add } from "../inventory/inventorySlice";
-import { selectDungeons } from "../atlas/atlasSlice";
-import { selectParties } from "../barrack/barrackSlice";
+import { selectMembers } from "../barrack/barrackSlice";
+import { selectMonsters } from "../atlas/atlasSlice";
 
 const Loot: React.FC<{ items: Item[] }> = (props) => {
   const [show, setShow] = useState(true);
@@ -80,24 +79,22 @@ const Battle: React.FC<
   const router = useIonRouter();
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectStatus);
-  const dungeons = useAppSelector(selectDungeons);
-  const parties = useAppSelector(selectParties);
-  const players = useAppSelector(selectPlayers);
-  const monsters = useAppSelector(selectMonsters);
+  const originalMonsters = useAppSelector(selectMonsters(match.params.dungeonId));
+  const originalMembers = useAppSelector(selectMembers(match.params.partyId));
+  const players = useAppSelector(selectCombatants('player'));
+  const monsters = useAppSelector(selectCombatants('monster'));
   const isOver = useAppSelector(selectIsOver);
   const loot = useAppSelector(selectLoot);
 
   useEffect(() => {
-    const dungeon = dungeons.find((d) => d.id === match.params.dungeonId);
-    const party = parties.find((d) => d.id === match.params.partyId);
     dispatch(
       start({
-        monsters: dungeon?.monsters || [],
-        players: party?.members || [],
+        monsters: originalMonsters,
+        players: originalMembers,
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [dispatch, originalMonsters, originalMembers]);
 
   useEffect(() => {
     let lastUpdate = new Date();

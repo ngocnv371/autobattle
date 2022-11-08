@@ -103,7 +103,11 @@ export const { addParty, removeParty, addMember, removeMember, levelUp } =
   barrackSlice.actions;
 
 export const selectParties = (state: RootState) => state.barrack.parties;
+
 export const selectMember = (id: string) => (state: RootState) =>
   state.barrack.parties.flatMap((p) => p.members).find((m) => m.id === id);
+
+export const selectMembers = (partyId: string) => (state: RootState) =>
+  state.barrack.parties.find((p) => p.id === partyId)?.members || [];
 
 export default barrackSlice.reducer;

@@ -158,10 +158,7 @@ export const selectStatus = (state: RootState) => state.battle.status;
 export const selectLoot = (state: RootState) => state.battle.loot;
 export const selectLogs = (state: RootState) => state.battle.logs;
 
-export const selectPlayers = (state: RootState) =>
-  state.battle.combatants.filter((c) => c.faction === "player");
-
-export const selectMonsters = (state: RootState) =>
-  state.battle.combatants.filter((c) => c.faction === "monster");
+export const selectCombatants = (faction: Faction) => (state: RootState) =>
+  state.battle.combatants.filter((c) => c.faction === faction);
 
 export default battleSlice.reducer;
