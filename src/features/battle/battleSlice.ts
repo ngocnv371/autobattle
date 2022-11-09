@@ -66,6 +66,7 @@ export const battleSlice = createSlice({
           state.logs.push(message);
           return logger.log(message, ...optionalParams);
         },
+        info: logger.info,
         error: logger.error,
       };
       function isFactionDead(faction: Faction) {
@@ -80,7 +81,7 @@ export const battleSlice = createSlice({
       function processTurn(c: Combatant) {
         // update cool down
         c.rested += delta;
-        if (c.life < 0) {
+        if (c.life <= 0) {
           return;
         }
 

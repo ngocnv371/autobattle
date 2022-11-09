@@ -43,6 +43,7 @@ export interface Item {
 
 export interface Logger {
   log(message?: any, ...optionalParams: any[]): void;
+  info(message?: any, ...optionalParams: any[]): void;
   error(message?: any, ...optionalParams: any[]): void;
 }
 
@@ -51,6 +52,7 @@ export interface Action {
 }
 
 export interface Skill {
+  canUse: (user: Combatant, target: Combatant, logger: Logger) => boolean;
   use: (user: Combatant, target: Combatant, logger: Logger) => void;
 }
 

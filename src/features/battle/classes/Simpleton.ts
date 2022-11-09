@@ -17,8 +17,8 @@ export function Simpleton(): Class {
         str: 10 + self.level * 2,
         dex: 10 + self.level * 2,
 
-        life: 100 + self.level * 20,
-        maxLife: 100 + self.level * 20,
+        life: 300 + self.level * 30,
+        maxLife: 300 + self.level * 30,
         mana: 50 + self.level * 10,
         maxMana: 50 + self.level * 10,
 

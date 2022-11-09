@@ -1,6 +1,7 @@
 import { Class } from "../../../app/models";
 import { DoNothing } from "../actions/DoNothing";
 import { UseSkill } from "../actions/UseSkill";
+import skillFactory from "../skills";
 import { Heal } from "../skills/Heal";
 import { Punch } from "../skills/Punch";
 
@@ -29,6 +30,10 @@ export function Healer(): Class {
       if (!weakest) {
         return DoNothing(self);
       }
+      const skill = skillFactory(Punch.name, self.level, logger);
+      if (!skill.canUse(self, weakest, logger)) {
+        return DoNothing(self);
+      }
       return UseSkill(self, Punch.name, self.level, weakest);
     },
     createCombatant(self) {
@@ -39,8 +44,8 @@ export function Healer(): Class {
         str: 10 + self.level * 2,
         dex: 10 + self.level * 2,
 
-        life: 100 + self.level * 20,
-        maxLife: 100 + self.level * 20,
+        life: 200 + self.level * 20,
+        maxLife: 200 + self.level * 20,
         mana: 50 + self.level * 10,
         maxMana: 50 + self.level * 10,
 
