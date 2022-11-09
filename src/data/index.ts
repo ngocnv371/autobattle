@@ -35,7 +35,7 @@ function calculateValue(progression: Progression, level: number): number {
     points[2],
     points[3]
   );
-  return min + position * max;
+  return Math.floor(min + position * max);
 }
 
 export function parseMonsters() {
