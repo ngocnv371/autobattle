@@ -4,8 +4,9 @@ import { Heal } from "./Heal";
 import { Punch } from "./Punch";
 import { Slap } from "./Slap";
 import { SpitPoison } from "./SpitPoison";
+import { Stare } from "./Stare";
 
-const factories = [Punch, Slap, Bite, Heal, SpitPoison];
+const factories = [Punch, Slap, Bite, Heal, SpitPoison, Stare];
 
 export default function skillFactory(
   name: string,

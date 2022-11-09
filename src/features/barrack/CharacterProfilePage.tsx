@@ -19,8 +19,8 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 import { Character } from "../../app/models";
 import { RouteComponentProps } from "react-router";
-import classFactory from "../battle/classes";
 import { useMemo } from "react";
+import { monsterFactory } from "../../data";
 
 const Stat: React.FC<{ name: string; value: any }> = (props) => {
   return (
@@ -34,7 +34,7 @@ const Stat: React.FC<{ name: string; value: any }> = (props) => {
 const LevelUp: React.FC<{ character: Character }> = ({ character }) => {
   const dispatch = useAppDispatch();
   const requirements = useMemo(() => {
-    const mc = classFactory(character.class);
+    const mc = monsterFactory(character.class, character.level);
     const req = mc.getLevelUpRequirements(character);
     return req;
     // eslint-disable-next-line react-hooks/exhaustive-deps

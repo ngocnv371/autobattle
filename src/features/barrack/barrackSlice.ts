@@ -8,25 +8,25 @@ const heroes: Character[] = [
     id: "skeleton1",
     level: 1,
     name: "Bob",
-    class: "Healer",
+    class: "Grass Snake",
   },
   {
     id: "p23",
     level: 1,
     name: "Weist",
-    class: "Poisonborn",
+    class: "Grass Snake",
   },
   {
     id: "player",
     level: 1,
     name: "Summoner",
-    class: "Brute",
+    class: "Grass Snake",
   },
   {
     id: "dis",
     level: 1,
     name: "Monkey",
-    class: "Animal",
+    class: "Grass Snake",
   },
 ];
 

@@ -61,3 +61,7 @@ export interface Class {
   processTurn(self: Combatant, combatants: Combatant[], logger: Logger): Action;
   createCombatant(self: Character): Combatant;
 }
+
+export interface CombatBehavior {
+  processTurn(self: Combatant, combatants: Combatant[], logger: Logger): Action;
+}

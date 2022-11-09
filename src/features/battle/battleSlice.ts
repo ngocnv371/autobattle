@@ -3,10 +3,10 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { Logger } from "../../app/models";
 import { RootState } from "../../app/store";
-import classFactory from "./classes";
 import createLogger from "../../logger";
 import { lootFactory } from "./loot";
 import { mergeItems } from "../inventory/utils";
+import { monsterFactory } from "../../data";
 
 export type BattleStatus =
   | "none"
@@ -38,14 +38,16 @@ export const battleSlice = createSlice({
       state,
       action: PayloadAction<{ players: Character[]; monsters: Character[] }>
     ) => {
+      let lastId = 1
       function instantiateCharacter(
         char: Character,
         faction: Faction
       ): Combatant {
-        const mc = classFactory(char.class);
+        const mc = monsterFactory(char.class, char.level);
         return {
           ...mc.createCombatant(char),
           faction,
+          id: ++lastId + ''
         };
       }
       state.status = "running";
@@ -90,7 +92,7 @@ export const battleSlice = createSlice({
             `${c.name} has recovered and decided to do something`
           );
           c.rested = 0;
-          const mc = classFactory(c.class);
+          const mc = monsterFactory(c.class, c.level);
           const action = mc.processTurn(c, state.combatants, battleLogger);
           action.execute(battleLogger);
         }
