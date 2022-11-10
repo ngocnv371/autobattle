@@ -1,0 +1,157 @@
+[
+  {
+    "name": "Human",
+    "int": ["linear", 10, 120],
+    "str": ["linear", 10, 120],
+    "dex": ["linear", 10, 120],
+    "maxLife": ["linear", 100, 1500],
+    "maxMana": ["linear", 50, 500],
+    "recovery": ["linear", 10, 100],
+    "baseDamage": ["linear", 10, 150],
+    "behavior": ["Aggressive", "Punch", "Stare"],
+    "levelUp": {
+      "Meat": ["linear", 5, 200],
+      "Magic Stone": ["linear", 0, 2500]
+    },
+    "loot": {
+      "Meat": ["linear", 0, 100],
+      "Bone": ["linear", 0, 100],
+      "Skin": ["linear", 0, 100]
+    }
+  },
+  {
+    "name": "Spirit",
+    "int": ["linear", 10, 120],
+    "str": ["linear", 10, 20],
+    "dex": ["linear", 10, 60],
+    "maxLife": ["linear", 100, 500],
+    "maxMana": ["linear", 90, 700],
+    "recovery": ["linear", 10, 100],
+    "baseDamage": ["linear", 13, 170],
+    "behavior": ["Aggressive", "Scream", "Stare"],
+    "levelUp": {
+      "Magic Stone": ["linear", 0, 2500]
+    },
+    "loot": {
+      "Ectoplasm": ["linear", 0, 100]
+    }
+  },
+  {
+    "name": "Corrupted Spirit",
+    "int": ["linear", 10, 180],
+    "str": ["linear", 10, 120],
+    "dex": ["linear", 10, 160],
+    "maxLife": ["linear", 100, 2500],
+    "maxMana": ["linear", 90, 900],
+    "recovery": ["linear", 10, 100],
+    "baseDamage": ["linear", 13, 170],
+    "behavior": ["Aggressive", "DrainLife", "Scream"],
+    "levelUp": {
+      "Magic Stone": ["linear", 0, 2500]
+    },
+    "loot": {
+      "Ectoplasm": ["linear", 0, 1000]
+    }
+  },
+  {
+    "name": "Grey Wolf",
+    "int": ["linear", 10, 100],
+    "str": ["linear", 10, 120],
+    "dex": ["linear", 10, 140],
+    "maxLife": ["linear", 100, 1200],
+    "maxMana": ["linear", 30, 300],
+    "recovery": ["linear", 10, 120],
+    "baseDamage": ["linear", 7, 100],
+    "behavior": ["Aggressive", "Bite", "Growl"],
+    "levelUp": {
+      "Meat": ["linear", 5, 200],
+      "Bone": ["linear", 1, 156],
+      "Magic Stone": ["linear", 0, 136]
+    },
+    "loot": {
+      "Meat": ["linear", 0, 100],
+      "Bone": ["linear", 0, 100],
+      "Pelt": ["linear", 0, 100]
+    }
+  },
+  {
+    "name": "Grass Snake",
+    "int": ["linear", 10, 80],
+    "str": ["linear", 10, 100],
+    "dex": ["linear", 10, 160],
+    "maxLife": ["linear", 100, 900],
+    "maxMana": ["linear", 40, 300],
+    "recovery": ["linear", 10, 160],
+    "baseDamage": ["linear", 20, 170],
+    "behavior": ["Aggressive", "Bite", "Stare"],
+    "levelUp": {
+      "Meat": ["linear", 5, 200],
+      "Magic Stone": ["linear", 0, 136]
+    },
+    "loot": {
+      "Meat": ["linear", 0, 50],
+      "Venom": ["linear", 0, 50],
+      "Snake Skin": ["linear", 0, 100]
+    }
+  },
+  {
+    "name": "Ever Grass",
+    "int": ["linear", 10, 70],
+    "str": ["linear", 10, 140],
+    "dex": ["linear", 10, 140],
+    "maxLife": ["linear", 100, 1800],
+    "maxMana": ["linear", 50, 500],
+    "recovery": ["linear", 12, 120],
+    "baseDamage": ["linear", 15, 160],
+    "behavior": ["Aggressive", "Slap", "Stare"],
+    "levelUp": {
+      "Meat": ["linear", 5, 200],
+      "Magic Stone": ["linear", 0, 136]
+    },
+    "loot": {
+      "Meat": ["linear", 0, 50],
+      "Venom": ["linear", 0, 50],
+      "Snake Skin": ["linear", 0, 100]
+    }
+  },
+  {
+    "name": "Deep Thorn",
+    "int": ["linear", 10, 70],
+    "str": ["linear", 10, 160],
+    "dex": ["linear", 10, 100],
+    "maxLife": ["linear", 100, 1200],
+    "maxMana": ["linear", 50, 500],
+    "recovery": ["linear", 12, 120],
+    "baseDamage": ["linear", 15, 160],
+    "behavior": ["Aggressive", "Slap", "Stare"],
+    "levelUp": {
+      "Meat": ["linear", 5, 200],
+      "Magic Stone": ["linear", 0, 136]
+    },
+    "loot": {
+      "Meat": ["linear", 0, 50],
+      "Venom": ["linear", 0, 50],
+      "Snake Skin": ["linear", 0, 100]
+    }
+  },
+  {
+    "name": "Blue Carp",
+    "int": ["linear", 10, 160],
+    "str": ["linear", 10, 100],
+    "dex": ["linear", 10, 100],
+    "maxLife": ["linear", 100, 1200],
+    "maxMana": ["linear", 70, 800],
+    "recovery": ["linear", 15, 140],
+    "baseDamage": ["linear", 15, 170],
+    "behavior": ["Aggressive", "Bite", "Stare"],
+    "levelUp": {
+      "Meat": ["linear", 5, 200],
+      "Magic Stone": ["linear", 0, 136]
+    },
+    "loot": {
+      "Meat": ["linear", 0, 50],
+      "Venom": ["linear", 0, 50],
+      "Snake Skin": ["linear", 0, 100]
+    }
+  }
+]

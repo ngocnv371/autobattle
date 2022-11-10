@@ -8,25 +8,25 @@ const heroes: Character[] = [
     id: "skeleton1",
     level: 1,
     name: "Bob",
-    class: "Healer",
+    class: "Human",
   },
   {
     id: "p23",
     level: 1,
     name: "Weist",
-    class: "Poisonborn",
+    class: "Human",
   },
   {
     id: "player",
     level: 1,
     name: "Summoner",
-    class: "Brute",
+    class: "Human",
   },
   {
     id: "dis",
     level: 1,
     name: "Monkey",
-    class: "Animal",
+    class: "Human",
   },
 ];
 

@@ -7,9 +7,9 @@ import {
   IonLabel,
   IonList,
 } from "@ionic/react";
-import { Dungeon } from "./atlasSlice";
+import { MissionSchema } from "../../data/schema";
 
-const DungeonCard: React.FC<React.PropsWithChildren<Dungeon>> = (props) => {
+const DungeonCard: React.FC<React.PropsWithChildren<MissionSchema>> = (props) => {
   return (
     <IonCard>
       <IonCardHeader>
@@ -19,8 +19,8 @@ const DungeonCard: React.FC<React.PropsWithChildren<Dungeon>> = (props) => {
         <IonCardContent>{props.description}</IonCardContent>
       )}
       <IonList>
-        {props.monsters.map((m) => (
-          <IonItem key={m.id}>
+        {props.enemies.map((m, idx) => (
+          <IonItem key={idx}>
             <IonLabel>{m.name}</IonLabel>
             <IonLabel slot="end">{m.class} LV{m.level}</IonLabel>
           </IonItem>
