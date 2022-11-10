@@ -6,7 +6,7 @@ import { RootState } from "../../app/store";
 import createLogger from "../../logger";
 import { lootFactory } from "./loot";
 import { mergeItems } from "../inventory/utils";
-import { monsterFactory } from "../../data";
+import { monsterFactory } from "../../data/monsters";
 
 export type BattleStatus =
   | "none"
@@ -46,6 +46,7 @@ export const battleSlice = createSlice({
         const mc = monsterFactory(char.class, char.level);
         return {
           ...mc.createCombatant(char),
+          name: char.name,
           faction,
           id: ++lastId + ''
         };

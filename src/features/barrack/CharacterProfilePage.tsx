@@ -20,7 +20,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Character } from "../../app/models";
 import { RouteComponentProps } from "react-router";
 import { useMemo } from "react";
-import { monsterFactory } from "../../data";
+import { monsterFactory } from "../../data/monsters";
 
 const Stat: React.FC<{ name: string; value: any }> = (props) => {
   return (

@@ -1,42 +1,8 @@
 import { Class, Combatant, Item } from "../app/models";
-import { cubicBezier } from "../app/utils";
+import { calculateProgressionValue } from "../app/utils";
 import behaviorFactory from "../features/battle/behaviors";
-import { Curve, MonsterSchema, Progression } from "./schema";
+import { MonsterSchema } from "./schema";
 
-const MAX_LEVEL = 100;
-
-function curveToPoints(curve: Curve): number[] {
-  const sampleCurves: { [name: string]: number[] } = {
-    linear: [0, 0, 1, 1],
-    "ease-out": [0, 0, 0.58, 1],
-    "ease-in-out": [0.42, 0, 0.58, 1],
-    "ease-in": [0.42, 0, 1, 1],
-  };
-  let points = sampleCurves["linear"];
-  if (typeof curve === "string") {
-    if (Object.keys(sampleCurves).includes(curve)) {
-      points = sampleCurves[curve];
-    } else {
-      console.warn(`unknown curve ${curve}`);
-    }
-  } else {
-    points = curve;
-  }
-  return points;
-}
-
-function calculateValue(progression: Progression, level: number): number {
-  const [curve, min, max] = progression;
-  const points = curveToPoints(curve);
-  const position = cubicBezier(
-    level / MAX_LEVEL,
-    points[0],
-    points[1],
-    points[2],
-    points[3]
-  );
-  return Math.floor(min + position * max);
-}
 
 export function parseMonsters() {
   try {
@@ -59,7 +25,7 @@ export function monsterFactory(name: string, level: number): Class {
     }
     return Object.keys(schema.levelUp).map((k) => ({
       name: k,
-      quantity: calculateValue(schema.levelUp[k], level),
+      quantity: calculateProgressionValue(schema.levelUp[k], level),
     }));
   }
   function createCombatant(): Combatant {
@@ -67,15 +33,15 @@ export function monsterFactory(name: string, level: number): Class {
       throw new Error(`monster not found ${name}`);
     }
     const projected = {
-      int: calculateValue(schema.int, level),
-      str: calculateValue(schema.str, level),
-      dex: calculateValue(schema.dex, level),
+      int: calculateProgressionValue(schema.int, level),
+      str: calculateProgressionValue(schema.str, level),
+      dex: calculateProgressionValue(schema.dex, level),
 
-      maxLife: calculateValue(schema.maxLife, level),
-      maxMana: calculateValue(schema.maxMana, level),
+      maxLife: calculateProgressionValue(schema.maxLife, level),
+      maxMana: calculateProgressionValue(schema.maxMana, level),
 
-      recovery: calculateValue(schema.recovery, level),
-      baseDamage: calculateValue(schema.baseDamage, level),
+      recovery: calculateProgressionValue(schema.recovery, level),
+      baseDamage: calculateProgressionValue(schema.baseDamage, level),
     };
     return {
       ...projected,
@@ -102,3 +68,4 @@ export function monsterFactory(name: string, level: number): Class {
     },
   };
 }
+
