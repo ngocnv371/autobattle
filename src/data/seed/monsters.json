@@ -20,6 +20,40 @@
     }
   },
   {
+    "name": "Spirit",
+    "int": ["linear", 10, 120],
+    "str": ["linear", 10, 20],
+    "dex": ["linear", 10, 60],
+    "maxLife": ["linear", 100, 500],
+    "maxMana": ["linear", 90, 700],
+    "recovery": ["linear", 10, 100],
+    "baseDamage": ["linear", 13, 170],
+    "behavior": ["Aggressive", "Scream", "Stare"],
+    "levelUp": {
+      "Magic Stone": ["linear", 0, 2500]
+    },
+    "loot": {
+      "Ectoplasm": ["linear", 0, 100]
+    }
+  },
+  {
+    "name": "Corrupted Spirit",
+    "int": ["linear", 10, 180],
+    "str": ["linear", 10, 120],
+    "dex": ["linear", 10, 160],
+    "maxLife": ["linear", 100, 2500],
+    "maxMana": ["linear", 90, 900],
+    "recovery": ["linear", 10, 100],
+    "baseDamage": ["linear", 13, 170],
+    "behavior": ["Aggressive", "DrainLife", "Scream"],
+    "levelUp": {
+      "Magic Stone": ["linear", 0, 2500]
+    },
+    "loot": {
+      "Ectoplasm": ["linear", 0, 1000]
+    }
+  },
+  {
     "name": "Grey Wolf",
     "int": ["linear", 10, 100],
     "str": ["linear", 10, 120],
