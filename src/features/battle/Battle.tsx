@@ -34,7 +34,7 @@ import { Item } from "../../app/models";
 import { RouteComponentProps } from "react-router";
 import { add } from "../inventory/inventorySlice";
 import { selectMembers } from "../barrack/barrackSlice";
-import { selectMonsters } from "../atlas/atlasSlice";
+import { selectEnemies } from "../atlas/atlasSlice";
 
 const Loot: React.FC<{ items: Item[] }> = (props) => {
   const [show, setShow] = useState(true);
@@ -80,7 +80,7 @@ const Battle: React.FC<
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectStatus);
   const originalMonsters = useAppSelector(
-    selectMonsters(match.params.dungeonId)
+    selectEnemies(match.params.dungeonId)
   );
   const originalMembers = useAppSelector(selectMembers(match.params.partyId));
   const players = useAppSelector(selectCombatants("player"));
@@ -120,6 +120,7 @@ const Battle: React.FC<
 
   function handleDone() {
     dispatch(add(loot));
+    router.goBack();
     router.goBack();
   }
   return (

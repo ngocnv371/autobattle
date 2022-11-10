@@ -7,6 +7,7 @@ import createLogger from "../../logger";
 import { lootFactory } from "./loot";
 import { mergeItems } from "../inventory/utils";
 import { monsterFactory } from "../../data/monsters";
+import { CharacterSchema } from "../../data/schema";
 
 export type BattleStatus =
   | "none"
@@ -36,11 +37,11 @@ export const battleSlice = createSlice({
   reducers: {
     start: (
       state,
-      action: PayloadAction<{ players: Character[]; monsters: Character[] }>
+      action: PayloadAction<{ players: CharacterSchema[]; monsters: CharacterSchema[] }>
     ) => {
       let lastId = 1
       function instantiateCharacter(
-        char: Character,
+        char: CharacterSchema,
         faction: Faction
       ): Combatant {
         const mc = monsterFactory(char.class, char.level);

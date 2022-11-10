@@ -1,8 +1,7 @@
-export interface Character {
+import { CharacterSchema } from "../data/schema";
+
+export interface Character extends CharacterSchema {
   id: string;
-  name: string;
-  class: string;
-  level: number;
 }
 
 export interface Dungeon {
@@ -59,7 +58,7 @@ export interface Skill {
 export interface Class {
   getLevelUpRequirements(self: Character): Item[];
   processTurn(self: Combatant, combatants: Combatant[], logger: Logger): Action;
-  createCombatant(self: Character): Combatant;
+  createCombatant(self: CharacterSchema): Combatant;
 }
 
 export interface CombatBehavior {

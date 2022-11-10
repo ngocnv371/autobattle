@@ -1,5 +1,6 @@
 [
   {
+    "id": "wh0",
     "zone": "White Harbor",
     "name": "Wolf Cave",
     "level": 1,
@@ -8,11 +9,11 @@
       { "name": "Alpha", "class": "Grey Wolf", "level": 3 },
       { "name": "Wolf", "class": "Grey Wolf", "level": 2 },
       { "name": "Wolf", "class": "Grey Wolf", "level": 2 },
-      { "name": "Wolf", "class": "Grey Wolf", "level": 2 },
       { "name": "Wolf Pup", "class": "Grey Wolf", "level": 1 }
     ]
   },
   {
+    "id": "wh1",
     "zone": "White Harbor",
     "name": "Shallow Waters",
     "level": 3,
@@ -21,11 +22,11 @@
       { "name": "Big One", "class": "Blue Carp", "level": 6 },
       { "name": "Fish", "class": "Blue Carp", "level": 4 },
       { "name": "Fish", "class": "Blue Carp", "level": 4 },
-      { "name": "Fish", "class": "Blue Carp", "level": 3 },
       { "name": "Fish", "class": "Blue Carp", "level": 2 }
     ]
   },
   {
+    "id": "wh2",
     "zone": "White Harbor",
     "name": "Dark Alley",
     "level": 5,
@@ -33,12 +34,12 @@
     "enemies": [
       { "name": "Boss", "class": "Human", "level": 7 },
       { "name": "Kidnapper", "class": "Human", "level": 5 },
-      { "name": "Kidnapper", "class": "Human", "level": 5 },
       { "name": "Bad Guy", "class": "Human", "level": 3 },
       { "name": "Bad Guy", "class": "Human", "level": 3 }
     ]
   },
   {
+    "id": "wh3",
     "zone": "White Harbor",
     "name": "Intruders in the Night",
     "level": 7,
@@ -46,12 +47,12 @@
     "enemies": [
       { "name": "Farmer", "class": "Human", "level": 8 },
       { "name": "Beggar", "class": "Human", "level": 7 },
-      { "name": "Beggar", "class": "Human", "level": 7 },
       { "name": "Prostitute", "class": "Human", "level": 4 },
       { "name": "Kid", "class": "Human", "level": 1 }
     ]
   },
   {
+    "id": "wh4",
     "zone": "White Harbor",
     "name": "Robbers",
     "level": 10,
@@ -60,11 +61,11 @@
       { "name": "Robber", "class": "Human", "level": 11 },
       { "name": "Beggar", "class": "Human", "level": 9 },
       { "name": "Beggar", "class": "Human", "level": 9 },
-      { "name": "Beggar", "class": "Human", "level": 6 },
       { "name": "Beggar", "class": "Human", "level": 6 }
     ]
   },
   {
+    "id": "wh5",
     "zone": "White Harbor",
     "name": "Darkest Night",
     "level": 15,
@@ -72,12 +73,12 @@
     "enemies": [
       { "name": "Male", "class": "Human", "level": 17 },
       { "name": "Female", "class": "Human", "level": 15 },
-      { "name": "Female", "class": "Human", "level": 15 },
       { "name": "Kid", "class": "Human", "level": 12 },
       { "name": "Kid", "class": "Human", "level": 11 }
     ]
   },
   {
+    "id": "wh6",
     "zone": "White Harbor",
     "name": "Dark Harvesters",
     "level": 18,
@@ -85,12 +86,12 @@
     "enemies": [
       { "name": "Big Ghost", "class": "Spirit", "level": 19 },
       { "name": "Ghost", "class": "Spirit", "level": 18 },
-      { "name": "Ghost", "class": "Spirit", "level": 18 },
       { "name": "Small Ghost", "class": "Spirit", "level": 17 },
       { "name": "Small Ghost", "class": "Spirit", "level": 17 }
     ]
   },
   {
+    "id": "wh7",
     "zone": "White Harbor",
     "name": "Moonlight Ritual",
     "level": 21,
@@ -98,12 +99,12 @@
     "enemies": [
       { "name": "Red Ghost", "class": "Corrupted Spirit", "level": 23 },
       { "name": "Ghost", "class": "Corrupted Spirit", "level": 22 },
-      { "name": "Ghost", "class": "Corrupted Spirit", "level": 21 },
       { "name": "White Ghost", "class": "Corrupted Spirit", "level": 21 },
       { "name": "White Ghost", "class": "Corrupted Spirit", "level": 21 }
     ]
   },
   {
+    "id": "wh8",
     "zone": "White Harbor",
     "name": "The Resurrection Escapees",
     "level": 25,
@@ -112,11 +113,11 @@
       { "name": "Humanoid", "class": "Human", "level": 27 },
       { "name": "Humanoid", "class": "Human", "level": 26 },
       { "name": "Humanoid", "class": "Human", "level": 25 },
-      { "name": "Humanoid", "class": "Human", "level": 24 },
       { "name": "Humanoid", "class": "Human", "level": 24 }
     ]
   },
   {
+    "id": "wh9",
     "zone": "White Harbor",
     "name": "Panic Attack",
     "level": 27,
@@ -125,11 +126,11 @@
       { "name": "Civilian", "class": "Human", "level": 29 },
       { "name": "Civilian", "class": "Human", "level": 27 },
       { "name": "Civilian", "class": "Human", "level": 27 },
-      { "name": "Civilian", "class": "Human", "level": 27 },
       { "name": "Civilian", "class": "Human", "level": 27 }
     ]
   },
   {
+    "id": "wh10",
     "zone": "White Harbor",
     "name": "Stray Cleanup",
     "level": 30,
@@ -138,11 +139,11 @@
       { "name": "Corrupted", "class": "Human", "level": 33 },
       { "name": "Corrupted", "class": "Human", "level": 32 },
       { "name": "Corrupted", "class": "Human", "level": 31 },
-      { "name": "Corrupted", "class": "Human", "level": 31 },
       { "name": "Corrupted", "class": "Human", "level": 31 }
     ]
   },
   {
+    "id": "wh11",
     "zone": "White Harbor",
     "name": "Rank Up Trial",
     "level": 33,
@@ -151,7 +152,6 @@
       { "name": "Old Guard", "class": "Human", "level": 35 },
       { "name": "Old Guard", "class": "Human", "level": 34 },
       { "name": "Old Guard", "class": "Human", "level": 34 },
-      { "name": "Old Guard", "class": "Human", "level": 31 },
       { "name": "Old Guard", "class": "Human", "level": 31 }
     ]
   }

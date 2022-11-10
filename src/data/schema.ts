@@ -26,3 +26,16 @@ export interface MonsterSchema {
   levelUp: ProgressionDictionary;
   loot: ProgressionDictionary;
 }
+
+export interface CharacterSchema {
+  name: string;
+  level: number;
+  class: string;
+}
+
+export interface MissionSchema {
+  id: string;
+  name: string;
+  description: string;
+  enemies: CharacterSchema[];
+}

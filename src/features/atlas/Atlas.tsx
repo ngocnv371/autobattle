@@ -8,26 +8,27 @@ import {
   useIonRouter,
 } from "@ionic/react";
 import { useAppSelector } from "../../app/hooks";
-import { Dungeon, selectDungeons } from "./atlasSlice";
+import { MissionSchema } from "../../data/schema";
+import { selectMissions } from "./atlasSlice";
 import DungeonCard from "./DungeonCard";
 
 function Atlas() {
-  const dungeons = useAppSelector(selectDungeons);
+  const dungeons = useAppSelector(selectMissions);
   const router = useIonRouter();
-  function onSelectDungeon(d: Dungeon) {
+  function onSelectDungeon(d: MissionSchema) {
     router.push(`/atlas/${d.id}`);
   }
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Dungeons</IonTitle>
+          <IonTitle>Missions</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Dungeons</IonTitle>
+            <IonTitle size="large">Missions</IonTitle>
           </IonToolbar>
         </IonHeader>
         {dungeons.map((d) => (
