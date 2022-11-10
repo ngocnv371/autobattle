@@ -1,12 +1,14 @@
 import { Logger, Skill } from "../../../app/models";
 import { Bite } from "./Bite";
+import { DrainLife } from "./DrainLife";
 import { Heal } from "./Heal";
 import { Punch } from "./Punch";
+import { Scream } from "./Scream";
 import { Slap } from "./Slap";
 import { SpitPoison } from "./SpitPoison";
 import { Stare } from "./Stare";
 
-const factories = [Punch, Slap, Bite, Heal, SpitPoison, Stare];
+const factories = [Punch, Slap, Bite, Heal, SpitPoison, Stare, Scream, DrainLife];
 
 export default function skillFactory(
   name: string,

@@ -11,6 +11,9 @@ export function SpitPoison(level: number, logger: Logger): Skill {
       logger.log(`${user.name} spit poison at ${target.name}`);
       applyDamageTo(target, user.baseDamage * level * user.str, logger);
       user.mana -= cost;
+      if (user.mana < 0) {
+        user.mana = 0;
+      }
     },
   };
 }
