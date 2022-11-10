@@ -79,22 +79,30 @@ const Battle: React.FC<
   const router = useIonRouter();
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectStatus);
-  const originalMonsters = useAppSelector(selectMonsters(match.params.dungeonId));
+  const originalMonsters = useAppSelector(
+    selectMonsters(match.params.dungeonId)
+  );
   const originalMembers = useAppSelector(selectMembers(match.params.partyId));
-  const players = useAppSelector(selectCombatants('player'));
-  const monsters = useAppSelector(selectCombatants('monster'));
+  const players = useAppSelector(selectCombatants("player"));
+  const monsters = useAppSelector(selectCombatants("monster"));
   const isOver = useAppSelector(selectIsOver);
   const loot = useAppSelector(selectLoot);
 
+  // delayed start to avoid Ionic bug "double render"
   useEffect(() => {
-    dispatch(
-      start({
-        monsters: originalMonsters,
-        players: originalMembers,
-      })
-    );
+    const handle = setTimeout(() => {
+      dispatch(
+        start({
+          monsters: originalMonsters,
+          players: originalMembers,
+        })
+      );
+    }, 50);
+    return () => {
+      clearTimeout(handle);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, originalMonsters, originalMembers]);
+  }, [dispatch, match.params.dungeonId, match.params.partyId]);
 
   useEffect(() => {
     let lastUpdate = new Date();
