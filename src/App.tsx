@@ -11,6 +11,7 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { fileTrayStacked, map, home } from "ionicons/icons";
+import { Database, Storage } from "@ionic/storage";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -37,48 +38,71 @@ import InventoryPage from "./features/inventory/InventoryPage";
 import BarrackPage from "./features/barrack/BarrackPage";
 import CharacterProfilePage from "./features/barrack/CharacterProfilePage";
 import TavernPage from "./features/tavern/TavernPage";
+import { useEffect } from "react";
+import { useAppDispatch } from "./app/hooks";
+import { loadMonsters } from "./features/monsters/monstersSlice";
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/inventory">
-            <InventoryPage />
-          </Route>
-          <Route exact path="/barrack">
-            <BarrackPage />
-          </Route>
-          <Route exact path="/barrack/tavern" component={TavernPage} />
-          <Route exact path="/barrack/:partyId/:memberId" component={CharacterProfilePage} />
-          <Route exact path="/atlas">
-            <Atlas />
-          </Route>
-          <Route exact path="/atlas/:dungeonId" component={PartyAssignmentPage} />
-          <Route exact path="/atlas/:dungeonId/:partyId" component={Battle} />
-          <Route exact path="/">
-            <Redirect to="/atlas" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="atlas" href="/atlas">
-            <IonIcon icon={map} />
-            <IonLabel>Missions</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="barrack" href="/barrack">
-            <IonIcon icon={home} />
-            <IonLabel>Barrack</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="inventory" href="/inventory">
-            <IonIcon icon={fileTrayStacked} />
-            <IonLabel>Inventory</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    const handle = setTimeout(() => {
+      dispatch(loadMonsters());
+    }, 500);
+    return () => {
+      clearTimeout(handle);
+    };
+  });
+
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path="/inventory">
+              <InventoryPage />
+            </Route>
+            <Route exact path="/barrack">
+              <BarrackPage />
+            </Route>
+            <Route exact path="/barrack/tavern" component={TavernPage} />
+            <Route
+              exact
+              path="/barrack/:partyId/:memberId"
+              component={CharacterProfilePage}
+            />
+            <Route exact path="/atlas">
+              <Atlas />
+            </Route>
+            <Route
+              exact
+              path="/atlas/:dungeonId"
+              component={PartyAssignmentPage}
+            />
+            <Route exact path="/atlas/:dungeonId/:partyId" component={Battle} />
+            <Route exact path="/">
+              <Redirect to="/atlas" />
+            </Route>
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="atlas" href="/atlas">
+              <IonIcon icon={map} />
+              <IonLabel>Missions</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="barrack" href="/barrack">
+              <IonIcon icon={home} />
+              <IonLabel>Barrack</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="inventory" href="/inventory">
+              <IonIcon icon={fileTrayStacked} />
+              <IonLabel>Inventory</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;
