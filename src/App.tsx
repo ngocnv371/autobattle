@@ -41,6 +41,7 @@ import TavernPage from "./features/tavern/TavernPage";
 import { useEffect } from "react";
 import { useAppDispatch } from "./app/hooks";
 import { loadMonsters } from "./features/monsters/monstersSlice";
+import { loadMissions } from "./features/missions/missionsSlice";
 
 setupIonicReact();
 
@@ -49,6 +50,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const handle = setTimeout(() => {
       dispatch(loadMonsters());
+      dispatch(loadMissions());
     }, 500);
     return () => {
       clearTimeout(handle);

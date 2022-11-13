@@ -5,6 +5,7 @@ import barrackReducer from '../features/barrack/barrackSlice';
 import inventoryReducer from '../features/inventory/inventorySlice';
 import tavernReducer from '../features/tavern/tavernSlice';
 import monstersReducer from '../features/monsters/monstersSlice';
+import missionsReducer from '../features/missions/missionsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     inventory: inventoryReducer,
     tavern: tavernReducer,
     monsters: monstersReducer,
+    missions: missionsReducer,
   },
 });
 

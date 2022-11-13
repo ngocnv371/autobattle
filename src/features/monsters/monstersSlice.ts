@@ -14,6 +14,14 @@ export const loadMonsters = createAsyncThunk("monsters/loadMonsters", async () =
   return list;
 });
 
+export const saveMonsters = createAsyncThunk(
+  "missions/saveMonsters",
+  async (_, api) => {
+    const storage = await createStorage();
+    await storage.set("monsters", api.getState());
+  }
+);
+
 const initialState: monstersState = [];
 
 export const monstersSlice = createSlice({
