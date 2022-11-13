@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { createStorage } from "../../app/storage";
+import { RootState } from "../../app/store";
 import { MissionSchema } from "../../data/schema";
 
 export type missionsState = MissionSchema[];
@@ -17,11 +18,11 @@ export const loadMissions = createAsyncThunk(
   }
 );
 
-export const saveMissions = createAsyncThunk(
+export const saveMissions = createAsyncThunk<void, void, { state: RootState }>(
   "missions/saveMissions",
   async (_, api) => {
     const storage = await createStorage();
-    await storage.set("missions", api.getState());
+    await storage.set("missions", api.getState().missions);
   }
 );
 

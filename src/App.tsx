@@ -11,7 +11,6 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { fileTrayStacked, map, home } from "ionicons/icons";
-import { Database, Storage } from "@ionic/storage";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -42,6 +41,7 @@ import { useEffect } from "react";
 import { useAppDispatch } from "./app/hooks";
 import { loadMonsters } from "./features/monsters/monstersSlice";
 import { loadMissions } from "./features/missions/missionsSlice";
+import MissionsPage from "./features/missions/MissionsPage";
 
 setupIonicReact();
 
@@ -74,21 +74,21 @@ const App: React.FC = () => {
               path="/barrack/:partyId/:memberId"
               component={CharacterProfilePage}
             />
-            <Route exact path="/atlas">
-              <Atlas />
+            <Route exact path="/missions">
+              <MissionsPage />
             </Route>
             <Route
               exact
-              path="/atlas/:dungeonId"
+              path="/missions/:missionId"
               component={PartyAssignmentPage}
             />
-            <Route exact path="/atlas/:dungeonId/:partyId" component={Battle} />
+            <Route exact path="/missions/:missionId/:partyId" component={Battle} />
             <Route exact path="/">
-              <Redirect to="/atlas" />
+              <Redirect to="/missions" />
             </Route>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
-            <IonTabButton tab="atlas" href="/atlas">
+            <IonTabButton tab="missions" href="/missions">
               <IonIcon icon={map} />
               <IonLabel>Missions</IonLabel>
             </IonTabButton>

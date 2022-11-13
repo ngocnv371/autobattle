@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { createStorage } from "../../app/storage";
+import { RootState } from "../../app/store";
 import { MonsterSchema } from "../../data/schema";
 
 export type monstersState = MonsterSchema[];
@@ -14,11 +15,11 @@ export const loadMonsters = createAsyncThunk("monsters/loadMonsters", async () =
   return list;
 });
 
-export const saveMonsters = createAsyncThunk(
+export const saveMonsters = createAsyncThunk<void, void, { state: RootState }>(
   "missions/saveMonsters",
   async (_, api) => {
     const storage = await createStorage();
-    await storage.set("monsters", api.getState());
+    await storage.set("monsters", api.getState().monsters);
   }
 );
 

@@ -90,7 +90,7 @@ export const battleSlice = createSlice({
         }
 
         if (c.rested > c.recovery) {
-          battleLogger.log(
+          battleLogger.info(
             `${c.name} has recovered and decided to do something`
           );
           c.rested = 0;
