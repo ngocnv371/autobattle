@@ -10,6 +10,7 @@ export const loadMonsters = createAsyncThunk("monsters/loadMonsters", async () =
   const storage = await createStorage();
   const list = await storage.get("monsters");
   if (!list) {
+    console.warn('no saved monsters data, load factory setting')
     return require("../../data/seed/monsters.json");
   }
   return list;
@@ -18,6 +19,7 @@ export const loadMonsters = createAsyncThunk("monsters/loadMonsters", async () =
 export const saveMonsters = createAsyncThunk<void, void, { state: RootState }>(
   "missions/saveMonsters",
   async (_, api) => {
+    console.debug("save monsters");
     const storage = await createStorage();
     await storage.set("monsters", api.getState().monsters);
   }
@@ -29,9 +31,8 @@ export const monstersSlice = createSlice({
   name: "monsters",
   initialState,
   reducers: {
-    load: (state, action: PayloadAction<MonsterSchema[]>) => {
-      state.length = 0;
-      state.push(...action.payload);
+    add: (state, action: PayloadAction<MonsterSchema>) => {
+      state.push(action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -41,6 +42,6 @@ export const monstersSlice = createSlice({
   },
 });
 
-export const { load } = monstersSlice.actions;
+export const { add } = monstersSlice.actions;
 
 export default monstersSlice.reducer;

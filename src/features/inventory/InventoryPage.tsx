@@ -50,6 +50,7 @@ const InventoryPage: React.FC = () => {
                 Sell
               </IonButton>
             )}
+            <IonButton routerLink="/inventory/shop">Shop</IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>

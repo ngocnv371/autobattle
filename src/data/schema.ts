@@ -1,3 +1,5 @@
+import { Item } from "../app/models";
+
 export type CubicBezierCurve = [p0: number, p1: number, p2: number, p3: number];
 export type BasicCurve = "linear" | "ease-out" | "ease-in-out" | "ease-in";
 export type Curve = BasicCurve | CubicBezierCurve;
@@ -39,4 +41,8 @@ export interface MissionSchema {
   name: string;
   description: string;
   enemies: CharacterSchema[];
+}
+
+export interface VendorItemSchema extends Item {
+  price: number;
 }

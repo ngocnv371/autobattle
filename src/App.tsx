@@ -37,19 +37,17 @@ import BarrackPage from "./features/barrack/BarrackPage";
 import CharacterProfilePage from "./features/barrack/CharacterProfilePage";
 import TavernPage from "./features/tavern/TavernPage";
 import { useEffect } from "react";
-import { useAppDispatch } from "./app/hooks";
-import { loadMonsters } from "./features/monsters/monstersSlice";
-import { loadMissions } from "./features/missions/missionsSlice";
 import MissionsPage from "./features/missions/MissionsPage";
+import { load } from "./app/store";
+import SettingsPage from "./features/settings/SettingsPage";
+import ShopPage from "./features/shop/ShopPage";
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  const dispatch = useAppDispatch();
   useEffect(() => {
     const handle = setTimeout(() => {
-      dispatch(loadMonsters());
-      dispatch(loadMissions());
+      load();
     }, 500);
     return () => {
       clearTimeout(handle);
@@ -61,8 +59,14 @@ const App: React.FC = () => {
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
+            <Route exact path="/settings">
+              <SettingsPage />
+            </Route>
             <Route exact path="/inventory">
               <InventoryPage />
+            </Route>
+            <Route exact path="/inventory/shop">
+              <ShopPage />
             </Route>
             <Route exact path="/barrack">
               <BarrackPage />
@@ -81,7 +85,11 @@ const App: React.FC = () => {
               path="/missions/:missionId"
               component={PartyAssignmentPage}
             />
-            <Route exact path="/missions/:missionId/:partyId" component={Battle} />
+            <Route
+              exact
+              path="/missions/:missionId/:partyId"
+              component={Battle}
+            />
             <Route exact path="/">
               <Redirect to="/missions" />
             </Route>
@@ -98,6 +106,10 @@ const App: React.FC = () => {
             <IonTabButton tab="inventory" href="/inventory">
               <IonIcon icon={fileTrayStacked} />
               <IonLabel>Inventory</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="settings" href="/settings">
+              <IonIcon icon={fileTrayStacked} />
+              <IonLabel>Settings</IonLabel>
             </IonTabButton>
           </IonTabBar>
         </IonTabs>

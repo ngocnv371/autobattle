@@ -1,21 +1,39 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { Item } from "../../app/models";
+import { createStorage } from "../../app/storage";
 import { RootState } from "../../app/store";
 import { mergeItems } from "./utils";
 
-const defaultItems: Item[] = [
-  { name: "Branch", quantity: 3 },
-  { name: "Torn Coat", quantity: 1 },
-  { name: "Magic Stone", quantity: 132 },
-];
+export const loadInventory = createAsyncThunk(
+  "inventory/loadInventory",
+  async (_, api) => {
+    console.debug("load inventory");
+    const storage = await createStorage();
+    const data = await storage.get("inventory");
+    if (!data) {
+      console.warn("no saved inventory");
+      return api.rejectWithValue(null);
+    }
+    return data;
+  }
+);
+
+export const saveInventory = createAsyncThunk<void, void, { state: RootState }>(
+  "inventory/saveInventory",
+  async (_, api) => {
+    console.debug("save inventory");
+    const storage = await createStorage();
+    await storage.set("inventory", api.getState().inventory);
+  }
+);
 
 export interface inventoryState {
   items: Item[];
 }
 
 const initialState: inventoryState = {
-  items: defaultItems,
+  items: [],
 };
 
 export const inventorySlice = createSlice({
@@ -45,6 +63,14 @@ export const inventorySlice = createSlice({
         })
         .filter((p) => p.quantity > 0);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(
+      loadInventory.fulfilled,
+      (state, action: PayloadAction<inventoryState>) => {
+        state.items.push(...action.payload.items);
+      }
+    );
   },
 });
 
