@@ -43,6 +43,6 @@ export interface MissionSchema {
   enemies: CharacterSchema[];
 }
 
-export interface VendorItemSchema extends Item {
+export interface ShopItemSchema extends Item {
   price: number;
 }

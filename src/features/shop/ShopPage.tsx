@@ -3,6 +3,7 @@ import {
   IonButton,
   IonButtons,
   IonContent,
+  IonFooter,
   IonHeader,
   IonItem,
   IonLabel,
@@ -11,12 +12,16 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { ShopItemSchema } from "../../data/schema";
+import QuickBuy from "./QuickBuy";
 import { restock, selectItems } from "./shopSlice";
 
 const ShopPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const items = useAppSelector(selectItems);
+  const [item, setItem] = useState<ShopItemSchema | null>(null);
   return (
     <IonPage>
       <IonHeader>
@@ -38,13 +43,21 @@ const ShopPage: React.FC = () => {
         </IonHeader>
         <IonList>
           {items.map((i) => (
-            <IonItem key={i.name}>
+            <IonItem
+              key={i.name}
+              onClick={() => (i !== item ? setItem(i) : setItem(null))}
+            >
               <IonLabel>{i.name}</IonLabel>
               <IonLabel slot="end">{i.price}</IonLabel>
             </IonItem>
           ))}
         </IonList>
       </IonContent>
+      {item && (
+        <IonFooter>
+          <QuickBuy {...item} />
+        </IonFooter>
+      )}
     </IonPage>
   );
 };

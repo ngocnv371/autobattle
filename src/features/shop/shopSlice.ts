@@ -2,10 +2,10 @@ import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { createStorage } from "../../app/storage";
 import { RootState } from "../../app/store";
-import { VendorItemSchema } from "../../data/schema";
+import { ShopItemSchema } from "../../data/schema";
 
 export interface shopState {
-  items: VendorItemSchema[];
+  items: ShopItemSchema[];
   lastRestock: number;
 }
 
@@ -44,7 +44,7 @@ export const shopSlice = createSlice({
     restock: (state) => {
       state.lastRestock = new Date().getTime();
       const defaultItems =
-        require("../../data/seed/shop.json") as VendorItemSchema[];
+        require("../../data/seed/shop.json") as ShopItemSchema[];
       // clone
       state.items = defaultItems.map(({ name, quantity, price }) => ({
         name,

@@ -61,6 +61,11 @@ const InventoryPage: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonList>
+          {items.length === 0 && (
+            <IonItem color={"warning"}>
+              <IonLabel>You don't have anything</IonLabel>
+            </IonItem>
+          )}
           {items.map((d) => (
             <IonItem
               key={d.name}
