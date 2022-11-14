@@ -16,3 +16,17 @@ When `life` hits zero, a combatant is considered dead.
 
 When all combatants of any faction are dead, then the other faction win and game over.
 
+# TODO
+
+- [ ] Download monsters schema & missions schema from a remote server
+  - [ ] Server?
+    - [ ] Github.io
+  - [ ] New monster images?
+    - [ ] Download and store locally?
+- [ ] Save & Load game
+- [x] Level up
+- [ ] Equipments
+- [ ] Vendors
+- [ ] Missions zones
+- [ ] Missions level requirements
+- [ ] Single party
