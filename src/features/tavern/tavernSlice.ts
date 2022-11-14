@@ -11,10 +11,11 @@ let lastWandererId = 1;
 function generateWanderers(num: number): Character[] {
   return Array(num).fill(0).map(() => {
     const id = 'w' + ++lastWandererId
+    // TODO: generate from available monsters
     return {
       id,
       name: uniqueNamesGenerator(config),
-      class: "Wolf",
+      class: "Human",
       level: 3,
     };
   });

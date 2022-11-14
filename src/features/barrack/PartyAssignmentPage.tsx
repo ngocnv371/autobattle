@@ -16,12 +16,12 @@ import { selectParties } from "./barrackSlice";
 import PartyCard from "./PartyCard";
 
 const PartyAssignmentPage: React.FC<
-  RouteComponentProps<{ dungeonId: string }>
+  RouteComponentProps<{ missionId: string }>
 > = ({ match }) => {
   const router = useIonRouter();
   const parties = useAppSelector(selectParties);
   function onSelectParty(p: Party) {
-    router.push(`/atlas/${match.params.dungeonId}/${p.id}`);
+    router.push(`/missions/${match.params.missionId}/${p.id}`);
   }
   return (
     <IonPage>

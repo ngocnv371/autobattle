@@ -34,7 +34,7 @@ import { Item } from "../../app/models";
 import { RouteComponentProps } from "react-router";
 import { add } from "../inventory/inventorySlice";
 import { selectMembers } from "../barrack/barrackSlice";
-import { selectEnemies } from "../atlas/atlasSlice";
+import { selectEnemies } from "../missions/missionsSlice";
 
 const Loot: React.FC<{ items: Item[] }> = (props) => {
   const [show, setShow] = useState(true);
@@ -74,13 +74,13 @@ const Logs: React.FC = () => {
 };
 
 const Battle: React.FC<
-  RouteComponentProps<{ dungeonId: string; partyId: string }>
+  RouteComponentProps<{ missionId: string; partyId: string }>
 > = ({ match }) => {
   const router = useIonRouter();
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectStatus);
   const originalMonsters = useAppSelector(
-    selectEnemies(match.params.dungeonId)
+    selectEnemies(match.params.missionId)
   );
   const originalMembers = useAppSelector(selectMembers(match.params.partyId));
   const players = useAppSelector(selectCombatants("player"));
@@ -102,7 +102,7 @@ const Battle: React.FC<
       clearTimeout(handle);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, match.params.dungeonId, match.params.partyId]);
+  }, [dispatch, match.params.missionId, match.params.partyId]);
 
   useEffect(() => {
     let lastUpdate = new Date();

@@ -31,6 +31,7 @@ export interface CombatStats {
 }
 
 export interface Combatant extends Character, CombatStats {
+  image: string;
   faction: Faction;
   rested: number;
 }

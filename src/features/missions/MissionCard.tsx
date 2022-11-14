@@ -9,20 +9,22 @@ import {
 } from "@ionic/react";
 import { MissionSchema } from "../../data/schema";
 
-const DungeonCard: React.FC<React.PropsWithChildren<MissionSchema>> = (props) => {
+const MissionCard: React.FC<React.PropsWithChildren<MissionSchema>> = (
+  props
+) => {
   return (
     <IonCard>
       <IonCardHeader>
         <IonCardTitle>{props.name}</IonCardTitle>
       </IonCardHeader>
-      {props.description && (
-        <IonCardContent>{props.description}</IonCardContent>
-      )}
+      <IonCardContent>{props.description}</IonCardContent>
       <IonList>
         {props.enemies.map((m, idx) => (
           <IonItem key={idx}>
             <IonLabel>{m.name}</IonLabel>
-            <IonLabel slot="end">{m.class} LV{m.level}</IonLabel>
+            <IonLabel slot="end">
+              {m.class} LV{m.level}
+            </IonLabel>
           </IonItem>
         ))}
       </IonList>
@@ -31,4 +33,4 @@ const DungeonCard: React.FC<React.PropsWithChildren<MissionSchema>> = (props) =>
   );
 };
 
-export default DungeonCard;
+export default MissionCard;

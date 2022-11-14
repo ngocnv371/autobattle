@@ -5,19 +5,12 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  useIonRouter,
 } from "@ionic/react";
 import { useAppSelector } from "../../app/hooks";
-import { MissionSchema } from "../../data/schema";
-import { selectMissions } from "./atlasSlice";
-import DungeonCard from "./DungeonCard";
+import MissionCard from "./MissionCard";
 
-function Atlas() {
-  const dungeons = useAppSelector(selectMissions);
-  const router = useIonRouter();
-  function onSelectDungeon(d: MissionSchema) {
-    router.push(`/atlas/${d.id}`);
-  }
+function MissionsPage() {
+  const missions = useAppSelector((s) => s.missions);
   return (
     <IonPage>
       <IonHeader>
@@ -31,16 +24,16 @@ function Atlas() {
             <IonTitle size="large">Missions</IonTitle>
           </IonToolbar>
         </IonHeader>
-        {dungeons.map((d) => (
-          <DungeonCard key={d.id} {...d}>
-            <IonButton fill="clear" onClick={() => onSelectDungeon(d)}>
+        {missions.map((d) => (
+          <MissionCard key={d.id} {...d}>
+            <IonButton fill="clear" routerLink={`/missions/${d.id}`}>
               Enter
             </IonButton>
-          </DungeonCard>
+          </MissionCard>
         ))}
       </IonContent>
     </IonPage>
   );
 }
 
-export default Atlas;
+export default MissionsPage;

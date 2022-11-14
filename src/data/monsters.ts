@@ -47,6 +47,7 @@ export function monsterFactory(name: string, level: number): Class {
       ...projected,
       id: "new",
       name: schema.name,
+      image: schema.image,
       faction: "monster",
       rested: 0,
       class: schema.name,

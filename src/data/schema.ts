@@ -11,6 +11,7 @@ type Behavior = [type: string, primary: string, secondary: string];
 
 export interface MonsterSchema {
   name: string;
+  image: string;
   int: Progression;
   str: Progression;
   dex: Progression;

@@ -24,7 +24,7 @@ function Combatant(props: Props) {
       <IonProgressBar
         value={props.combatant.life / props.combatant.maxLife}
       ></IonProgressBar>
-      <IonImg src="https://picsum.photos/200/200" />
+      <IonImg src={`${process.env.PUBLIC_URL}/assets/monsters/${props.combatant.image}`} />
       <IonCardHeader className="ion-no-padding">
         <IonCardSubtitle>
           {props.combatant.name}
