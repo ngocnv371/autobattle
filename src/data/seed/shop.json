@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Meat",
+    "quantity": 200,
+    "price": 20
+  },
+  {
+    "name": "Bone",
+    "quantity": 100,
+    "price": 60
+  },
+  {
+    "name": "Ectoplasm",
+    "quantity": 20,
+    "price": 390
+  },
+  {
+    "name": "Snake Skin",
+    "quantity": 15,
+    "price": 50
+  }
+]

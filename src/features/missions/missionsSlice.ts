@@ -9,9 +9,11 @@ export type missionsState = MissionSchema[];
 export const loadMissions = createAsyncThunk(
   "missions/loadMissions",
   async () => {
+    console.debug("load missions");
     const storage = await createStorage();
     const list = await storage.get("missions");
     if (!list) {
+      console.warn("no saved missions data, load factory setting");
       return require("../../data/seed/missions.json");
     }
     return list;
@@ -21,6 +23,7 @@ export const loadMissions = createAsyncThunk(
 export const saveMissions = createAsyncThunk<void, void, { state: RootState }>(
   "missions/saveMissions",
   async (_, api) => {
+    console.debug("save missions");
     const storage = await createStorage();
     await storage.set("missions", api.getState().missions);
   }
@@ -32,9 +35,8 @@ export const missionsSlice = createSlice({
   name: "missions",
   initialState,
   reducers: {
-    load: (state, action: PayloadAction<MissionSchema[]>) => {
-      state.length = 0;
-      state.push(...action.payload);
+    add: (state, action: PayloadAction<MissionSchema>) => {
+      state.push(action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -44,7 +46,7 @@ export const missionsSlice = createSlice({
   },
 });
 
-export const { load } = missionsSlice.actions;
+export const { add } = missionsSlice.actions;
 
 export const selectEnemies = (missionId: string) => (state: RootState) =>
   state.missions.find((d) => d.id === missionId)?.enemies || [];

@@ -26,7 +26,7 @@ When all combatants of any faction are dead, then the other faction win and game
 - [ ] Save & Load game
 - [x] Level up
 - [ ] Equipments
-- [ ] Vendors
+- [x] Vendors
 - [ ] Missions zones
 - [ ] Missions level requirements
 - [ ] Single party
