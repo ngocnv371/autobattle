@@ -25,7 +25,7 @@ const InventoryPage: React.FC = () => {
   const [item, setItem] = useState<Item | null>(null);
   const [present, dismiss] = useIonModal(QuickSellModal, {
     onDismiss: (quantity: number | null, price: number, role: string) =>
-      dismiss({quantity, price}, role),
+      dismiss({ quantity, price }, role),
     item: item!,
   });
   function openQuickSellModal(item: Item) {
@@ -33,13 +33,11 @@ const InventoryPage: React.FC = () => {
     present({
       onWillDismiss: (ev: CustomEvent<OverlayEventDetail>) => {
         if (ev.detail.role === "confirm") {
-          const { price, quantity } = ev.detail.data
-          dispatch(add([{ name: DEFAULT_CURRENCY, quantity: price * quantity }]));
+          const { price, quantity } = ev.detail.data;
           dispatch(
-            remove([
-              { name: item.name, quantity },
-            ])
+            add([{ name: DEFAULT_CURRENCY, quantity: price * quantity }])
           );
+          dispatch(remove([{ name: item.name, quantity }]));
         }
       },
     });
@@ -62,8 +60,8 @@ const InventoryPage: React.FC = () => {
         </IonHeader>
         <IonList>
           {items.length === 0 && (
-            <IonItem color={"warning"}>
-              <IonLabel>Empty</IonLabel>
+            <IonItem>
+              <IonLabel color={"warning"}>You have no item</IonLabel>
             </IonItem>
           )}
           {items.map((d) => (

@@ -10,12 +10,6 @@ export interface Dungeon {
   monsters: Character[];
 }
 
-export interface Party {
-  id: string;
-  name: string;
-  members: Character[];
-}
-
 export type Faction = "player" | "monster";
 
 export interface CombatStats {

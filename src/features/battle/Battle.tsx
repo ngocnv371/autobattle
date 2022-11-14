@@ -33,7 +33,7 @@ import Combatant from "./Combatant";
 import { Item } from "../../app/models";
 import { RouteComponentProps } from "react-router";
 import { add } from "../inventory/inventorySlice";
-import { selectMembers } from "../barrack/barrackSlice";
+import { selectMembers } from "../party/partySlice";
 import { selectEnemies } from "../missions/missionsSlice";
 
 const Loot: React.FC<{ items: Item[] }> = (props) => {
@@ -82,7 +82,7 @@ const Battle: React.FC<
   const originalMonsters = useAppSelector(
     selectEnemies(match.params.missionId)
   );
-  const originalMembers = useAppSelector(selectMembers(match.params.partyId));
+  const originalMembers = useAppSelector(selectMembers);
   const players = useAppSelector(selectCombatants("player"));
   const monsters = useAppSelector(selectCombatants("monster"));
   const isOver = useAppSelector(selectIsOver);
@@ -120,7 +120,6 @@ const Battle: React.FC<
 
   function handleDone() {
     dispatch(add(loot));
-    router.goBack();
     router.goBack();
   }
   return (

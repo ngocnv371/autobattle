@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import battleReducer from "../features/battle/battleSlice";
-import barrackReducer from "../features/barrack/barrackSlice";
+import partyReducer from "../features/party/partySlice";
 import inventoryReducer, {
   loadInventory,
   saveInventory,
@@ -20,7 +20,7 @@ import { createStorage } from "./storage";
 export const store = configureStore({
   reducer: {
     battle: battleReducer,
-    barrack: barrackReducer,
+    party: partyReducer,
     inventory: inventoryReducer,
     tavern: tavernReducer,
     monsters: monstersReducer,

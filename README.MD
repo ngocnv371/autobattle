@@ -23,10 +23,10 @@ When all combatants of any faction are dead, then the other faction win and game
     - [ ] Github.io
   - [ ] New monster images?
     - [ ] Download and store locally?
-- [ ] Save & Load game
+- [x] Save & Load game
 - [x] Level up
 - [ ] Equipments
 - [x] Vendors
 - [ ] Missions zones
 - [ ] Missions level requirements
-- [ ] Single party
+- [x] Single party

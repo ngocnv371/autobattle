@@ -10,7 +10,13 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { fileTrayStacked, map, home, buildOutline } from "ionicons/icons";
+import {
+  fileTrayStacked,
+  map,
+  home,
+  buildOutline,
+  people,
+} from "ionicons/icons";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -30,17 +36,16 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import PartyAssignmentPage from "./features/barrack/PartyAssignmentPage";
 import Battle from "./features/battle/Battle";
 import InventoryPage from "./features/inventory/InventoryPage";
-import BarrackPage from "./features/barrack/BarrackPage";
-import CharacterProfilePage from "./features/barrack/CharacterProfilePage";
+import CharacterProfilePage from "./features/party/CharacterProfilePage";
 import TavernPage from "./features/tavern/TavernPage";
 import { useEffect } from "react";
 import MissionsPage from "./features/missions/MissionsPage";
 import { load } from "./app/store";
 import SettingsPage from "./features/settings/SettingsPage";
 import ShopPage from "./features/shop/ShopPage";
+import PartyPage from "./features/party/PartyPage";
 
 setupIonicReact();
 
@@ -68,28 +73,21 @@ const App: React.FC = () => {
             <Route exact path="/inventory/shop">
               <ShopPage />
             </Route>
-            <Route exact path="/barrack">
-              <BarrackPage />
+            <Route exact path="/party">
+              <PartyPage />
             </Route>
-            <Route exact path="/barrack/tavern" component={TavernPage} />
+            <Route exact path="/party/tavern" strict>
+              <TavernPage />
+            </Route>
             <Route
               exact
-              path="/barrack/:partyId/:memberId"
+              path="/party/members/:memberId"
               component={CharacterProfilePage}
             />
             <Route exact path="/missions">
               <MissionsPage />
             </Route>
-            <Route
-              exact
-              path="/missions/:missionId"
-              component={PartyAssignmentPage}
-            />
-            <Route
-              exact
-              path="/missions/:missionId/:partyId"
-              component={Battle}
-            />
+            <Route exact path="/missions/:missionId" component={Battle} />
             <Route exact path="/">
               <Redirect to="/missions" />
             </Route>
@@ -99,9 +97,9 @@ const App: React.FC = () => {
               <IonIcon icon={map} />
               <IonLabel>Missions</IonLabel>
             </IonTabButton>
-            <IonTabButton tab="barrack" href="/barrack">
-              <IonIcon icon={home} />
-              <IonLabel>Barrack</IonLabel>
+            <IonTabButton tab="party" href="/party">
+              <IonIcon icon={people} />
+              <IonLabel>Party</IonLabel>
             </IonTabButton>
             <IonTabButton tab="inventory" href="/inventory">
               <IonIcon icon={fileTrayStacked} />

@@ -13,7 +13,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { levelUp, selectMember } from "./barrackSlice";
+import { levelUp, selectOneMember } from "./partySlice";
 import { remove, selectInStock } from "../inventory/inventorySlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
@@ -68,9 +68,9 @@ const LevelUp: React.FC<{ character: Character }> = ({ character }) => {
 };
 
 const CharacterProfilePage: React.FC<
-  RouteComponentProps<{ partyId: string; memberId: string }>
+  RouteComponentProps<{ memberId: string }>
 > = ({ match }) => {
-  const char = useAppSelector(selectMember(match.params.memberId));
+  const char = useAppSelector(selectOneMember(match.params.memberId));
 
   if (!char) {
     return null;
