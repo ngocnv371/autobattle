@@ -1,6 +1,7 @@
 [
   {
     "name": "Human",
+    "image": "monster0.jpg",
     "int": ["linear", 10, 120],
     "str": ["linear", 10, 120],
     "dex": ["linear", 10, 120],
@@ -21,6 +22,7 @@
   },
   {
     "name": "Spirit",
+    "image": "monster0.jpg",
     "int": ["linear", 10, 120],
     "str": ["linear", 10, 20],
     "dex": ["linear", 10, 60],
@@ -38,6 +40,7 @@
   },
   {
     "name": "Corrupted Spirit",
+    "image": "monster0.jpg",
     "int": ["linear", 10, 180],
     "str": ["linear", 10, 120],
     "dex": ["linear", 10, 160],
@@ -55,6 +58,7 @@
   },
   {
     "name": "Grey Wolf",
+    "image": "wolf0.jpg",
     "int": ["linear", 10, 100],
     "str": ["linear", 10, 120],
     "dex": ["linear", 10, 140],
@@ -76,6 +80,7 @@
   },
   {
     "name": "Grass Snake",
+    "image": "snake0.jpg",
     "int": ["linear", 10, 80],
     "str": ["linear", 10, 100],
     "dex": ["linear", 10, 160],
@@ -96,6 +101,7 @@
   },
   {
     "name": "Ever Grass",
+    "image": "monster0.jpg",
     "int": ["linear", 10, 70],
     "str": ["linear", 10, 140],
     "dex": ["linear", 10, 140],
@@ -116,6 +122,7 @@
   },
   {
     "name": "Deep Thorn",
+    "image": "monster0.jpg",
     "int": ["linear", 10, 70],
     "str": ["linear", 10, 160],
     "dex": ["linear", 10, 100],
@@ -136,6 +143,7 @@
   },
   {
     "name": "Blue Carp",
+    "image": "monster0.jpg",
     "int": ["linear", 10, 160],
     "str": ["linear", 10, 100],
     "dex": ["linear", 10, 100],

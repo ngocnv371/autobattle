@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import battleReducer from '../features/battle/battleSlice';
-import atlasReducer from '../features/atlas/atlasSlice';
 import barrackReducer from '../features/barrack/barrackSlice';
 import inventoryReducer from '../features/inventory/inventorySlice';
 import tavernReducer from '../features/tavern/tavernSlice';
@@ -10,7 +9,6 @@ import missionsReducer from '../features/missions/missionsSlice';
 export const store = configureStore({
   reducer: {
     battle: battleReducer,
-    atlas: atlasReducer,
     barrack: barrackReducer,
     inventory: inventoryReducer,
     tavern: tavernReducer,

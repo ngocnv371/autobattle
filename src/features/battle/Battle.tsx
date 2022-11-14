@@ -34,7 +34,7 @@ import { Item } from "../../app/models";
 import { RouteComponentProps } from "react-router";
 import { add } from "../inventory/inventorySlice";
 import { selectMembers } from "../barrack/barrackSlice";
-import { selectEnemies } from "../atlas/atlasSlice";
+import { selectEnemies } from "../missions/missionsSlice";
 
 const Loot: React.FC<{ items: Item[] }> = (props) => {
   const [show, setShow] = useState(true);

@@ -46,4 +46,7 @@ export const missionsSlice = createSlice({
 
 export const { load } = missionsSlice.actions;
 
+export const selectEnemies = (missionId: string) => (state: RootState) =>
+  state.missions.find((d) => d.id === missionId)?.enemies || [];
+
 export default missionsSlice.reducer;
