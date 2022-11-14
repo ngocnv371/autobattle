@@ -52,7 +52,7 @@ const QuickBuyModal = ({
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
+      <IonContent>
         <IonItem>
           <IonLabel>Item</IonLabel>
           <IonLabel slot="end">{item.name}</IonLabel>
