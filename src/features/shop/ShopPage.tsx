@@ -3,7 +3,6 @@ import {
   IonButton,
   IonButtons,
   IonContent,
-  IonFooter,
   IonHeader,
   IonItem,
   IonLabel,
@@ -11,17 +10,40 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonModal,
 } from "@ionic/react";
-import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import QuickBuyModal from "./QuickBuyModal";
+import { DEFAULT_CURRENCY, restock, selectItems } from "./shopSlice";
+import { OverlayEventDetail } from "@ionic/core/components";
 import { ShopItemSchema } from "../../data/schema";
-import QuickBuy from "./QuickBuy";
-import { restock, selectItems } from "./shopSlice";
+import { useState } from "react";
+import { add, remove } from "../inventory/inventorySlice";
 
 const ShopPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const items = useAppSelector(selectItems);
   const [item, setItem] = useState<ShopItemSchema | null>(null);
+  const [present, dismiss] = useIonModal(QuickBuyModal, {
+    onDismiss: (quantity: number | null, role: string) =>
+      dismiss(quantity, role),
+    item: item!,
+  });
+  function openQuickBuyModal(item: ShopItemSchema) {
+    setItem(item);
+    present({
+      onWillDismiss: (ev: CustomEvent<OverlayEventDetail>) => {
+        if (ev.detail.role === "confirm") {
+          dispatch(add([{ name: item.name, quantity: ev.detail.data }]));
+          dispatch(
+            remove([
+              { name: DEFAULT_CURRENCY, quantity: ev.detail.data * item.price },
+            ])
+          );
+        }
+      },
+    });
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -43,21 +65,13 @@ const ShopPage: React.FC = () => {
         </IonHeader>
         <IonList>
           {items.map((i) => (
-            <IonItem
-              key={i.name}
-              onClick={() => (i !== item ? setItem(i) : setItem(null))}
-            >
+            <IonItem key={i.name} onClick={() => openQuickBuyModal(i)}>
               <IonLabel>{i.name}</IonLabel>
               <IonLabel slot="end">{i.price}</IonLabel>
             </IonItem>
           ))}
         </IonList>
       </IonContent>
-      {item && (
-        <IonFooter>
-          <QuickBuy {...item} />
-        </IonFooter>
-      )}
     </IonPage>
   );
 };

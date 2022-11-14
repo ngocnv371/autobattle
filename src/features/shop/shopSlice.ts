@@ -3,6 +3,9 @@ import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { createStorage } from "../../app/storage";
 import { RootState } from "../../app/store";
 import { ShopItemSchema } from "../../data/schema";
+import { selectOneItem } from "../inventory/inventorySlice";
+
+export const DEFAULT_CURRENCY = "Magic Stone";
 
 export interface shopState {
   items: ShopItemSchema[];
@@ -67,5 +70,21 @@ export const shopSlice = createSlice({
 export const { restock } = shopSlice.actions;
 
 export const selectItems = (state: RootState) => state.shop.items;
+
+export const selectCanBuyQuantity =
+  (name: string) =>
+  (state: RootState): [min: number, max: number] => {
+    const currency = selectOneItem(DEFAULT_CURRENCY)(state);
+    if (!currency) {
+      return [0, 0];
+    }
+    const item = state.shop.items.find((i) => i.name === name);
+    if (!item) {
+      throw new Error(`item not found: ${name}`);
+    }
+    const max = Math.floor(currency.quantity / item.price);
+    const min = max > 0 ? 1 : 0;
+    return [min, max];
+  };
 
 export default shopSlice.reducer;

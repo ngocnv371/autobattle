@@ -5,8 +5,6 @@ import { createStorage } from "../../app/storage";
 import { RootState } from "../../app/store";
 import { mergeItems } from "./utils";
 
-export const DEFAULT_CURRENCY = 'Magic Stone';
-
 export const loadInventory = createAsyncThunk(
   "inventory/loadInventory",
   async (_, api) => {
@@ -87,7 +85,7 @@ export const selectInStock = (items: Item[]) => (state: RootState) =>
     )
   ).length === items.length;
 
-export const selectOnItem = (name: string) => (state: RootState) =>
+export const selectOneItem = (name: string) => (state: RootState) =>
   state.inventory.items.find((i) => i.name === name);
 
 export default inventorySlice.reducer;
