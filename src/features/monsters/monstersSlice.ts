@@ -6,15 +6,18 @@ import { MonsterSchema } from "../../data/schema";
 
 export type monstersState = MonsterSchema[];
 
-export const loadMonsters = createAsyncThunk("monsters/loadMonsters", async () => {
-  const storage = await createStorage();
-  const list = await storage.get("monsters");
-  if (!list) {
-    console.warn('no saved monsters data, load factory setting')
-    return require("../../data/seed/monsters.json");
+export const loadMonsters = createAsyncThunk(
+  "monsters/loadMonsters",
+  async () => {
+    const storage = await createStorage();
+    const list = await storage.get("monsters");
+    if (!list) {
+      console.warn("no saved monsters data, load factory setting");
+      return require("../../data/seed/monsters.json");
+    }
+    return list;
   }
-  return list;
-});
+);
 
 export const saveMonsters = createAsyncThunk<void, void, { state: RootState }>(
   "missions/saveMonsters",
@@ -37,6 +40,7 @@ export const monstersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(loadMonsters.fulfilled, (state, action) => {
+      state.length = 0;
       state.push(...action.payload);
     });
   },

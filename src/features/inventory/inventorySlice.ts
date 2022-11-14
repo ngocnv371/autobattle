@@ -61,6 +61,7 @@ export const inventorySlice = createSlice({
     builder.addCase(
       loadInventory.fulfilled,
       (state, action: PayloadAction<inventoryState>) => {
+        state.items.length = 0;
         state.items.push(...action.payload.items);
       }
     );

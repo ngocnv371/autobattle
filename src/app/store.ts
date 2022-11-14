@@ -15,6 +15,7 @@ import missionsReducer, {
   saveMissions,
 } from "../features/missions/missionsSlice";
 import shopReducer, { loadShop, saveShop } from "../features/shop/shopSlice";
+import { createStorage } from "./storage";
 
 export const store = configureStore({
   reducer: {
@@ -39,6 +40,13 @@ export async function save() {
   await store.dispatch(saveMissions());
   await store.dispatch(saveShop());
   await store.dispatch(saveInventory());
+}
+
+export async function reset() {
+  console.warn("reset store data");
+  const storage = await createStorage();
+  await storage.clear();
+  await load();
 }
 
 export async function load() {

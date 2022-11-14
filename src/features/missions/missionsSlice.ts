@@ -41,6 +41,7 @@ export const missionsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(loadMissions.fulfilled, (state, action) => {
+      state.length = 0;
       state.push(...action.payload);
     });
   },

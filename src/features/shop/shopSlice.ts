@@ -64,6 +64,7 @@ export const shopSlice = createSlice({
     builder.addCase(
       loadShop.fulfilled,
       (state, action: PayloadAction<shopState>) => {
+        state.items.length = 0;
         state.items.push(...action.payload.items);
         state.lastRestock = action.payload.lastRestock;
         state.buyoutPriceModifier = action.payload.buyoutPriceModifier;
