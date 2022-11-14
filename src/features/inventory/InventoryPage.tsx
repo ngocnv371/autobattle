@@ -9,32 +9,40 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonModal,
 } from "@ionic/react";
-import { selectItems, sell } from "./inventorySlice";
+import { add, remove, selectItems } from "./inventorySlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-
+import { OverlayEventDetail } from "@ionic/core/components";
 import { Item } from "../../app/models";
 import { useState } from "react";
+import QuickSellModal from "./QuickSellModal";
+import { DEFAULT_CURRENCY } from "../shop/shopSlice";
 
 const InventoryPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const items = useAppSelector(selectItems);
-  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
-  function handleSell() {
-    if (!selectedItem) {
-      return;
-    }
-    dispatch(sell(selectedItem));
-    setSelectedItem(null);
-  }
-  function handleSelect(w: Item) {
-    if (!selectedItem) {
-      setSelectedItem(w);
-    } else if (selectedItem.name !== w.name) {
-      setSelectedItem(w);
-    } else {
-      setSelectedItem(null);
-    }
+  const [item, setItem] = useState<Item | null>(null);
+  const [present, dismiss] = useIonModal(QuickSellModal, {
+    onDismiss: (quantity: number | null, price: number, role: string) =>
+      dismiss({quantity, price}, role),
+    item: item!,
+  });
+  function openQuickSellModal(item: Item) {
+    setItem(item);
+    present({
+      onWillDismiss: (ev: CustomEvent<OverlayEventDetail>) => {
+        if (ev.detail.role === "confirm") {
+          const { price, quantity } = ev.detail.data
+          dispatch(add([{ name: DEFAULT_CURRENCY, quantity: price * quantity }]));
+          dispatch(
+            remove([
+              { name: item.name, quantity },
+            ])
+          );
+        }
+      },
+    });
   }
   return (
     <IonPage>
@@ -42,14 +50,6 @@ const InventoryPage: React.FC = () => {
         <IonToolbar>
           <IonTitle>Inventory</IonTitle>
           <IonButtons slot="end">
-            {selectedItem && (
-              <IonButton
-                disabled={selectedItem.name === "Gold"}
-                onClick={() => handleSell()}
-              >
-                Sell
-              </IonButton>
-            )}
             <IonButton routerLink="/inventory/shop">Shop</IonButton>
           </IonButtons>
         </IonToolbar>
@@ -63,15 +63,11 @@ const InventoryPage: React.FC = () => {
         <IonList>
           {items.length === 0 && (
             <IonItem color={"warning"}>
-              <IonLabel>You don't have anything</IonLabel>
+              <IonLabel>Empty</IonLabel>
             </IonItem>
           )}
           {items.map((d) => (
-            <IonItem
-              key={d.name}
-              onClick={() => handleSelect(d)}
-              color={selectedItem?.name === d.name ? "primary" : ""}
-            >
+            <IonItem key={d.name} onClick={() => openQuickSellModal(d)}>
               <IonLabel>{d.name}</IonLabel>
               <IonLabel slot="end">{d.quantity}</IonLabel>
             </IonItem>

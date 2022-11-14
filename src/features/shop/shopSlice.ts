@@ -10,6 +10,8 @@ export const DEFAULT_CURRENCY = "Magic Stone";
 export interface shopState {
   items: ShopItemSchema[];
   lastRestock: number;
+  buyoutPriceModifier: number;
+  junkPrice: number;
 }
 
 export const loadShop = createAsyncThunk(
@@ -38,6 +40,8 @@ export const saveShop = createAsyncThunk<void, void, { state: RootState }>(
 const initialState: shopState = {
   items: [],
   lastRestock: 0,
+  buyoutPriceModifier: 0.5,
+  junkPrice: 10,
 };
 
 export const shopSlice = createSlice({
@@ -62,6 +66,8 @@ export const shopSlice = createSlice({
       (state, action: PayloadAction<shopState>) => {
         state.items.push(...action.payload.items);
         state.lastRestock = action.payload.lastRestock;
+        state.buyoutPriceModifier = action.payload.buyoutPriceModifier;
+        state.junkPrice = action.payload.junkPrice;
       }
     );
   },
@@ -85,6 +91,16 @@ export const selectCanBuyQuantity =
     const max = Math.floor(currency.quantity / item.price);
     const min = max > 0 ? 1 : 0;
     return [min, max];
+  };
+
+export const selectPrice =
+  (name: string) =>
+  (state: RootState): number => {
+    const item = state.shop.items.find((i) => i.name === name);
+    if (item) {
+      return item.price * state.shop.buyoutPriceModifier;
+    }
+    return state.shop.junkPrice;
   };
 
 export default shopSlice.reducer;

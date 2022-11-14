@@ -11,22 +11,24 @@ import {
   IonLabel,
   IonRange,
 } from "@ionic/react";
-import { ShopItemSchema } from "../../data/schema";
+import { Item } from "../../app/models";
 import { useAppSelector } from "../../app/hooks";
-import { DEFAULT_CURRENCY, selectCanBuyQuantity } from "./shopSlice";
-import { selectOneItem } from "../inventory/inventorySlice";
+import { selectPrice } from "../shop/shopSlice";
 
-const QuickBuyModal = ({
+const QuickSellModal = ({
   onDismiss,
   item,
 }: {
-  onDismiss: (data: null | number, role?: string) => void;
-  item: ShopItemSchema;
+  onDismiss: (
+    quantity: null | number,
+    price: number | null,
+    role?: string
+  ) => void;
+  item: Item;
 }) => {
   const [quantity, setQuantity] = useState(0);
-  const [min, max] = useAppSelector(selectCanBuyQuantity(item.name));
-  const canBuy = min > 0;
-  const currency = useAppSelector(selectOneItem(DEFAULT_CURRENCY));
+  const [min, max] = [1, item.quantity];
+  const price = useAppSelector(selectPrice(item.name));
 
   useEffect(() => {
     setQuantity(min);
@@ -36,17 +38,17 @@ const QuickBuyModal = ({
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton color="medium" onClick={() => onDismiss(null, "cancel")}>
+            <IonButton
+              color="medium"
+              onClick={() => onDismiss(null, null, "cancel")}
+            >
               Cancel
             </IonButton>
           </IonButtons>
-          <IonTitle>Buy</IonTitle>
+          <IonTitle>Sell</IonTitle>
           <IonButtons slot="end">
-            <IonButton
-              onClick={() => onDismiss(quantity, "confirm")}
-              disabled={!canBuy}
-            >
-              Buy
+            <IonButton onClick={() => onDismiss(quantity, price, "confirm")}>
+              Sell
             </IonButton>
           </IonButtons>
         </IonToolbar>
@@ -58,7 +60,7 @@ const QuickBuyModal = ({
         </IonItem>
         <IonItem>
           <IonLabel>Price</IonLabel>
-          <IonLabel slot="end">🌟{item.price}</IonLabel>
+          <IonLabel slot="end">🌟{price}</IonLabel>
         </IonItem>
         <IonItem lines={"none"}>
           <IonLabel>Quantity</IonLabel>
@@ -66,7 +68,6 @@ const QuickBuyModal = ({
             min={min}
             max={max}
             value={quantity}
-            disabled={!canBuy}
             onIonChange={({ detail }) => setQuantity(detail.value as number)}
           ></IonRange>
         </IonItem>
@@ -75,20 +76,11 @@ const QuickBuyModal = ({
         </IonItem>
         <IonItem>
           <IonLabel>Total</IonLabel>
-          <IonLabel slot="end">🌟{quantity * item.price}</IonLabel>
+          <IonLabel slot="end">🌟{quantity * price}</IonLabel>
         </IonItem>
-        <IonItem>
-          <IonLabel>You Have</IonLabel>
-          <IonLabel slot="end">🌟{currency?.quantity || 0}</IonLabel>
-        </IonItem>
-        {!canBuy && (
-          <IonItem color={"danger"}>
-            <IonLabel>You don't have enough 🌟 to buy this</IonLabel>
-          </IonItem>
-        )}
       </IonContent>
     </IonPage>
   );
 };
 
-export default QuickBuyModal;
+export default QuickSellModal;
