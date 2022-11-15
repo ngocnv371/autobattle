@@ -3,7 +3,7 @@ import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { createStorage } from "../../app/storage";
 import { RootState } from "../../app/store";
 import { ShopItemSchema } from "../../data/schema";
-import { selectOneItem } from "../inventory/inventorySlice";
+import { selectItemByName } from "../inventory/inventorySlice";
 
 export const DEFAULT_CURRENCY = "Magic Stone";
 
@@ -81,7 +81,7 @@ export const selectItems = (state: RootState) => state.shop.items;
 export const selectCanBuyQuantity =
   (name: string) =>
   (state: RootState): [min: number, max: number] => {
-    const currency = selectOneItem(DEFAULT_CURRENCY)(state);
+    const currency = selectItemByName(DEFAULT_CURRENCY)(state);
     if (!currency) {
       return [0, 0];
     }

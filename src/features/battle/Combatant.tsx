@@ -9,6 +9,7 @@ import {
 } from "@ionic/react";
 
 import React from "react";
+import MonsterImage from "../monsters/MonsterImage";
 
 interface Props {
   combatant: models.Combatant;
@@ -24,7 +25,7 @@ function Combatant(props: Props) {
       <IonProgressBar
         value={props.combatant.life / props.combatant.maxLife}
       ></IonProgressBar>
-      <IonImg src={`${process.env.PUBLIC_URL}/assets/monsters/${props.combatant.image}`} />
+      <MonsterImage image={props.combatant.image} />
       <IonCardHeader className="ion-no-padding">
         <IonCardSubtitle>
           {props.combatant.name}

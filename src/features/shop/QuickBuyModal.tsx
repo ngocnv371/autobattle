@@ -14,7 +14,7 @@ import {
 import { ShopItemSchema } from "../../data/schema";
 import { useAppSelector } from "../../app/hooks";
 import { DEFAULT_CURRENCY, selectCanBuyQuantity } from "./shopSlice";
-import { selectOneItem } from "../inventory/inventorySlice";
+import { selectItemByName } from "../inventory/inventorySlice";
 
 const QuickBuyModal = ({
   onDismiss,
@@ -26,7 +26,7 @@ const QuickBuyModal = ({
   const [quantity, setQuantity] = useState(0);
   const [min, max] = useAppSelector(selectCanBuyQuantity(item.name));
   const canBuy = min > 0;
-  const currency = useAppSelector(selectOneItem(DEFAULT_CURRENCY));
+  const currency = useAppSelector(selectItemByName(DEFAULT_CURRENCY));
 
   useEffect(() => {
     setQuantity(min);

@@ -79,7 +79,7 @@ export const selectInStock = (items: Item[]) => (state: RootState) =>
     )
   ).length === items.length;
 
-export const selectOneItem = (name: string) => (state: RootState) =>
+export const selectItemByName = (name: string) => (state: RootState) =>
   state.inventory.items.find((i) => i.name === name);
 
 export default inventorySlice.reducer;

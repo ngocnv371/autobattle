@@ -37,7 +37,7 @@ export const partySlice = createSlice({
 
 export const { addMember, removeMember, levelUp } = partySlice.actions;
 
-export const selectOneMember = (id: string) => (state: RootState) =>
+export const selectMemberById = (id: string) => (state: RootState) =>
   state.party.members.find((m) => m.id === id);
 
 export const selectMembers = (state: RootState) => state.party.members;

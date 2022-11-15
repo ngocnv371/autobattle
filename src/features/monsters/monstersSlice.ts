@@ -1,7 +1,9 @@
 import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { CombatStats } from "../../app/models";
 
 import { createStorage } from "../../app/storage";
 import { RootState } from "../../app/store";
+import { calculateProgressionValue } from "../../app/utils";
 import { MonsterSchema } from "../../data/schema";
 
 export type monstersState = MonsterSchema[];
@@ -48,4 +50,44 @@ export const monstersSlice = createSlice({
 
 export const { add } = monstersSlice.actions;
 
-export default monstersSlice.reducer;
+export const selectMonsterByName = (name: string) => (state: RootState) =>
+  state.monsters.find((m) => m.name === name);
+
+export const selectLevelUpRequirements =
+  (name: string, level: number) => (state: RootState) => {
+    const monster = selectMonsterByName(name)(state);
+    if (!monster) {
+      return [];
+    }
+    return Object.keys(monster.levelUp).map((k) => ({
+      name: k,
+      quantity: calculateProgressionValue(monster.levelUp[k], level),
+    }));
+  };
+
+export const selectStatsByLevel =
+  (name: string, level: number) =>
+  (state: RootState): CombatStats | null => {
+    const monster = selectMonsterByName(name)(state);
+    if (!monster) {
+      return null;
+    }
+    const stats: CombatStats = {
+      int: calculateProgressionValue(monster.int, level),
+      str: calculateProgressionValue(monster.str, level),
+      dex: calculateProgressionValue(monster.dex, level),
+
+      maxLife: calculateProgressionValue(monster.maxLife, level),
+      life: 0,
+      maxMana: calculateProgressionValue(monster.maxMana, level),
+      mana: 0,
+
+      recovery: calculateProgressionValue(monster.recovery, level),
+      baseDamage: calculateProgressionValue(monster.baseDamage, level),
+    };
+    stats.life = stats.maxLife;
+    stats.mana = stats.maxMana;
+    return stats;
+  };
+
+ export default monstersSlice.reducer;
