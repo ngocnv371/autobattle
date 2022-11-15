@@ -2,22 +2,29 @@ import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { createStorage } from "../../app/storage";
 import { RootState } from "../../app/store";
-import { MissionSchema } from "../../data/schema";
+import { MissionLog, MissionSchema } from "../../data/schema";
 import { selectPartyLevel } from "../party/partySlice";
 
-export type missionsState = MissionSchema[];
+export type missionsState = {
+  items: MissionSchema[];
+  logs: MissionLog[];
+};
 
 export const loadMissions = createAsyncThunk(
   "missions/loadMissions",
-  async () => {
+  async (): Promise<missionsState> => {
     console.debug("load missions");
     const storage = await createStorage();
-    const list = await storage.get("missions");
-    if (!list) {
+    const data = await storage.get("missions");
+    if (!data) {
       console.warn("no saved missions data, load factory setting");
-      return require("../../data/seed/missions.json");
+      const seed = require("../../data/seed/missions.json");
+      return {
+        items: seed,
+        logs: [],
+      };
     }
-    return list;
+    return data;
   }
 );
 
@@ -30,33 +37,66 @@ export const saveMissions = createAsyncThunk<void, void, { state: RootState }>(
   }
 );
 
-const initialState: missionsState = [];
+const initialState: missionsState = {
+  items: [],
+  logs: [],
+};
 
 export const missionsSlice = createSlice({
   name: "missions",
   initialState,
   reducers: {
     add: (state, action: PayloadAction<MissionSchema>) => {
-      state.push(action.payload);
+      state.items.push(action.payload);
+    },
+    complete: (state, action: PayloadAction<string>) => {
+      const m = state.items.find((i) => i.id === action.payload);
+      if (!m) {
+        console.warn(`mission not found ${action.payload}`);
+        return;
+      }
+      const l = state.logs.find((i) => i.id === action.payload);
+      if (!l) {
+        state.logs.push({
+          id: action.payload,
+          times: 1,
+        });
+      } else {
+        l.times += 1;
+      }
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(loadMissions.fulfilled, (state, action) => {
-      state.length = 0;
-      state.push(...action.payload);
-    });
+    builder.addCase(
+      loadMissions.fulfilled,
+      (state, action: PayloadAction<missionsState>) => {
+        state.items = action.payload.items;
+        state.logs = action.payload.logs;
+      }
+    );
   },
 });
 
-export const { add } = missionsSlice.actions;
+export const { add, complete } = missionsSlice.actions;
 
 export const selectMissions = (state: RootState) => {
   const level = selectPartyLevel(state);
-  const list = state.missions.filter((m) => m.level < level);
-  return list;
+  const availableMissions = state.missions.items
+    .filter((m) => m.level <= level)
+    .filter((m) => {
+      if (!m.repeat) {
+        return true;
+      }
+      const log = state.missions.logs.find((l) => l.id === m.id);
+      if (!log) {
+        return true;
+      }
+      return log.times < m.repeat;
+    });
+  return availableMissions;
 };
 
-export const selectEnemies = (missionId: string) => (state: RootState) =>
-  state.missions.find((d) => d.id === missionId)?.enemies || [];
+export const selectMissionById = (id: string) => (state: RootState) =>
+  state.missions.items.find((d) => d.id === id);
 
 export default missionsSlice.reducer;

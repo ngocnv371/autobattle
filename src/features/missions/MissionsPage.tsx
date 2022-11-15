@@ -11,7 +11,7 @@ import MissionCard from "./MissionCard";
 import { selectMissions } from "./missionsSlice";
 
 function MissionsPage() {
-  const missions = useAppSelector(selectMissions);
+  const missions = useAppSelector(selectMissions).sort((a, b) => b.level - a.level);
   return (
     <IonPage>
       <IonHeader>

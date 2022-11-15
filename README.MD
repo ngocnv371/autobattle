@@ -28,5 +28,6 @@ When all combatants of any faction are dead, then the other faction win and game
 - [ ] Equipments
 - [x] Vendors
 - [ ] Missions zones
-- [ ] Missions level requirements
+- [x] Missions level requirements
+- [x] Missions repeatable
 - [x] Single party

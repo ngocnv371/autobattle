@@ -41,7 +41,13 @@ export interface MissionSchema {
   level: number;
   name: string;
   description: string;
+  repeat: number;
   enemies: CharacterSchema[];
+}
+
+export interface MissionLog {
+  id: string;
+  times: number;
 }
 
 export interface ShopItemSchema extends Item {

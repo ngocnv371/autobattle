@@ -1,4 +1,4 @@
-import { Character, Combatant, Faction, Item } from "../../app/models";
+import { Combatant, Faction, Item } from "../../app/models";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { Logger } from "../../app/models";
@@ -37,9 +37,12 @@ export const battleSlice = createSlice({
   reducers: {
     start: (
       state,
-      action: PayloadAction<{ players: CharacterSchema[]; monsters: CharacterSchema[] }>
+      action: PayloadAction<{
+        players: CharacterSchema[];
+        monsters: CharacterSchema[];
+      }>
     ) => {
-      let lastId = 1
+      let lastId = 1;
       function instantiateCharacter(
         char: CharacterSchema,
         faction: Faction
@@ -49,7 +52,7 @@ export const battleSlice = createSlice({
           ...mc.createCombatant(char),
           name: char.name,
           faction,
-          id: ++lastId + ''
+          id: ++lastId + "",
         };
       }
       state.status = "running";

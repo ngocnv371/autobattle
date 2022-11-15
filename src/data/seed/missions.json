@@ -3,8 +3,9 @@
     "id": "wh0",
     "zone": "White Harbor",
     "name": "Wolf Cave",
-    "level": 1,
+    "level": 0,
     "description": "The hungry wolves are skirting the town's walls. The farmers are scared off their wits.",
+    "repeat": 0,
     "enemies": [
       { "name": "Alpha", "class": "Grey Wolf", "level": 3 },
       { "name": "Wolf", "class": "Grey Wolf", "level": 2 },
@@ -18,6 +19,7 @@
     "name": "Shallow Waters",
     "level": 3,
     "description": "The harbor is being harassed by some bold sharks.",
+    "repeat": 0,
     "enemies": [
       { "name": "Big One", "class": "Blue Carp", "level": 6 },
       { "name": "Fish", "class": "Blue Carp", "level": 4 },
@@ -31,6 +33,7 @@
     "name": "Dark Alley",
     "level": 5,
     "description": "People are going missing in dark alleys..",
+    "repeat": 0,
     "enemies": [
       { "name": "Boss", "class": "Human", "level": 7 },
       { "name": "Kidnapper", "class": "Human", "level": 5 },
@@ -44,6 +47,7 @@
     "name": "Intruders in the Night",
     "level": 7,
     "description": "There's a lot of strangers in town recently. They're up to no good.",
+    "repeat": 5,
     "enemies": [
       { "name": "Farmer", "class": "Human", "level": 8 },
       { "name": "Beggar", "class": "Human", "level": 7 },
@@ -57,6 +61,7 @@
     "name": "Robbers",
     "level": 10,
     "description": "The food vendors are being robbed in plain daylight. Hungry men will stop at nothing.",
+    "repeat": 5,
     "enemies": [
       { "name": "Robber", "class": "Human", "level": 11 },
       { "name": "Beggar", "class": "Human", "level": 9 },
@@ -70,6 +75,7 @@
     "name": "Darkest Night",
     "level": 15,
     "description": "Orders from above, citizens are to stay at home after sun down. No exception. Those walk in the night are not of ours. Execute them.",
+    "repeat": 5,
     "enemies": [
       { "name": "Male", "class": "Human", "level": 17 },
       { "name": "Female", "class": "Human", "level": 15 },
@@ -83,6 +89,7 @@
     "name": "Dark Harvesters",
     "level": 18,
     "description": "The soul well has been setup. Attracted lingering spirits are to be reaped and sent to the underground prison for processing.",
+    "repeat": 5,
     "enemies": [
       { "name": "Big Ghost", "class": "Spirit", "level": 19 },
       { "name": "Ghost", "class": "Spirit", "level": 18 },
@@ -96,6 +103,7 @@
     "name": "Moonlight Ritual",
     "level": 21,
     "description": "The corrupted manifestation of spirits are disrupting the ritual of Resurrection. Keep them at bay.",
+    "repeat": 5,
     "enemies": [
       { "name": "Red Ghost", "class": "Corrupted Spirit", "level": 23 },
       { "name": "Ghost", "class": "Corrupted Spirit", "level": 22 },
@@ -109,6 +117,7 @@
     "name": "The Resurrection Escapees",
     "level": 25,
     "description": "The resurrected are corrupted. Contain them, do not let them escape into the residential areas.",
+    "repeat": 7,
     "enemies": [
       { "name": "Humanoid", "class": "Human", "level": 27 },
       { "name": "Humanoid", "class": "Human", "level": 26 },
@@ -122,6 +131,7 @@
     "name": "Panic Attack",
     "level": 27,
     "description": "Orders! The civilians are in panic. Do not let them get close to the ritual site alive.",
+    "repeat": 3,
     "enemies": [
       { "name": "Civilian", "class": "Human", "level": 29 },
       { "name": "Civilian", "class": "Human", "level": 27 },
@@ -135,6 +145,7 @@
     "name": "Stray Cleanup",
     "level": 30,
     "description": "The ritual was a success. Some corrupted still managed to hide in the residential areas, root them out and slay them.",
+    "repeat": 0,
     "enemies": [
       { "name": "Corrupted", "class": "Human", "level": 33 },
       { "name": "Corrupted", "class": "Human", "level": 32 },
@@ -148,6 +159,7 @@
     "name": "Rank Up Trial",
     "level": 33,
     "description": "Your contribution has not escaped the eyes of the Royals. Here's your chance to earn your place with the Elite Guard.",
+    "repeat": 1,
     "enemies": [
       { "name": "Old Guard", "class": "Human", "level": 35 },
       { "name": "Old Guard", "class": "Human", "level": 34 },

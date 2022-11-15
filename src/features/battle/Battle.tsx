@@ -34,7 +34,7 @@ import { Item } from "../../app/models";
 import { RouteComponentProps } from "react-router";
 import { add } from "../inventory/inventorySlice";
 import { selectMembers } from "../party/partySlice";
-import { selectEnemies } from "../missions/missionsSlice";
+import { complete, selectMissionById } from "../missions/missionsSlice";
 
 const Loot: React.FC<{ items: Item[] }> = (props) => {
   const [show, setShow] = useState(true);
@@ -79,9 +79,7 @@ const Battle: React.FC<
   const router = useIonRouter();
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectStatus);
-  const originalMonsters = useAppSelector(
-    selectEnemies(match.params.missionId)
-  );
+  const mission = useAppSelector(selectMissionById(match.params.missionId));
   const originalMembers = useAppSelector(selectMembers);
   const players = useAppSelector(selectCombatants("player"));
   const monsters = useAppSelector(selectCombatants("monster"));
@@ -93,7 +91,7 @@ const Battle: React.FC<
     const handle = setTimeout(() => {
       dispatch(
         start({
-          monsters: originalMonsters,
+          monsters: mission!.enemies,
           players: originalMembers,
         })
       );
@@ -120,6 +118,9 @@ const Battle: React.FC<
 
   function handleDone() {
     dispatch(add(loot));
+    if (status === "playerWin") {
+      dispatch(complete(mission!.id));
+    }
     router.goBack();
   }
   return (
