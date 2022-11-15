@@ -15,7 +15,7 @@ export interface shopState {
 }
 
 export const loadShop = createAsyncThunk(
-  "monsters/loadShop",
+  "shop/loadShop",
   async (_, api) => {
     console.debug("load shop");
     const storage = await createStorage();
@@ -29,7 +29,7 @@ export const loadShop = createAsyncThunk(
 );
 
 export const saveShop = createAsyncThunk<void, void, { state: RootState }>(
-  "missions/saveShop",
+  "shop/saveShop",
   async (_, api) => {
     console.debug("save shop");
     const storage = await createStorage();

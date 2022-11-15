@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import battleReducer from "../features/battle/battleSlice";
-import partyReducer from "../features/party/partySlice";
+import partyReducer, { loadParty, saveParty } from "../features/party/partySlice";
 import inventoryReducer, {
   loadInventory,
   saveInventory,
@@ -40,6 +40,7 @@ export async function save() {
   await store.dispatch(saveMissions());
   await store.dispatch(saveShop());
   await store.dispatch(saveInventory());
+  await store.dispatch(saveParty());
 }
 
 export async function reset() {
@@ -55,4 +56,5 @@ export async function load() {
   await store.dispatch(loadMissions());
   await store.dispatch(loadShop());
   await store.dispatch(loadInventory());
+  await store.dispatch(loadParty());
 }

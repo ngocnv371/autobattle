@@ -22,7 +22,7 @@ export const loadMonsters = createAsyncThunk(
 );
 
 export const saveMonsters = createAsyncThunk<void, void, { state: RootState }>(
-  "missions/saveMonsters",
+  "monsters/saveMonsters",
   async (_, api) => {
     console.debug("save monsters");
     const storage = await createStorage();

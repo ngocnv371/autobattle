@@ -1,12 +1,33 @@
 import { Character } from "../../app/models";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import { createStorage } from "../../app/storage";
 
 const MAX_MEMBER = 4;
 
 export interface partyState {
   members: Character[];
 }
+
+export const loadParty = createAsyncThunk("party/loadParty", async (_, api) => {
+  console.debug("load party");
+  const storage = await createStorage();
+  const state = await storage.get("party");
+  if (!state) {
+    console.warn("no saved party data");
+    return api.rejectWithValue(null);
+  }
+  return state;
+});
+
+export const saveParty = createAsyncThunk<void, void, { state: RootState }>(
+  "party/saveParty",
+  async (_, api) => {
+    console.debug("save party");
+    const storage = await createStorage();
+    await storage.set("party", api.getState().party);
+  }
+);
 
 const initialState: partyState = {
   members: [],
@@ -32,6 +53,15 @@ export const partySlice = createSlice({
       }
       member.level++;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(
+      loadParty.fulfilled,
+      (state, action: PayloadAction<partyState>) => {
+        state.members.length = 0;
+        state.members.push(...action.payload.members);
+      }
+    );
   },
 });
 
