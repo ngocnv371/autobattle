@@ -14,8 +14,10 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonAlert,
+  useIonRouter,
 } from "@ionic/react";
-import { levelUp, selectMemberById } from "./partySlice";
+import { levelUp, removeMember, selectMemberById } from "./partySlice";
 import { remove, selectInStock } from "../inventory/inventorySlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
@@ -100,6 +102,9 @@ const Stats: React.FC<Character> = (props) => {
 const CharacterProfilePage: React.FC<
   RouteComponentProps<{ memberId: string }>
 > = ({ match }) => {
+  const dispatch = useAppDispatch();
+  const router = useIonRouter();
+  const [presentAlert] = useIonAlert();
   const char = useAppSelector(selectMemberById(match.params.memberId));
   const monster = useAppSelector(selectMonsterByName(char?.class || ""));
 
@@ -115,6 +120,29 @@ const CharacterProfilePage: React.FC<
             <IonBackButton />
           </IonButtons>
           <IonTitle>Character</IonTitle>
+          <IonButtons slot="end">
+            <IonButton
+              onClick={() => {
+                presentAlert({
+                  header: "Alert",
+                  message: "Do you want to kick this member from the party?",
+                  buttons: [
+                    { text: "Cancel", role: "cancel" },
+                    {
+                      text: "OK",
+                      role: "destructive",
+                      handler: () => {
+                        dispatch(removeMember(char.id));
+                        router.goBack();
+                      },
+                    },
+                  ],
+                });
+              }}
+            >
+              Kick
+            </IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
