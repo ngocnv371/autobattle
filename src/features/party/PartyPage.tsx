@@ -11,16 +11,17 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { useAppSelector } from "../../app/hooks";
-import { selectMembers } from "./partySlice";
+import { selectMembers, selectPartyLevel } from "./partySlice";
 
 const PartyPage: React.FC = () => {
   const members = useAppSelector(selectMembers);
+  const level = useAppSelector(selectPartyLevel)
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Party</IonTitle>
+          <IonTitle>Party LV{level}</IonTitle>
           <IonButtons slot="end">
             <IonButton routerLink="/party/tavern">Tavern</IonButton>
           </IonButtons>

@@ -38,6 +38,7 @@ export interface CharacterSchema {
 
 export interface MissionSchema {
   id: string;
+  level: number;
   name: string;
   description: string;
   enemies: CharacterSchema[];

@@ -8,9 +8,10 @@ import {
 } from "@ionic/react";
 import { useAppSelector } from "../../app/hooks";
 import MissionCard from "./MissionCard";
+import { selectMissions } from "./missionsSlice";
 
 function MissionsPage() {
-  const missions = useAppSelector((s) => s.missions);
+  const missions = useAppSelector(selectMissions);
   return (
     <IonPage>
       <IonHeader>

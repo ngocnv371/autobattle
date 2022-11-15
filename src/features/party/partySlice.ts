@@ -75,4 +75,11 @@ export const selectMembers = (state: RootState) => state.party.members;
 export const selectCanAddMember = (state: RootState) =>
   state.party.members.length < MAX_MEMBER;
 
+// equal the level of the member with the highest level
+export const selectPartyLevel = (state: RootState) =>
+  state.party.members
+    .map((m) => m.level)
+    .sort()
+    .at(0) || 0;
+
 export default partySlice.reducer;

@@ -3,6 +3,7 @@ import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { createStorage } from "../../app/storage";
 import { RootState } from "../../app/store";
 import { MissionSchema } from "../../data/schema";
+import { selectPartyLevel } from "../party/partySlice";
 
 export type missionsState = MissionSchema[];
 
@@ -48,6 +49,12 @@ export const missionsSlice = createSlice({
 });
 
 export const { add } = missionsSlice.actions;
+
+export const selectMissions = (state: RootState) => {
+  const level = selectPartyLevel(state);
+  const list = state.missions.filter((m) => m.level < level);
+  return list;
+};
 
 export const selectEnemies = (missionId: string) => (state: RootState) =>
   state.missions.find((d) => d.id === missionId)?.enemies || [];
