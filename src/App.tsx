@@ -46,6 +46,7 @@ import SettingsPage from "./features/settings/SettingsPage";
 import ShopPage from "./features/shop/ShopPage";
 import PartyPage from "./features/party/PartyPage";
 import WandererProfilePage from "./features/tavern/WandererProfilePage";
+import MonsterProfilePage from "./features/missions/MonsterProfilePage";
 
 setupIonicReact();
 
@@ -92,6 +93,7 @@ const App: React.FC = () => {
             <Route exact path="/missions">
               <MissionsPage />
             </Route>
+            <Route exact path="/missions/monsters/:class/:level" component={MonsterProfilePage} />
             <Route exact path="/missions/:missionId" component={Battle} />
             <Route exact path="/">
               <Redirect to="/missions" />

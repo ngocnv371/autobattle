@@ -7,7 +7,6 @@ import {
   IonList,
 } from "@ionic/react";
 import { useAppSelector } from "../../app/hooks";
-import { Character } from "../../app/models";
 import { selectStatsByLevel } from "../monsters/monstersSlice";
 
 const Stat: React.FC<{ name: string; value: any }> = (props) => {
@@ -19,7 +18,7 @@ const Stat: React.FC<{ name: string; value: any }> = (props) => {
   );
 };
 
-const CharacterStats: React.FC<Character> = (props) => {
+const CharacterStats: React.FC<{ class: string; level: number }> = (props) => {
   const data = useAppSelector(selectStatsByLevel(props.class, props.level));
   if (!data) {
     return null;

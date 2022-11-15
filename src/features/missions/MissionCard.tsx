@@ -20,7 +20,7 @@ const MissionCard: React.FC<React.PropsWithChildren<MissionSchema>> = (
       <IonCardContent>{props.description}</IonCardContent>
       <IonList>
         {props.enemies.map((m, idx) => (
-          <IonItem key={idx}>
+          <IonItem key={idx} routerLink={`/missions/monsters/${m.class}/${m.level}`}>
             <IonLabel>{m.name}</IonLabel>
             <IonLabel slot="end">
               {m.class} LV{m.level}
