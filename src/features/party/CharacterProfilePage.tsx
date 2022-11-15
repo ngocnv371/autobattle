@@ -26,18 +26,9 @@ import { RouteComponentProps } from "react-router";
 import {
   selectLevelUpRequirements,
   selectMonsterByName,
-  selectStatsByLevel,
 } from "../monsters/monstersSlice";
 import MonsterImage from "../monsters/MonsterImage";
-
-const Stat: React.FC<{ name: string; value: any }> = (props) => {
-  return (
-    <IonItem>
-      <IonLabel>{props.name}</IonLabel>
-      <IonLabel slot="end">{props.value}</IonLabel>
-    </IonItem>
-  );
-};
+import CharacterStats from "./CharacterStats";
 
 const LevelUp: React.FC<{ character: Character }> = ({ character }) => {
   const dispatch = useAppDispatch();
@@ -72,29 +63,6 @@ const LevelUp: React.FC<{ character: Character }> = ({ character }) => {
       >
         Level Up
       </IonButton>
-    </IonCard>
-  );
-};
-
-const Stats: React.FC<Character> = (props) => {
-  const data = useAppSelector(selectStatsByLevel(props.class, props.level));
-  if (!data) {
-    return null;
-  }
-  return (
-    <IonCard>
-      <IonCardHeader>
-        <IonCardTitle>Stats</IonCardTitle>
-      </IonCardHeader>
-      <IonList>
-        <Stat name="INT" value={data.int} />
-        <Stat name="STR" value={data.str} />
-        <Stat name="DEX" value={data.dex} />
-        <Stat name="Life" value={data.maxLife} />
-        <Stat name="Mana" value={data.maxMana} />
-        <Stat name="Recovery" value={data.recovery} />
-        <Stat name="Base Damage" value={data.baseDamage} />
-      </IonList>
     </IonCard>
   );
 };
@@ -160,7 +128,7 @@ const CharacterProfilePage: React.FC<
             </IonCardSubtitle>
           </IonCardHeader>
         </IonCard>
-        <Stats {...char} />
+        <CharacterStats {...char} />
         <LevelUp character={char} />
       </IonContent>
     </IonPage>

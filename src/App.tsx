@@ -13,7 +13,6 @@ import { IonReactRouter } from "@ionic/react-router";
 import {
   fileTrayStacked,
   map,
-  home,
   buildOutline,
   people,
 } from "ionicons/icons";
@@ -46,6 +45,7 @@ import { load } from "./app/store";
 import SettingsPage from "./features/settings/SettingsPage";
 import ShopPage from "./features/shop/ShopPage";
 import PartyPage from "./features/party/PartyPage";
+import WandererProfilePage from "./features/tavern/WandererProfilePage";
 
 setupIonicReact();
 
@@ -83,6 +83,11 @@ const App: React.FC = () => {
               exact
               path="/party/members/:memberId"
               component={CharacterProfilePage}
+            />
+            <Route
+              exact
+              path="/party/tavern/:wandererId"
+              component={WandererProfilePage}
             />
             <Route exact path="/missions">
               <MissionsPage />

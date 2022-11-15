@@ -1,24 +1,26 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { names, Config, uniqueNamesGenerator } from "unique-names-generator"
+import { names, Config, uniqueNamesGenerator } from "unique-names-generator";
 import { Character } from "../../app/models";
 import { RootState } from "../../app/store";
 
 const config: Config = {
-  dictionaries: [names]
-}
+  dictionaries: [names],
+};
 
 let lastWandererId = 1;
 function generateWanderers(num: number): Character[] {
-  return Array(num).fill(0).map(() => {
-    const id = 'w' + ++lastWandererId
-    // TODO: generate from available monsters
-    return {
-      id,
-      name: uniqueNamesGenerator(config),
-      class: "Human",
-      level: 3,
-    };
-  });
+  return Array(num)
+    .fill(0)
+    .map(() => {
+      const id = "w" + ++lastWandererId;
+      // TODO: generate from available monsters
+      return {
+        id,
+        name: uniqueNamesGenerator(config),
+        class: "Human",
+        level: 3,
+      };
+    });
 }
 
 export interface tavernState {
@@ -45,5 +47,8 @@ export const tavernSlice = createSlice({
 export const { remove, refresh } = tavernSlice.actions;
 
 export const selectWanderers = (state: RootState) => state.tavern.wanderers;
+
+export const selectWandererById = (id: string) => (state: RootState) =>
+  state.tavern.wanderers.find((w) => w.id === id);
 
 export default tavernSlice.reducer;
