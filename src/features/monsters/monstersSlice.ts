@@ -3,7 +3,7 @@ import { CombatStats } from "../../app/models";
 
 import { createStorage } from "../../app/storage";
 import { RootState } from "../../app/store";
-import { calculateProgressionValue } from "../../app/utils";
+import { calculateProgressionValue, randomRange } from "../../app/utils";
 import { MonsterSchema } from "../../data/schema";
 
 export type monstersState = MonsterSchema[];
@@ -65,6 +65,30 @@ export const selectLevelUpRequirements =
     }));
   };
 
+export const selectLootByLevel =
+  (name: string, level: number) => (state: RootState) => {
+    const monster = selectMonsterByName(name)(state);
+    if (!monster) {
+      return [];
+    }
+    const loot = Object.keys(monster.loot)
+      .map((k) => {
+        const max = calculateProgressionValue(monster.loot[k], level);
+        console.log(`${name} LV ${level} can drops up to ${max}x ${k}`)
+        return {
+          name: k,
+          quantity: randomRange(monster.loot[k][1], max),
+        };
+      })
+      .filter((l) => l.quantity > 0);
+    console.log(
+      `${name} LV ${level} drops ${loot
+        .map((l) => `${l.quantity}x ${l.name}`)
+        .join(", ")}`
+    );
+    return loot;
+  };
+
 export const selectStatsByLevel =
   (name: string, level: number) =>
   (state: RootState): CombatStats | null => {
@@ -90,4 +114,4 @@ export const selectStatsByLevel =
     return stats;
   };
 
- export default monstersSlice.reducer;
+export default monstersSlice.reducer;

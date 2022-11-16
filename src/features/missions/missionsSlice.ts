@@ -1,8 +1,11 @@
 import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { Item } from "../../app/models";
 
 import { createStorage } from "../../app/storage";
 import { RootState } from "../../app/store";
 import { MissionLog, MissionSchema } from "../../data/schema";
+import { mergeItems } from "../inventory/utils";
+import { selectLootByLevel } from "../monsters/monstersSlice";
 import { selectPartyLevel } from "../party/partySlice";
 
 export type missionsState = {
@@ -36,6 +39,14 @@ export const saveMissions = createAsyncThunk<void, void, { state: RootState }>(
     await storage.set("missions", api.getState().missions);
   }
 );
+
+export const generateLoot = createAsyncThunk<
+  Item[],
+  string,
+  { state: RootState }
+>("missions/generateLoot", async (missionId, api) => {
+  return selectMissionLootById(missionId)(api.getState());
+});
 
 const initialState: missionsState = {
   items: [],
@@ -98,5 +109,17 @@ export const selectMissions = (state: RootState) => {
 
 export const selectMissionById = (id: string) => (state: RootState) =>
   state.missions.items.find((d) => d.id === id);
+
+export const selectMissionLootById = (id: string) => (state: RootState) => {
+  const m = selectMissionById(id)(state);
+  if (!m) {
+    console.warn(`mission not found ${id}`);
+    return [];
+  }
+  const loot = m.enemies
+    .map((e) => selectLootByLevel(e.class, e.level)(state))
+    .reduce((a, b) => mergeItems(a, b), []);
+  return loot;
+};
 
 export default missionsSlice.reducer;

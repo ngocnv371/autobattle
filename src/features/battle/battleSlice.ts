@@ -1,11 +1,8 @@
-import { Combatant, Faction, Item } from "../../app/models";
+import { Combatant, Faction } from "../../app/models";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
 import { Logger } from "../../app/models";
 import { RootState } from "../../app/store";
 import createLogger from "../../logger";
-import { lootFactory } from "./loot";
-import { mergeItems } from "../inventory/utils";
 import { monsterFactory } from "../../data/monsters";
 import { CharacterSchema } from "../../data/schema";
 
@@ -19,7 +16,6 @@ export interface BattleState {
   status: BattleStatus;
   combatants: Combatant[];
   timer: TimerHandler;
-  loot: Item[];
   logs: string[];
 }
 
@@ -27,7 +23,6 @@ const initialState: BattleState = {
   status: "none",
   combatants: [],
   timer: "",
-  loot: [],
   logs: [],
 };
 
@@ -56,7 +51,6 @@ export const battleSlice = createSlice({
         };
       }
       state.status = "running";
-      state.loot = [];
       state.logs = [];
       state.combatants = [
         ...action.payload.players.map((p) => instantiateCharacter(p, "player")),
@@ -102,15 +96,6 @@ export const battleSlice = createSlice({
           action.execute(battleLogger);
         }
       }
-      function generateLoot() {
-        let bag: Item[] = [];
-        state.combatants
-          .filter((c) => c.faction === "monster")
-          .forEach((m) => {
-            bag = mergeItems(bag, lootFactory(m.class));
-          });
-        state.loot = bag;
-      }
 
       const delta = action.payload;
       if (state.status !== "running") {
@@ -119,7 +104,6 @@ export const battleSlice = createSlice({
       if (isFactionDead("monster")) {
         battleLogger.log("player wins");
         state.status = "playerWin";
-        generateLoot();
         return;
       } else if (isFactionDead("player")) {
         battleLogger.log("player loose");
@@ -149,7 +133,6 @@ export const selectIsOver = (state: RootState) =>
 
 export const selectStatus = (state: RootState) => state.battle.status;
 
-export const selectLoot = (state: RootState) => state.battle.loot;
 export const selectLogs = (state: RootState) => state.battle.logs;
 
 export const selectCombatants = (faction: Faction) => (state: RootState) =>

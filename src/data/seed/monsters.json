@@ -15,9 +15,9 @@
       "Magic Stone": ["linear", 0, 2500]
     },
     "loot": {
-      "Meat": ["linear", 0, 100],
-      "Bone": ["linear", 0, 100],
-      "Skin": ["linear", 0, 100]
+      "Meat": ["linear", 1, 100],
+      "Bone": ["linear", 1, 100],
+      "Skin": ["linear", 1, 100]
     }
   },
   {
@@ -35,7 +35,7 @@
       "Magic Stone": ["linear", 0, 2500]
     },
     "loot": {
-      "Ectoplasm": ["linear", 0, 100]
+      "Ectoplasm": ["linear", 1, 100]
     }
   },
   {
@@ -53,7 +53,7 @@
       "Magic Stone": ["linear", 0, 2500]
     },
     "loot": {
-      "Ectoplasm": ["linear", 0, 1000]
+      "Ectoplasm": ["linear", 1, 1000]
     }
   },
   {
@@ -73,9 +73,9 @@
       "Magic Stone": ["linear", 0, 136]
     },
     "loot": {
-      "Meat": ["linear", 0, 100],
-      "Bone": ["linear", 0, 100],
-      "Pelt": ["linear", 0, 100]
+      "Meat": ["linear", 1, 100],
+      "Bone": ["linear", 1, 100],
+      "Pelt": ["linear", 1, 100]
     }
   },
   {
@@ -94,9 +94,9 @@
       "Magic Stone": ["linear", 0, 136]
     },
     "loot": {
-      "Meat": ["linear", 0, 50],
-      "Venom": ["linear", 0, 50],
-      "Snake Skin": ["linear", 0, 100]
+      "Meat": ["linear", 1, 50],
+      "Venom": ["linear", 1, 50],
+      "Snake Skin": ["linear", 1, 100]
     }
   },
   {
@@ -115,9 +115,9 @@
       "Magic Stone": ["linear", 0, 136]
     },
     "loot": {
-      "Meat": ["linear", 0, 50],
-      "Venom": ["linear", 0, 50],
-      "Snake Skin": ["linear", 0, 100]
+      "Meat": ["linear", 1, 50],
+      "Venom": ["linear", 1, 50],
+      "Snake Skin": ["linear", 1, 100]
     }
   },
   {
@@ -136,9 +136,9 @@
       "Magic Stone": ["linear", 0, 136]
     },
     "loot": {
-      "Meat": ["linear", 0, 50],
-      "Venom": ["linear", 0, 50],
-      "Snake Skin": ["linear", 0, 100]
+      "Meat": ["linear", 1, 50],
+      "Venom": ["linear", 1, 50],
+      "Snake Skin": ["linear", 1, 100]
     }
   },
   {
@@ -157,9 +157,9 @@
       "Magic Stone": ["linear", 0, 136]
     },
     "loot": {
-      "Meat": ["linear", 0, 50],
-      "Venom": ["linear", 0, 50],
-      "Snake Skin": ["linear", 0, 100]
+      "Meat": ["linear", 1, 50],
+      "Venom": ["linear", 1, 50],
+      "Snake Skin": ["linear", 1, 100]
     }
   }
 ]

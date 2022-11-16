@@ -47,7 +47,10 @@ function curveToPoints(curve: Curve): number[] {
   return points;
 }
 
-export function calculateProgressionValue(progression: Progression, level: number): number {
+export function calculateProgressionValue(
+  progression: Progression,
+  level: number
+): number {
   const [curve, min, max] = progression;
   const points = curveToPoints(curve);
   const position = cubicBezier(
@@ -58,4 +61,8 @@ export function calculateProgressionValue(progression: Progression, level: numbe
     points[3]
   );
   return Math.floor(min + position * max);
+}
+
+export function randomRange(min: number, max: number) {
+  return Math.floor(min + Math.random() * max);
 }

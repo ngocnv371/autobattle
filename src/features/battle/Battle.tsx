@@ -21,7 +21,6 @@ import {
   selectCombatants,
   selectIsOver,
   selectLogs,
-  selectLoot,
   selectStatus,
   start,
   update,
@@ -34,7 +33,11 @@ import { Item } from "../../app/models";
 import { RouteComponentProps } from "react-router";
 import { add } from "../inventory/inventorySlice";
 import { selectMembers } from "../party/partySlice";
-import { complete, selectMissionById } from "../missions/missionsSlice";
+import {
+  complete,
+  generateLoot,
+  selectMissionById,
+} from "../missions/missionsSlice";
 
 const Loot: React.FC<{ items: Item[] }> = (props) => {
   const [show, setShow] = useState(true);
@@ -84,7 +87,7 @@ const Battle: React.FC<
   const players = useAppSelector(selectCombatants("player"));
   const monsters = useAppSelector(selectCombatants("monster"));
   const isOver = useAppSelector(selectIsOver);
-  const loot = useAppSelector(selectLoot);
+  const [loot, setLoot] = useState<Item[]>([]);
 
   // delayed start to avoid Ionic bug "double render"
   useEffect(() => {
@@ -102,6 +105,7 @@ const Battle: React.FC<
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, match.params.missionId, match.params.partyId]);
 
+  // game loop
   useEffect(() => {
     let lastUpdate = new Date();
     const handle = setInterval(() => {
@@ -116,10 +120,23 @@ const Battle: React.FC<
     return () => clearInterval(handle);
   }, [dispatch, status]);
 
-  function handleDone() {
+  // generate loot on win
+  useEffect(() => {
+    async function genLoot() {
+      const loot = await dispatch(
+        generateLoot(match.params.missionId)
+      ).unwrap();
+      setLoot(loot);
+    }
+    if (status === "playerWin") {
+      genLoot();
+    }
+  }, [dispatch, status, match.params.missionId]);
+
+  async function handleDone() {
     dispatch(add(loot));
     if (status === "playerWin") {
-      dispatch(complete(mission!.id));
+      dispatch(complete(match.params.missionId));
     }
     router.goBack();
   }
