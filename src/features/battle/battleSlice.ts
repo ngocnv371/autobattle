@@ -1,10 +1,9 @@
-import { Combatant, Faction } from "../../app/models";
+import { CharacterInfo, Combatant, Faction } from "../../app/models";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Logger } from "../../app/models";
 import { RootState } from "../../app/store";
 import createLogger from "../../logger";
 import { monsterFactory } from "../../data/monsters";
-import { CharacterSchema } from "../../data/schema";
 
 export type BattleStatus =
   | "none"
@@ -33,31 +32,32 @@ export const battleSlice = createSlice({
     start: (
       state,
       action: PayloadAction<{
-        players: CharacterSchema[];
-        monsters: CharacterSchema[];
+        players: CharacterInfo[];
+        monsters: CharacterInfo[];
       }>
     ) => {
       let lastId = 1;
-      function instantiateCharacter(
-        char: CharacterSchema,
-        faction: Faction
-      ): Combatant {
-        const mc = monsterFactory(char.class, char.level);
-        return {
-          ...mc.createCombatant(char),
-          name: char.name,
-          faction,
-          id: ++lastId + "",
-        };
-      }
       state.status = "running";
       state.logs = [];
-      state.combatants = [
-        ...action.payload.players.map((p) => instantiateCharacter(p, "player")),
-        ...action.payload.monsters.map((p) =>
-          instantiateCharacter(p, "monster")
-        ),
-      ];
+      const players: Combatant[] = action.payload.players.map((p) => {
+        const c: Combatant = {
+          ...p,
+          faction: "player",
+          rested: 0,
+          id: ++lastId + "",
+        };
+        return c;
+      });
+      const monsters: Combatant[] = action.payload.monsters.map((p) => {
+        const c: Combatant = {
+          ...p,
+          faction: "monster",
+          rested: 0,
+          id: ++lastId + "",
+        };
+        return c;
+      });
+      state.combatants = [...players, ...monsters];
     },
     update: (state, action: PayloadAction<number>) => {
       const now = new Date().getTime();

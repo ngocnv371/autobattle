@@ -32,11 +32,11 @@ import Combatant from "./Combatant";
 import { Item } from "../../app/models";
 import { RouteComponentProps } from "react-router";
 import { add } from "../inventory/inventorySlice";
-import { selectMembers } from "../party/partySlice";
+import { selectCharacters } from "../party/partySlice";
 import {
   complete,
   generateLoot,
-  selectMissionById,
+  selectCharactersByMissionId,
 } from "../missions/missionsSlice";
 
 const Loot: React.FC<{ items: Item[] }> = (props) => {
@@ -77,15 +77,15 @@ const Logs: React.FC = () => {
 };
 
 const Battle: React.FC<
-  RouteComponentProps<{ missionId: string; partyId: string }>
+  RouteComponentProps<{ missionId: string }>
 > = ({ match }) => {
   const router = useIonRouter();
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectStatus);
-  const mission = useAppSelector(selectMissionById(match.params.missionId));
-  const originalMembers = useAppSelector(selectMembers);
-  const players = useAppSelector(selectCombatants("player"));
+  const originalMembers = useAppSelector(selectCharactersByMissionId(match.params.missionId))
+  const originalPlayers = useAppSelector(selectCharacters)
   const monsters = useAppSelector(selectCombatants("monster"));
+  const players = useAppSelector(selectCombatants("player"));
   const isOver = useAppSelector(selectIsOver);
   const [loot, setLoot] = useState<Item[]>([]);
 
@@ -94,8 +94,8 @@ const Battle: React.FC<
     const handle = setTimeout(() => {
       dispatch(
         start({
-          monsters: mission!.enemies,
-          players: originalMembers,
+          monsters: originalMembers,
+          players: originalPlayers,
         })
       );
     }, 50);
@@ -103,7 +103,7 @@ const Battle: React.FC<
       clearTimeout(handle);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, match.params.missionId, match.params.partyId]);
+  }, [dispatch, match.params.missionId]);
 
   // game loop
   useEffect(() => {
@@ -132,6 +132,10 @@ const Battle: React.FC<
       genLoot();
     }
   }, [dispatch, status, match.params.missionId]);
+
+  if (!originalMembers.length || !originalPlayers.length) {
+    return <></>
+  }
 
   async function handleDone() {
     dispatch(add(loot));

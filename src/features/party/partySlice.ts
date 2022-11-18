@@ -1,7 +1,11 @@
-import { Character } from "../../app/models";
+import { Character, CharacterInfo } from "../../app/models";
 import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { createStorage } from "../../app/storage";
+import {
+  selectMonsterByName,
+  selectStatsByLevel,
+} from "../monsters/monstersSlice";
 
 const MAX_MEMBER = 4;
 
@@ -81,5 +85,23 @@ export const selectPartyLevel = (state: RootState) =>
     .map((m) => m.level)
     .sort()
     .at(0) || 0;
+
+export const selectCharacters = (state: RootState): CharacterInfo[] => {
+  return selectMembers(state)
+    .map((m) => {
+      const monster = selectMonsterByName(m.class)(state);
+      if (!monster) {
+        return null;
+      }
+      const stats = selectStatsByLevel(m.class, m.level)(state)!;
+      const info = {
+        ...stats,
+        ...m,
+        image: monster.image,
+      };
+      return info;
+    })
+    .filter(Boolean) as CharacterInfo[];
+};
 
 export default partySlice.reducer;

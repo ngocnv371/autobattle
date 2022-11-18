@@ -4,7 +4,6 @@ import {
   IonCard,
   IonCardHeader,
   IonCardSubtitle,
-  IonImg,
   IonProgressBar,
 } from "@ionic/react";
 
