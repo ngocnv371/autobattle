@@ -1,4 +1,4 @@
-import { CharacterSchema } from "../data/schema";
+import { Behavior, CharacterSchema } from "../data/schema";
 
 export interface Character extends CharacterSchema {
   id: string;
@@ -22,6 +22,7 @@ export interface CombatStats {
   maxMana: number;
   recovery: number;
   baseDamage: number;
+  behavior: Behavior;
 }
 
 export interface CharacterInfo extends Character, CombatStats {

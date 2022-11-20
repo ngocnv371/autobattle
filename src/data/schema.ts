@@ -9,7 +9,7 @@ export type ProgressionDictionary = {
   [item: string]: Progression;
 };
 
-type Behavior = [type: string, primary: string, secondary: string];
+export type Behavior = [type: string, primary: string, secondary: string];
 
 export interface MonsterSchema {
   name: string;

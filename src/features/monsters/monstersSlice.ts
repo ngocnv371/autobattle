@@ -113,6 +113,7 @@ export const selectStatsByLevel =
 
       recovery: calculateProgressionValue(monster.recovery, level),
       baseDamage: calculateProgressionValue(monster.baseDamage, level),
+      behavior: monster.behavior
     };
     stats.life = stats.maxLife;
     stats.mana = stats.maxMana;

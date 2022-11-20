@@ -4,6 +4,7 @@ import { Logger } from "../../app/models";
 import { RootState } from "../../app/store";
 import createLogger from "../../logger";
 import { monsterFactory } from "../../data/monsters";
+import behaviorFactory from "./behaviors";
 
 export type BattleStatus =
   | "none"
@@ -91,8 +92,8 @@ export const battleSlice = createSlice({
             `${c.name} has recovered and decided to do something`
           );
           c.rested = 0;
-          const mc = monsterFactory(c.class, c.level);
-          const action = mc.processTurn(c, state.combatants, battleLogger);
+          const behavior = behaviorFactory(...c.behavior);
+          const action = behavior.processTurn(c, state.combatants, battleLogger);
           action.execute(battleLogger);
         }
       }
