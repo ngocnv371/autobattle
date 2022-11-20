@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { CombatStats } from "../../app/models";
-
+import { CharacterInfo, CombatStats } from "../../app/models";
 import { createStorage } from "../../app/storage";
 import { RootState } from "../../app/store";
 import { calculateProgressionValue, randomRange } from "../../app/utils";
@@ -50,8 +49,14 @@ export const monstersSlice = createSlice({
 
 export const { add } = monstersSlice.actions;
 
-export const selectMonsterByName = (name: string) => (state: RootState) =>
-  state.monsters.find((m) => m.name === name);
+export const selectMonsterByName = (name: string) => (state: RootState) => {
+  const monster = state.monsters.find((m) => m.name === name);
+  if (!monster) {
+    console.warn(`monster not found ${name}`);
+    return null;
+  }
+  return monster;
+};
 
 export const selectLevelUpRequirements =
   (name: string, level: number) => (state: RootState) => {
@@ -74,7 +79,7 @@ export const selectLootByLevel =
     const loot = Object.keys(monster.loot)
       .map((k) => {
         const max = calculateProgressionValue(monster.loot[k], level);
-        console.log(`${name} LV ${level} can drops up to ${max}x ${k}`)
+        console.log(`${name} LV ${level} can drops up to ${max}x ${k}`);
         return {
           name: k,
           quantity: randomRange(monster.loot[k][1], max),
@@ -108,10 +113,30 @@ export const selectStatsByLevel =
 
       recovery: calculateProgressionValue(monster.recovery, level),
       baseDamage: calculateProgressionValue(monster.baseDamage, level),
+      behavior: monster.behavior
     };
     stats.life = stats.maxLife;
     stats.mana = stats.maxMana;
     return stats;
+  };
+
+export const selectCharacterInfoByLevel =
+  (name: string, level: number) =>
+  (state: RootState): CharacterInfo | null => {
+    const monster = selectMonsterByName(name)(state);
+    if (!monster) {
+      return null;
+    }
+    const stats = selectStatsByLevel(name, level)(state)!;
+    const info: CharacterInfo = {
+      ...stats,
+      level,
+      class: name,
+      image: monster.image,
+      name,
+      id: "",
+    };
+    return info;
   };
 
 export default monstersSlice.reducer;

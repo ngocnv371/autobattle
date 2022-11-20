@@ -1,4 +1,4 @@
-import { CharacterSchema } from "../data/schema";
+import { Behavior, CharacterSchema } from "../data/schema";
 
 export interface Character extends CharacterSchema {
   id: string;
@@ -22,10 +22,14 @@ export interface CombatStats {
   maxMana: number;
   recovery: number;
   baseDamage: number;
+  behavior: Behavior;
 }
 
-export interface Combatant extends Character, CombatStats {
+export interface CharacterInfo extends Character, CombatStats {
   image: string;
+}
+
+export interface Combatant extends CharacterInfo {
   faction: Faction;
   rested: number;
 }
@@ -51,9 +55,7 @@ export interface Skill {
 }
 
 export interface Class {
-  getLevelUpRequirements(self: Character): Item[];
   processTurn(self: Combatant, combatants: Combatant[], logger: Logger): Action;
-  createCombatant(self: CharacterSchema): Combatant;
 }
 
 export interface CombatBehavior {
